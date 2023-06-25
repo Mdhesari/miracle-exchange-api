@@ -41,22 +41,11 @@ class SendSMS
 
     public function handle()
     {
-        try {
-            $this->SMS()->UltraFastSend([
-                'ParameterArray' => $this->parameters,
-                'Mobile'         => $this->mobile,
-                'TemplateId'     => $this->templateId,
-            ]);
-
-        } catch (\Exception | GuzzleException $exception) {
-
-            Log::error($exception);
-        }
-
+        $this->SMS()->VerifyLookup($this->mobile, $this->parameters[0] ?? null, null, null, $this->templateId, null);
     }
 
     private function SMS()
     {
-        return app(SMSIR::class);
+        return app('kavenegar');
     }
 }

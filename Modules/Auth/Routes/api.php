@@ -15,8 +15,9 @@ use Modules\Auth\Http\Controllers\AuthController;
 |
 */
 
-Route::prefix('auth')->group(function () {
-    Route::post('login', [AuthController::class, 'login']);
-    Route::post('logout', [AuthController::class, 'logout']);
-    Route::post('refresh', [AuthController::class, 'refresh']);
+Route::prefix('auth')->name('auth.')->group(function () {
+    Route::post('otp/send', [AuthController::class, 'sendOTP'])->name('otp.send');
+    Route::post('login', [AuthController::class, 'login'])->name('login');
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('refresh', [AuthController::class, 'refresh'])->name('refresh');
 });

@@ -6,6 +6,8 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Validation\ValidationException;
 use Modules\Auth\Entities\OTP;
 use Modules\Auth\Exceptions\OTPRateLimitException;
@@ -114,9 +116,9 @@ class OTPController extends Controller
          */
 
         OTP::create([
-            'mobile'            => $mobile,
-            'otp'               => $otp,
-            'otp_sent_at'       => now(),
+            'mobile'      => $mobile,
+            'otp'         => $otp,
+            'otp_sent_at' => now(),
         ]);
 
         /**
@@ -124,20 +126,43 @@ class OTPController extends Controller
          */
 
         $data = [
-            [
-                "Parameter"      => "VerificationCode",
-                "ParameterValue" => $otp
-            ],
-            [
-                "Parameter"      => "PlatformName",
-                "ParameterValue" => config('app.name')
-            ],
+            $otp
         ];
 
         /**
          * Dispatch send sms job.
          */
 
-        SendSMS::dispatch($mobile, 13458, $data);
+        SendSMS::dispatch($mobile, "verifyOtp", $data);
+    }
+
+    /**
+     * @param int $length
+     * @param string|null $table
+     * @param string|null $column
+     * @return int
+     */
+
+    public function tokenGenerator(int $length = 6, string $table = null, string $column = null): int
+    {
+        $token = mt_rand(pow(10, $length - 1), pow(10, $length) - 1);
+
+        if ( $table && $column ) {
+
+            if ( Schema::hasColumn($table, $column) ) {
+
+                $isExists = DB::table($table)->where($column, $token)->exists();
+
+                if ( $isExists ) {
+
+                    $this->tokenGenerator($length, $table, $column);
+
+                }
+
+            }
+
+        }
+
+        return $token;
     }
 }

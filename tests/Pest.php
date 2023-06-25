@@ -11,9 +11,11 @@
 |
 */
 
+use App\Models\User;
+
 uses(
     Tests\TestCase::class,
-    // Illuminate\Foundation\Testing\RefreshDatabase::class,
+// Illuminate\Foundation\Testing\RefreshDatabase::class,
 )->in('Feature');
 
 /*
@@ -42,7 +44,7 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function actingAs(User $user = null)
 {
-    // ..
+    \Laravel\Sanctum\Sanctum::actingAs($user ?? User::factory()->create());
 }

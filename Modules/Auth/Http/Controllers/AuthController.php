@@ -19,7 +19,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api')->except('login');
+        $this->middleware('auth:api')->except(['login', 'sendOTP']);
     }
 
     public function sendOTP(OTPRequest $request)
@@ -65,7 +65,11 @@ class AuthController extends Controller
      */
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
+        return api()->success(null, [
+            'access_token' => auth()->refresh(),
+            'token_type'   => 'Bearer',
+            'expires_in'   => auth()->factory()->getTTL() * 60
+        ]);
     }
 
     /**
