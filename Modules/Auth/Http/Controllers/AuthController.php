@@ -3,77 +3,98 @@
 namespace Modules\Auth\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Auth\Http\Requests\LoginRequest;
+use Modules\Auth\Http\Requests\OTPRequest;
 
 class AuthController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     * @return Renderable
+     * Create a new AuthController instance.
+     *
+     * @return void
      */
-    public function index()
+    public function __construct()
     {
-        return view('auth::index');
+        $this->middleware('auth:api')->except('login');
+    }
+
+    public function sendOTP(OTPRequest $request)
+    {
+        $data = $request->validated();
+
+        $this->otp()->send($data['mobile']);
     }
 
     /**
-     * Show the form for creating a new resource.
-     * @return Renderable
+     * Get a JWT via given credentials.
+     *
+     * @param LoginRequest $request
+     * @return JsonResponse
      */
-    public function create()
+    public function login(LoginRequest $request): JsonResponse
     {
-        return view('auth::create');
+        $credentials = $request->validated();
+
+        if ( ! $token = auth()->attempt($credentials) ) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        return $this->respondWithToken($token);
     }
 
     /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
+     * Get the authenticated User.
+     *
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function me()
     {
-        //
+        return response()->json(auth()->user());
     }
 
     /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
+     * Log the user out (Invalidate the token).
+     *
+     * @return JsonResponse
      */
-    public function show($id)
+    public function logout()
     {
-        return view('auth::show');
+        auth()->logout();
+
+        return response()->json(['message' => 'Successfully logged out']);
     }
 
     /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
+     * Refresh a token.
+     *
+     * @return JsonResponse
      */
-    public function edit($id)
+    public function refresh()
     {
-        return view('auth::edit');
+        return $this->respondWithToken(auth()->refresh());
     }
 
     /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
+     * Get the token array structure.
+     *
+     * @param string $token
+     *
+     * @return JsonResponse
      */
-    public function update(Request $request, $id)
+    protected function respondWithToken($token)
     {
-        //
+        return response()->json([
+            'access_token' => $token,
+            'token_type'   => 'bearer',
+            'expires_in'   => auth()->factory()->getTTL() * 60
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
+    private function otp()
     {
-        //
+        return app(OTPController::class);
     }
 }
