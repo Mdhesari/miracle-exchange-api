@@ -1,0 +1,22 @@
+{
+    "name": "mdhesari/laravel-rolepermission-module",
+    "description": "",
+    "authors": [
+        {
+            "name": "Mohamad Fazel Hesari",
+            "email": "mdhesari99@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\RolePermission\\": ""
+        }
+    }
+}

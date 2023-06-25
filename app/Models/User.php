@@ -9,11 +9,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasPermissions;
+use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, HasFactory, Notifiable, HasUuids, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, HasUuids, SoftDeletes, HasRoles, HasPermissions;
 
     /**
      * The attributes that are mass assignable.
@@ -61,5 +63,24 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function uniqueIds()
+    {
+        return ['uuid'];
+    }
+
+    protected function getDefaultGuardName(): string
+    {
+        return 'api';
+    }
+
+    /**
+     * @param mixed $user_id
+     * @return bool
+     */
+    public function isOwner(mixed $user_id): bool
+    {
+        return intval($this->id) === intval($user_id);
     }
 }

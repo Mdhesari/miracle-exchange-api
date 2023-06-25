@@ -1,4 +1,5 @@
 {
     "Auth": true,
-    "Postman": true
+    "Postman": true,
+    "Helpdesk": true
 }
