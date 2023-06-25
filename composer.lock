@@ -4,8 +4,82 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3550a0a204be82a9aaa03b0c443ee7f6",
+    "content-hash": "8d966042bc883df44b2c75980447706b",
     "packages": [
+        {
+            "name": "andreaselia/laravel-api-to-postman",
+            "version": "v1.15.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/andreaselia/laravel-api-to-postman.git",
+                "reference": "26ab882479c4590b2d2bb7861dfb57dd58a912a7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/andreaselia/laravel-api-to-postman/zipball/26ab882479c4590b2d2bb7861dfb57dd58a912a7",
+                "reference": "26ab882479c4590b2d2bb7861dfb57dd58a912a7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "illuminate/config": "^6.0|^7.0|^8.0|^9.0|^10.0",
+                "illuminate/console": "^6.0|^7.0|^8.0|^9.0|^10.0",
+                "illuminate/contracts": "^6.0|^7.0|^8.0|^9.0|^10.0",
+                "illuminate/routing": "^6.0|^7.0|^8.0|^9.0|^10.0",
+                "illuminate/support": "^6.0|^7.0|^8.0|^9.0|^10.0",
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^8.0",
+                "phpunit/phpunit": "^10.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AndreasElia\\PostmanGenerator\\PostmanGeneratorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AndreasElia\\PostmanGenerator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andreas Elia",
+                    "email": "andreaselia@live.co.uk"
+                }
+            ],
+            "description": "Generate a Postman collection automatically from your Laravel API",
+            "keywords": [
+                "Postman",
+                "api",
+                "collection",
+                "generate",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/andreaselia/laravel-api-to-postman/issues",
+                "source": "https://github.com/andreaselia/laravel-api-to-postman/tree/v1.15.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/andreaselia",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/tomirons",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-02-15T23:07:40+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.11.0",
@@ -1897,6 +1971,84 @@
                 }
             ],
             "time": "2022-04-17T13:12:02+00:00"
+        },
+        {
+            "name": "mdhesari/api-response",
+            "version": "dev-mdhesari-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Mdhesari/api-response.git",
+                "reference": "da125607b0c4df558d8dfd3141c888c9c749202e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Mdhesari/api-response/zipball/da125607b0c4df558d8dfd3141c888c9c749202e",
+                "reference": "da125607b0c4df558d8dfd3141c888c9c749202e",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3|^8.0|^8.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0",
+                "phpunit/phpunit": "^9.5"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Obiefy\\API\\ApiResponseServiceProvider"
+                    ],
+                    "aliases": {
+                        "API": "Obiefy\\API\\Facades\\API"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Obiefy\\API\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Obiefy",
+                    "email": "obayhamed@gmail.com",
+                    "homepage": "http://obay-dev.com",
+                    "role": "Creator & Maintainer"
+                },
+                {
+                    "name": "Mohamad Hesari",
+                    "email": "mdhesari@gmail.com",
+                    "homepage": "https://mdhesari.com",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Simple Laravel package to return Json responses.",
+            "homepage": "https://github.com/mdhesari/api-response",
+            "keywords": [
+                "RESTful API",
+                "api",
+                "json",
+                "laravel",
+                "php",
+                "response",
+                "restful"
+            ],
+            "support": {
+                "source": "https://github.com/Mdhesari/api-response/tree/mdhesari-master"
+            },
+            "funding": [
+                {
+                    "url": "https://ko-fi.com/obiefy",
+                    "type": "ko_fi"
+                }
+            ],
+            "time": "2023-06-25T13:07:02+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -9112,7 +9264,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "mdhesari/api-response": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

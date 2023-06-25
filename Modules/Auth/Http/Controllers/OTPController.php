@@ -9,7 +9,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Validation\ValidationException;
 use Modules\Auth\Entities\OTP;
 use Modules\Auth\Exceptions\OTPRateLimitException;
-use Modules\OTPLogin\Jobs\SendSMS;
+use Modules\Auth\Jobs\SendSMS;
 
 class OTPController extends Controller
 {
@@ -80,11 +80,10 @@ class OTPController extends Controller
 
     /**
      * @param string $mobile
-     * @param bool $is_reset_password
      * @throws \Exception
      */
 
-    public function send(string $mobile, bool $is_reset_password = false, bool $is_register = false)
+    public function send(string $mobile)
     {
         /**
          * Let's start by checking last time we send a token.
@@ -118,8 +117,6 @@ class OTPController extends Controller
             'mobile'            => $mobile,
             'otp'               => $otp,
             'otp_sent_at'       => now(),
-            'is_reset_password' => $is_reset_password,
-            'is_register'       => $is_register,
         ]);
 
         /**

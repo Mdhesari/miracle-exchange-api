@@ -2,6 +2,7 @@
 
 namespace Modules\Auth\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -26,6 +27,8 @@ class AuthController extends Controller
         $data = $request->validated();
 
         $this->otp()->send($data['mobile']);
+
+        return api()->success();
     }
 
     /**
@@ -38,21 +41,9 @@ class AuthController extends Controller
     {
         $credentials = $request->validated();
 
-        if ( ! $token = auth()->attempt($credentials) ) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
+        $otp = $this->otp()->verify($credentials['otp'], $credentials['mobile']);
 
-        return $this->respondWithToken($token);
-    }
-
-    /**
-     * Get the authenticated User.
-     *
-     * @return JsonResponse
-     */
-    public function me()
-    {
-        return response()->json(auth()->user());
+        return $this->respondWithToken($otp);
     }
 
     /**
@@ -64,7 +55,7 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return api()->success();
     }
 
     /**
@@ -84,11 +75,15 @@ class AuthController extends Controller
      *
      * @return JsonResponse
      */
-    protected function respondWithToken($token)
+    protected function respondWithToken($otp)
     {
-        return response()->json([
+        $user = User::whereMobile($otp->mobile)->firstOrFail();
+
+        $token = auth()->login($user);
+
+        return api()->success(null, [
             'access_token' => $token,
-            'token_type'   => 'bearer',
+            'token_type'   => 'Bearer',
             'expires_in'   => auth()->factory()->getTTL() * 60
         ]);
     }

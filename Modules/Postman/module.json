@@ -1,0 +1,11 @@
+{
+    "name": "Postman",
+    "alias": "postman",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Postman\\Providers\\PostmanServiceProvider"
+    ],
+    "files": []
+}
