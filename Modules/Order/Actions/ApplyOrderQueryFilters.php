@@ -14,6 +14,10 @@ class ApplyOrderQueryFilters extends BaseQueryFilters
             $query->where('status', $data['status']);
         }
 
+        if ( isset($data['market_id']) ) {
+            $query->where('market_id', $data['market_id']);
+        }
+
         return $query;
     }
 }

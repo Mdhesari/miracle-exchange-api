@@ -23,11 +23,14 @@ class OrderController extends Controller
      *
      * @param Request $request
      * @param ApplyOrderQueryFilters $applyOrderQueryFilters
-     * @QAparam s string
-     * @QAparam user_id integer
-     * @QAparam oldest boolean
-     * @QAparam date_from integer
-     * @QAparam date_to integer
+     * @LRDparam s string
+     * @LRDparam date_from string
+     * @LRDparam date_to string
+     * @LRDparam per_page string
+     * @LRDparam per_page string
+     * @LRDparam user_id integer
+     * @LRDparam market_id integer
+     * @LRDparam status Enum [Done, Pending, FillPending, Rejected]
      * @return JsonResponse
      */
     public function index(Request $request, ApplyOrderQueryFilters $applyOrderQueryFilters): JsonResponse
