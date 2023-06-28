@@ -30,6 +30,7 @@ class OrderController extends Controller
      * @LRDparam per_page string
      * @LRDparam user_id integer
      * @LRDparam market_id integer
+     * @LRDparam expand string [user, market]
      * @LRDparam status Enum [Done, Pending, FillPending, Rejected]
      * @return JsonResponse
      */

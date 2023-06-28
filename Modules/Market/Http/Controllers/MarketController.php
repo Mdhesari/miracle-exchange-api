@@ -25,6 +25,7 @@ class MarketController extends Controller
      * @LRDparam date_to string
      * @LRDparam per_page string
      * @LRDparam per_page string
+     * @LRDparam expand string [orders]
      * @LRDparam status Enum [Enabled, Disabled]
      */
     public function index(Request $request, ApplyMarketQueryFilters $applyMarketQueryFilters): JsonResponse
