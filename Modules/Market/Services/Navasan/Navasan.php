@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Navasan;
+namespace Modules\Market\Services\Navasan;
 
 use GuzzleHttp\Client;
 

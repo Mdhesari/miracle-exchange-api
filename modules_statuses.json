@@ -4,5 +4,6 @@
     "Helpdesk": true,
     "Wallet": true,
     "User": true,
-    "Order": true
+    "Order": true,
+    "Market": true
 }

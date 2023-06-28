@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Providers;
+namespace Modules\Market\Providers;
 
-use App\Services\Navasan\Navasan;
 use Illuminate\Support\ServiceProvider;
+use Modules\Market\Services\Navasan\Navasan;
 
 class NavasanServiceProvider extends ServiceProvider
 {
