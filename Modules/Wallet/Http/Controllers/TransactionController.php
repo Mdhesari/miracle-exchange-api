@@ -31,16 +31,16 @@ class TransactionController extends Controller
     /**
      * @param Request $request
      * @param ApplyTransactionQueryFilters $applyTransactionQueryFilters
-     * @QAparam s string
-     * @QAparam type string
-     * @QAparam user_id integer
-     * @QAparam with_trashed boolean
-     * @QAparam quantity integer
-     * @QAparam wallet_id integer
-     * @QAparam status string [pending, gateway_pending, verified, rejected]
-     * @QAparam oldest boolean
-     * @QAparam date_from integer
-     * @QAparam date_to integer
+     * @LRDparam s string
+     * @LRDparam type string
+     * @LRDparam user_id integer
+     * @LRDparam with_trashed boolean
+     * @LRDparam quantity integer
+     * @LRDparam wallet_id integer
+     * @LRDparam status string [pending, gateway_pending, verified, rejected]
+     * @LRDparam oldest boolean
+     * @LRDparam date_from integer
+     * @LRDparam date_to integer
      * @return JsonResponse
      */
     public function index(Request $request, ApplyTransactionQueryFilters $applyTransactionQueryFilters): JsonResponse
