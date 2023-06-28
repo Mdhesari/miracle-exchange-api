@@ -5,7 +5,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Modules\Helpdesk\Entities\Ticket;
 
-beforeEach(fn() => actingAs());
+beforeEach(fn() => $this->actingAs());
 
 it('can send ticket message with attachments', function () {
     $ticket = Ticket::factory()->create([

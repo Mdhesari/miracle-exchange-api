@@ -45,7 +45,7 @@ return [
     |
     | The middleware which wraps your authenticated API routes.
     |
-    | E.g. auth:api, auth:sanctum
+    | E.g. auth:api, auth:api
     |
     */
 

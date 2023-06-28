@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\Wallet\Traits\HasWallet;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -27,6 +28,7 @@ class User extends Authenticatable implements JWTSubject
         'last_name',
         'national_code',
         'account_number',
+        'birthday',
         'email',
         'mobile',
         'banned_at',
@@ -43,6 +45,10 @@ class User extends Authenticatable implements JWTSubject
         'remember_token',
     ];
 
+    protected $appends = [
+        'full_name',
+    ];
+
     /**
      * The attributes that should be cast.
      *
@@ -51,9 +57,15 @@ class User extends Authenticatable implements JWTSubject
     protected $casts = [
         'email_verified_at'  => 'datetime',
         'mobile_verified_at' => 'datetime',
+        'birthday'           => 'date',
         'banned_at'          => 'datetime',
         'password'           => 'hashed',
     ];
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
 
     public function getJWTIdentifier()
     {
@@ -82,5 +94,10 @@ class User extends Authenticatable implements JWTSubject
     public function isOwner(mixed $user_id): bool
     {
         return intval($this->id) === intval($user_id);
+    }
+
+    public function getSubject(): mixed
+    {
+        return $this->full_name;
     }
 }

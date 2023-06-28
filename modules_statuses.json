@@ -1,5 +1,7 @@
 {
     "Auth": true,
     "Postman": true,
-    "Helpdesk": true
+    "Helpdesk": true,
+    "Wallet": true,
+    "User": true
 }

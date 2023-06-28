@@ -23,6 +23,7 @@ return new class extends Migration {
             $table->string('mobile')->unique();
             $table->string('password')->nullable();
 
+            $table->date('birthday')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamp('mobile_verified_at')->nullable();
             $table->timestamp('banned_at')->nullable();

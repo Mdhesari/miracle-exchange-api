@@ -4,7 +4,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Modules\Helpdesk\Entities\Ticket;
 
-beforeEach(fn() => actingAs());
+beforeEach(fn() => $this->actingAs());
 
 it('can user with permission get tickets', function () {
     Auth::user()->givePermissionTo('tickets');

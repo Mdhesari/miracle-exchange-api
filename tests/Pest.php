@@ -48,3 +48,19 @@ function actingAs(User $user = null)
 {
     \Laravel\Sanctum\Sanctum::actingAs($user ?? User::factory()->create());
 }
+
+function givePerm(string $name)
+{
+    return \Auth::user()->givePermissionTo($name);
+}
+
+function actingAsWithPerm(string $name, \App\Models\User $user = null)
+{
+    actingAs($user);
+    givePerm($name);
+}
+
+function createUser()
+{
+    return User::factory()->create();
+}

@@ -20,7 +20,7 @@ class TicketMessageController extends Controller
     public function __construct()
     {
         $this->middleware([
-            'auth:sanctum'
+            'auth:api'
         ]);
     }
 

@@ -1,0 +1,25 @@
+{
+    "name": "vorna/wallet",
+    "description": "",
+    "authors": [
+        {
+            "name": "Mohamad Fazel Hesari",
+            "email": "mdhesari99@gmail.com"
+        }
+    ],
+    "requires": {
+        "owen-it/laravel-auditing": "^13.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Wallet\\": ""
+        }
+    }
+}

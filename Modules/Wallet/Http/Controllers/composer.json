@@ -1,0 +1,14 @@
+{
+    "name": "vendor_name/Controllers",
+    "description": "description",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "mdhesari",
+            "email": "email@example.com"
+        }
+    ],
+    "require": {
+    }
+}
