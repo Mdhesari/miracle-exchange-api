@@ -4,6 +4,7 @@ namespace Modules\Market\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Market\Entities\Market;
 
 class MarketDatabaseSeeder extends Seeder
 {
@@ -16,6 +17,7 @@ class MarketDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
+        Market::factory()->count(6)->create();
         // $this->call("OthersTableSeeder");
     }
 }

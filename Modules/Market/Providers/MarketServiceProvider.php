@@ -36,6 +36,7 @@ class MarketServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->register(ObserverServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(NavasanServiceProvider::class);
     }

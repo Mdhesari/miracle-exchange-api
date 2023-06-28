@@ -14,6 +14,7 @@ class RolePermissionSeeder extends Seeder
         $permissions = [
             'tickets',
             'transactions',
+            'markets',
         ];
 
         foreach ($permissions as $name) {

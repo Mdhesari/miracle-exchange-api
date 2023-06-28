@@ -2,8 +2,14 @@
 
 namespace Modules\Market\Http\Controllers;
 
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Modules\Market\Actions\ApplyMarketQueryFilters;
+use Modules\Market\Actions\CreateMarket;
+use Modules\Market\Actions\UpdateMarket;
 use Modules\Market\Entities\Market;
+use Modules\Market\Http\Requests\MarketRequest;
 
 class MarketController extends Controller
 {
@@ -15,40 +21,60 @@ class MarketController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request, ApplyMarketQueryFilters $applyMarketQueryFilters): JsonResponse
     {
-        //
+        $query = $applyMarketQueryFilters(Market::query(), $request->all());
+
+        return api()->success(null, [
+            'items' => $query->paginate(),
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(MarketRequest $request, CreateMarket $createMarket): JsonResponse
     {
-        //
+        $market = $createMarket($request->validated());
+
+        return api()->success(null, [
+            'item' => Market::find($market->id),
+        ]);
     }
 
     /**
-     * Display the specified resource.
+     * @param Market $market
+     * @return JsonResponse
+     * @throws AuthorizationException
      */
-    public function show(Market $market)
+    public function show(Market $market): JsonResponse
     {
-        //
+        $this->authorize('show', $market);
+
+        return api()->success(null, [
+            'item' => Market::find($market->id),
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Market $market)
+    public function update(MarketRequest $request, Market $market, UpdateMarket $updateMarket): JsonResponse
     {
-        //
+        $market = $updateMarket($market, $request->validated());
+
+        return api()->success(null, [
+            'item' => Market::find($market->id),
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Market $market)
+    public function destroy(Market $market): JsonResponse
     {
-        //
+        $market->delete();
+
+        return api()->success();
     }
 }

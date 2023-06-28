@@ -3,16 +3,25 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Modules\Market\Enums\MarketStatus;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
         Schema::create('markets', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+
+            $table->string('name')->nullable();
+            $table->string('symbol')->nullable();
+
+            $table->float('price', 12, 0);
+
+            $table->enum('status', array_column(MarketStatus::cases(), 'name'));
+
+            $table->timestamp('price_updated_at')->nullable();
             $table->timestamps();
         });
     }
