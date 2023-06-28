@@ -3,5 +3,6 @@
     "Postman": true,
     "Helpdesk": true,
     "Wallet": true,
-    "User": true
+    "User": true,
+    "Order": true
 }
