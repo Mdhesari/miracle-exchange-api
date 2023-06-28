@@ -201,7 +201,7 @@ class Transaction extends Model implements HasFilters, Expandable, AuditableCont
     public function getExpandRelations(): array
     {
         return [
-            'transactionables', 'transactionable', 'wallet', 'user', 'media',
+            'transactionables', 'transactionable', 'user', 'media',
         ];
     }
 

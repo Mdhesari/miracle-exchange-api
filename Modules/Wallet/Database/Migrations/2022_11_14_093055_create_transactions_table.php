@@ -27,7 +27,6 @@ class CreateTransactionsTable extends Migration
             $table->enum('status', Transaction::getAvailableStatus())->default(Transaction::STATUS_PENDING);
             $table->enum('type', Transaction::getAvailableTypes())->default(Transaction::TYPE_DEPOSIT);
 
-            $table->foreignId('wallet_id')->nullable()->constrained();
             $table->foreignId('user_id')->nullable()->constrained();
             $table->foreignId('admin_id')->nullable()->constrained('users');
 
