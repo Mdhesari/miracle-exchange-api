@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Modules\Order\Http\Controllers\OrderAdminPaymentController;
 use Modules\Order\Http\Controllers\OrderController;
 use Modules\Order\Http\Controllers\OrderPaymentController;
 
@@ -19,3 +20,5 @@ use Modules\Order\Http\Controllers\OrderPaymentController;
 Route::apiResource('orders', OrderController::class);
 
 Route::post('orders/{order}/payment', OrderPaymentController::class)->name('orders.payment');
+
+Route::post('orders/{order}/admin/payment', OrderAdminPaymentController::class)->name('orders.admin-payment');
