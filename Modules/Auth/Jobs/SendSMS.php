@@ -17,18 +17,18 @@ class SendSMS
 
     protected string $mobile;
 
-    protected string $templateId;
+    protected int|string $templateId;
 
     protected array $parameters;
 
     /**
      * SendSMS constructor.
      * @param string $mobile
-     * @param int $templateId
+     * @param int|string $templateId
      * @param array $parameters
      */
 
-    public function __construct(string $mobile, int $templateId, array $parameters)
+    public function __construct(string $mobile, int|string $templateId, array $parameters)
     {
         $this->mobile = $mobile;
 
