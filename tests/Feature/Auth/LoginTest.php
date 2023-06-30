@@ -5,5 +5,5 @@ it('can send otp', function () {
         'mobile' => '9128177871',
     ]);
 
-    $response->dump()->assertSuccessful();
+    $response->assertSuccessful();
 });

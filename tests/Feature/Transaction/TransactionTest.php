@@ -51,7 +51,7 @@ it('can update reference of a transaction', function () {
         'reference' => '123456',
     ]);
 
-    $response->dump()->assertSuccessful()->assertJson([
+    $response->assertSuccessful()->assertJson([
         'data' => [
             'item' => [
                 'reference' => '123456',
