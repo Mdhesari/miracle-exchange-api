@@ -17,7 +17,7 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
-            $table->string('gateway')->nullable();
+            $table->foreignId('gateway_id')->nullable();
             $table->string('reference')->nullable();
             $table->string('hash')->unique()->nullable();
             $table->string('callback_url')->nullable();

@@ -1,9 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Event;
+use Modules\Gateway\Entities\Gateway;
 use Modules\Market\Entities\Market;
 use Modules\Order\Entities\Order;
 use Modules\Order\Enums\OrderStatus;
+use Modules\Order\Events\OrderTransactionCreated;
 use Modules\Wallet\Entities\Transaction;
 
 beforeEach(fn() => $this->actingAs());
@@ -25,22 +28,30 @@ it('can setup order', function () {
 });
 
 it('can get transaction and choose payment method', function () {
+    Event::fake([OrderTransactionCreated::class]);
+
+    $gateway = Gateway::factory()->create();
+
     $order = Order::factory()->create([
         'user_id' => Auth::id(),
     ]);
 
-    $response = $this->post(route('orders.payment'), [
-        'gateway_id' => 1,
+    $response = $this->post(route('orders.payment', $order), [
+        'gateway_id' => $gateway->id,
     ]);
 
     $response->assertSuccessful()->assertJson([
         'data' => [
             'item' => [
-                'gateway_id'   => 1,
-                'quantity'     => $order->cumulative_quote_quantity,
-                'status'       => Transaction::STATUS_ADMIN_PENDING,
-                'pivot_status' => OrderStatus::AdminPending,
+                'gateway_id'      => 1,
+                'quantity'        => $order->cumulative_quote_quantity,
+                'status'          => Transaction::STATUS_ADMIN_PENDING,
+                'transactionable' => [
+                    'status' => OrderStatus::AdminPending->name
+                ]
             ]
         ]
     ]);
+
+    Event::assertDispatched(OrderTransactionCreated::class);
 });

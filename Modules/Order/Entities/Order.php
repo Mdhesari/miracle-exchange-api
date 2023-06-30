@@ -9,11 +9,12 @@ use Mdhesari\LaravelQueryFilters\Contracts\Expandable;
 use Mdhesari\LaravelQueryFilters\Traits\HasExpandScope;
 use Modules\Market\Entities\Market;
 use Modules\Order\Database\factories\OrderFactory;
+use Modules\Wallet\Traits\HasTransaction;
 use Modules\Wallet\Traits\Transactionable;
 
 class Order extends Model implements Expandable
 {
-    use HasFactory, HasExpandScope, Transactionable;
+    use HasFactory, HasExpandScope, HasTransaction;
 
     protected $fillable = [
         'market_id',
@@ -54,5 +55,10 @@ class Order extends Model implements Expandable
     protected static function newFactory()
     {
         return app(OrderFactory::class);
+    }
+
+    public function getOwner()
+    {
+        return $this->user->full_name;
     }
 }

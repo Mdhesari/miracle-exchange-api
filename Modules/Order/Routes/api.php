@@ -18,4 +18,4 @@ use Modules\Order\Http\Controllers\OrderPaymentController;
 
 Route::apiResource('orders', OrderController::class);
 
-Route::post('orders/payment', OrderPaymentController::class)->name('orders.payment');
+Route::post('orders/{order}/payment', OrderPaymentController::class)->name('orders.payment');

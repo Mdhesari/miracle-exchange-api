@@ -50,7 +50,7 @@ class Transaction extends Model implements HasFilters, Expandable, AuditableCont
     const MEDIA_REFERENCE = 'reference';
 
     protected $fillable = [
-        'transactionable_id', 'transactionable_type', 'quantity', 'status', 'type', 'user_id', 'admin_id', 'meta', 'reference', 'gateway', 'callback_url',
+        'transactionable_id', 'transactionable_type', 'gateway_id', 'quantity', 'status', 'type', 'user_id', 'admin_id', 'meta', 'reference', 'gateway', 'callback_url',
     ];
 
     protected $casts = [
@@ -131,11 +131,6 @@ class Transaction extends Model implements HasFilters, Expandable, AuditableCont
         ];
     }
 
-    public function transactionables(): HasMany
-    {
-        return $this->hasMany(TransactionTransactionable::class, 'transaction_id');
-    }
-
     public function wallet(): BelongsTo
     {
         return $this->belongsTo(Wallet::class);
@@ -201,7 +196,7 @@ class Transaction extends Model implements HasFilters, Expandable, AuditableCont
     public function getExpandRelations(): array
     {
         return [
-            'transactionables', 'transactionable', 'user', 'media',
+            'transactionable', 'user', 'media',
         ];
     }
 
