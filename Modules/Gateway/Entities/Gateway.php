@@ -15,6 +15,10 @@ class Gateway extends Model
         'title', 'account_number', 'account_name', 'sheba_number', 'is_active',
     ];
 
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
+
     protected static function newFactory()
     {
         return app(GatewayFactory::class);

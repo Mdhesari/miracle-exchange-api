@@ -20,8 +20,14 @@ class GatewayController extends Controller
 
     /**
      * Display a listing of the resource.
+     * @LRDparam s string
+     * @LRDparam date_from string
+     * @LRDparam date_to string
+     * @LRDparam per_page string
+     * @LRDparam per_page string
+     * @LRDparam is_active boolean [only for admins]
      */
-    public function index(Request $request, ApplyGatewayQueryFilters $applyGatewayQueryFilters)
+    public function index(Request $request, ApplyGatewayQueryFilters $applyGatewayQueryFilters): \Illuminate\Http\JsonResponse
     {
         $query = $applyGatewayQueryFilters(Gateway::query(), $request->all());
 
