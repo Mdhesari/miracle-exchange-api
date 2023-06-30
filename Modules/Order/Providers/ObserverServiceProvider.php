@@ -5,11 +5,14 @@ namespace Modules\Order\Providers;
 use Illuminate\Support\ServiceProvider;
 use Modules\Order\Entities\Order;
 use Modules\Order\Observers\OrderObserver;
+use Modules\Order\Observers\TransactionObserver;
+use Modules\Wallet\Entities\Transaction;
 
 class ObserverServiceProvider extends ServiceProvider
 {
     private array $observers = [
-        Order::class => OrderObserver::class,
+        Order::class       => OrderObserver::class,
+        Transaction::class => TransactionObserver::class,
     ];
 
     /**

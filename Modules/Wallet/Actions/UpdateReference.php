@@ -3,6 +3,7 @@
 namespace Modules\Wallet\Actions;
 
 use Modules\Wallet\Entities\Transaction;
+use Modules\Wallet\Events\TransactionReferenceUpdated;
 
 class UpdateReference
 {
@@ -16,6 +17,8 @@ class UpdateReference
         if ( isset($data['media']) ) {
             array_map(fn($file) => $transaction->addReferenceMedia($file), $data['media']);
         }
+
+        event(new TransactionReferenceUpdated($transaction));
 
         return $transaction;
     }

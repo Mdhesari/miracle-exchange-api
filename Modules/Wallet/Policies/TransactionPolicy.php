@@ -32,6 +32,6 @@ class TransactionPolicy
 
     public function reference(User $user, Transaction $transaction): bool
     {
-        return dump($transaction->type === Transaction::TYPE_WITHDRAW && $user->isOwner($transaction->user_id) && ! $transaction->isVerified());
+        return $transaction->type === Transaction::TYPE_WITHDRAW && $user->isOwner($transaction->user_id) && ! $transaction->isVerified();
     }
 }

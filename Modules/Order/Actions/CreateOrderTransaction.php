@@ -16,13 +16,9 @@ class CreateOrderTransaction
             'gateway_id' => $data['gateway_id'],
             'quantity'   => $order->cumulative_quote_quantity,
             'user_id'    => $data['user_id'] ?? Auth::id(),
-            'status'     => Transaction::STATUS_ADMIN_PENDING,
+            'status'     => Transaction::STATUS_GATEWAY_PENDING,
             'type'       => Transaction::TYPE_WITHDRAW,
             'expires_at' => today()->addDay(),
-        ]);
-
-        $order->update([
-            'status' => OrderStatus::AdminPending->name
         ]);
 
         event(new OrderTransactionCreated($transaction));

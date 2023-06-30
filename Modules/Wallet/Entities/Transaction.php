@@ -220,6 +220,11 @@ class Transaction extends Model implements HasFilters, Expandable, AuditableCont
         return $this->status === Transaction::STATUS_VERIFIED;
     }
 
+    public function isAdminPending()
+    {
+        return $this->status === Transaction::STATUS_ADMIN_PENDING;
+    }
+
     public function isExpiredTime()
     {
         return $this->expires_at?->lessThan(now());
