@@ -16,6 +16,11 @@ return new class extends Migration {
             $table->string('title');
             $table->string('sheba_number');
             $table->string('account_number');
+            $table->string('account_name');
+
+            $table->boolean('is_active');
+
+            $table->softDeletes();
 
             $table->timestamps();
         });

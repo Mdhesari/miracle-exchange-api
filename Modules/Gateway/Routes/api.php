@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\GatewayController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Modules\Gateway\Http\Controllers\GatewayController;
 
 /*
 |--------------------------------------------------------------------------

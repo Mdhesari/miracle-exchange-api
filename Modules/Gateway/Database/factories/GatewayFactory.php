@@ -23,7 +23,9 @@ class GatewayFactory extends Factory
         return [
             'title'          => $this->faker->sentence,
             'account_number' => $this->faker->creditCardNumber,
-            'sheba_number'   => $this->faker->swiftBicNumber
+            'account_name'   => $this->faker->name,
+            'sheba_number'   => $this->faker->swiftBicNumber,
+            'is_active'      => true,
         ];
     }
 }

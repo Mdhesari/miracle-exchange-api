@@ -4,14 +4,15 @@ namespace Modules\Gateway\Entities;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Gateway\Database\factories\GatewayFactory;
 
 class Gateway extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'title', 'account_number', 'sheba_number',
+        'title', 'account_number', 'account_name', 'sheba_number', 'is_active',
     ];
 
     protected static function newFactory()
