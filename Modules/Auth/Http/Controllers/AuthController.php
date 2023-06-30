@@ -81,7 +81,9 @@ class AuthController extends Controller
      */
     protected function respondWithToken($otp)
     {
-        $user = User::whereMobile($otp->mobile)->firstOrFail();
+        $user = User::firstOrCreate([
+            'mobile' => $otp->mobile
+        ]);
 
         $token = auth()->login($user);
 
