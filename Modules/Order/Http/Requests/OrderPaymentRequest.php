@@ -3,10 +3,8 @@
 namespace Modules\Order\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
-use Modules\Order\Enums\OrderStatus;
 
-class OrderRequest extends FormRequest
+class OrderPaymentRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -16,9 +14,7 @@ class OrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'market_id'                 => 'required|exists:markets,id',
-            'cumulative_quote_quantity' => 'required|numeric',
-            'account_id'                => 'nullable|exists,accounts,id',
+            'gateway_id' => 'required|exists,gateways,id',
         ];
     }
 

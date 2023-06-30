@@ -6,6 +6,7 @@ enum OrderStatus
 {
     case Done;
     case Pending;
+    case AdminPending;
     case FillPending;
     case Rejected;
 }

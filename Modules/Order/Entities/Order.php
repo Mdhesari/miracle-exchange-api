@@ -8,11 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 use Mdhesari\LaravelQueryFilters\Contracts\Expandable;
 use Mdhesari\LaravelQueryFilters\Traits\HasExpandScope;
 use Modules\Market\Entities\Market;
-use Modules\Order\Enums\OrderStatus;
+use Modules\Order\Database\factories\OrderFactory;
+use Modules\Wallet\Traits\Transactionable;
 
 class Order extends Model implements Expandable
 {
-    use HasFactory, HasExpandScope;
+    use HasFactory, HasExpandScope, Transactionable;
 
     protected $fillable = [
         'market_id',
@@ -28,7 +29,7 @@ class Order extends Model implements Expandable
     protected $casts = [
         'original_market_price'     => 'decimal:0',
         'executed_price'            => 'decimal:0',
-        'executed_quantity'         => 'decimal:0',
+        'executed_quantity'         => 'decimal:2',
         'cumulative_quote_quantity' => 'decimal:0',
         'fill_percentage'           => 'decimal:0',
     ];
@@ -46,7 +47,12 @@ class Order extends Model implements Expandable
     public function getExpandRelations(): array
     {
         return [
-            'user', 'market',
+            'user', 'market', 'transactions',
         ];
+    }
+
+    protected static function newFactory()
+    {
+        return app(OrderFactory::class);
     }
 }

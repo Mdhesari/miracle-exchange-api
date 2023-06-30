@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Modules\Order\Http\Controllers\OrderController;
+use Modules\Order\Http\Controllers\OrderPaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/order', function (Request $request) {
-    return $request->user();
-});
+Route::apiResource('orders', OrderController::class);
+
+Route::post('orders/payment', OrderPaymentController::class)->name('orders.payment');
