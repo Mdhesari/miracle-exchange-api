@@ -7,6 +7,11 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
 {
+    public function show(User $authUser, User $user)
+    {
+        return $authUser->isOwner($user->id) || $authUser->can('users');
+    }
+
     public function update(User $authUser, User $user)
     {
         return $authUser->isOwner($user->id) || $authUser->can('users');

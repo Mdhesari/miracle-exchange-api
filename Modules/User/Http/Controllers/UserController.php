@@ -22,7 +22,7 @@ class UserController extends Controller
         $this->middleware('auth:api');
 
         $this->middleware('can:users')->except([
-            'update', 'destroy',
+            'show', 'update', 'destroy',
         ]);
     }
 
@@ -77,9 +77,12 @@ class UserController extends Controller
      *
      * @param User $user
      * @return JsonResponse
+     * @throws AuthorizationException
      */
     public function show(User $user): JsonResponse
     {
+        $this->authorize('show', $user);
+
         return api()->success(null, [
             'item' => User::find($user->id),
         ]);
