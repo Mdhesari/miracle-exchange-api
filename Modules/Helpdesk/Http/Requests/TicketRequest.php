@@ -33,7 +33,6 @@ class TicketRequest extends FormRequest
             'subject'    => 'required|string',
             'department' => 'required|string',
             'notes'      => 'nullable|string',
-            'status'     => ['nullable', Rule::in([Ticket::STATUS_CLOSED])],
         ];
     }
 }
