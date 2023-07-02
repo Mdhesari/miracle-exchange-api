@@ -2,8 +2,10 @@
 
 namespace Modules\User\Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
 
 class UserDatabaseSeeder extends Seeder
 {
@@ -16,6 +18,15 @@ class UserDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
+        $admins = [
+            [
+                'mobile'   => '9121234567',
+                'password' => 'secret@exchange',
+            ]
+        ];
+
+        array_map(fn($admin) => User::firstOrCreate([
+            'mobile' => $admin['mobile'],
+        ], $admin)->assignRole('super-admin'), $admins);
     }
 }
