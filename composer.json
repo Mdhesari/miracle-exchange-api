@@ -15,6 +15,7 @@
         "kavenegar/laravel": "^1.3",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
+        "laravel/telescope": "^4.15",
         "laravel/tinker": "^2.8",
         "mdhesari/api-response": "dev-mdhesari-master",
         "mdhesari/laravel-query-filters": "*",
