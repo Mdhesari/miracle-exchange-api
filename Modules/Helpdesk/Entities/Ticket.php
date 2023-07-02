@@ -3,6 +3,7 @@
 namespace Modules\Helpdesk\Entities;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Lang;
@@ -16,7 +17,7 @@ use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 
 class Ticket extends Model implements HasFilters, Expandable, AuditableContract
 {
-    use SoftDeletes, HasFactory, HasExpandScope, Auditable;
+    use SoftDeletes, HasFactory, HasExpandScope, Auditable, HasUuids;
 
     protected $fillable = [
         'subject', 'department', 'notes', 'status', 'user_id', 'number',
@@ -72,6 +73,11 @@ class Ticket extends Model implements HasFilters, Expandable, AuditableContract
     public function messages(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(TicketMessage::class);
+    }
+
+    public function uniqueIds(): array
+    {
+        return ['uuid'];
     }
 
     public function getSearchParams(): array
