@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Mdhesari\LaravelQueryFilters\Contracts\Expandable;
+use Mdhesari\LaravelQueryFilters\Contracts\HasFilters;
 use Modules\Market\Database\factories\MarketFactory;
 use Modules\Market\Enums\MarketStatus;
 use Modules\Order\Entities\Order;
 
-class Market extends Model implements Expandable
+class Market extends Model implements Expandable, HasFilters
 {
     use HasFactory, HasUuids;
 
@@ -50,5 +51,10 @@ class Market extends Model implements Expandable
     public function getExpandRelations(): array
     {
         return ['orders'];
+    }
+
+    public function getSearchParams()
+    {
+        return ['name', 'symbol'];
     }
 }
