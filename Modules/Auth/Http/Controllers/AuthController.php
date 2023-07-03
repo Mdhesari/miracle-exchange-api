@@ -82,7 +82,7 @@ class AuthController extends Controller
     protected function respondWithToken($otp)
     {
         $user = User::firstOrCreate([
-            'mobile' => $otp->mobile
+            'mobile' => substr($otp->mobile, -10)
         ]);
 
         $token = auth()->login($user);
