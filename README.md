@@ -22,7 +22,7 @@ This README file provides an overview of the project and instructions for settin
 
 ## Installation
 
-1.Clone the repository:
+1.Clone the repository :
 
 ```shell
 git clone https://github.com/mdhesari/simple-exchange-api.git
