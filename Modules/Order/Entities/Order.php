@@ -5,11 +5,13 @@ namespace Modules\Order\Entities;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Lang;
 use Mdhesari\LaravelQueryFilters\Contracts\Expandable;
 use Mdhesari\LaravelQueryFilters\Traits\HasExpandScope;
 use Modules\Account\Entities\Account;
 use Modules\Market\Entities\Market;
 use Modules\Order\Database\factories\OrderFactory;
+use Modules\Order\Enums\OrderStatus;
 use Modules\Wallet\Traits\HasTransaction;
 use Modules\Wallet\Traits\Transactionable;
 
@@ -36,6 +38,22 @@ class Order extends Model implements Expandable
         'cumulative_quote_quantity' => 'decimal:0',
         'fill_percentage'           => 'decimal:0',
     ];
+
+    protected $appends = [
+        'is_settlement',
+        'status_trans',
+        'available_status',
+    ];
+
+    public function getStatusTransAttribute()
+    {
+        return Lang::has($key = 'order::status.'.$this->status) ? __($key) : $this->status;
+    }
+
+    public function getAvailableStatusAttribute(): array
+    {
+        return array_column(OrderStatus::cases(), 'name');
+    }
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
