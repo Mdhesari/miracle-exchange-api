@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
+use Modules\Account\Entities\Account;
 use Modules\Gateway\Entities\Gateway;
 use Modules\Market\Entities\Market;
 use Modules\Order\Actions\CreateOrderTransaction;
@@ -25,6 +26,24 @@ it('can setup order', function () {
             'item' => [
                 'executed_price'    => $market->price,
                 'executed_quantity' => number_format(20000000 / $market->price, 2, null, null),
+            ]
+        ]
+    ]);
+});
+
+it('can setup order with account', function () {
+    $response = $this->post(route('orders.store'), [
+        'cumulative_quote_quantity' => 20000000,
+        'market_id'                 => ($market = Market::factory()->create())->id,
+        'account_id'                => $acc_id = Account::factory()->create()->id,
+    ]);
+
+    $response->assertSuccessful()->assertJson([
+        'data' => [
+            'item' => [
+                'executed_price'    => $market->price,
+                'executed_quantity' => number_format(20000000 / $market->price, 2, null, null),
+                'account_id'        => $acc_id,
             ]
         ]
     ]);

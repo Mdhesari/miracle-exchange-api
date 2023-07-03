@@ -18,7 +18,7 @@ class OrderRequest extends FormRequest
         return [
             'market_id'                 => 'required|exists:markets,id',
             'cumulative_quote_quantity' => 'required|numeric',
-            'account_id'                => 'nullable|exists,accounts,id',
+            'account_id'                => 'nullable|exists:accounts,id',
         ];
     }
 

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Mdhesari\LaravelQueryFilters\Contracts\Expandable;
 use Mdhesari\LaravelQueryFilters\Traits\HasExpandScope;
+use Modules\Account\Entities\Account;
 use Modules\Market\Entities\Market;
 use Modules\Order\Database\factories\OrderFactory;
 use Modules\Wallet\Traits\HasTransaction;
@@ -19,6 +20,7 @@ class Order extends Model implements Expandable
     protected $fillable = [
         'market_id',
         'user_id',
+        'account_id',
         'original_market_price',
         'executed_price',
         'executed_quantity',
@@ -40,6 +42,11 @@ class Order extends Model implements Expandable
         return $this->belongsTo(User::class);
     }
 
+    public function account(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Account::class);
+    }
+
     public function market(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Market::class);
@@ -48,7 +55,7 @@ class Order extends Model implements Expandable
     public function getExpandRelations(): array
     {
         return [
-            'user', 'market', 'transactions',
+            'user', 'market', 'account', 'transactions',
         ];
     }
 
