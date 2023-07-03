@@ -40,7 +40,6 @@ class Order extends Model implements Expandable
     ];
 
     protected $appends = [
-        'is_settlement',
         'status_trans',
         'available_status',
     ];
