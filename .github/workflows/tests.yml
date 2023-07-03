@@ -1,4 +1,4 @@
-name: Foodiegram CI
+name: Exchange CI
 
 on:
   pull_request:
