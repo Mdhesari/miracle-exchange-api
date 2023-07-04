@@ -17,6 +17,7 @@ class RolePermissionSeeder extends Seeder
             'markets',
             'orders',
             'gateways',
+            'users',
         ];
 
         foreach ($permissions as $name) {
