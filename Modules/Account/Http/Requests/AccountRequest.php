@@ -18,6 +18,7 @@ class AccountRequest extends FormRequest
             'sheba_number'   => 'required|string',
             'account_number' => 'required|string',
             'account_name'   => 'required|string',
+            'user_id'        => 'nullable|exists:users,id',
         ];
     }
 
