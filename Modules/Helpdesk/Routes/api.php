@@ -26,5 +26,6 @@ Route::prefix('tickets')->name('tickets.')->group(function () {
          */
         Route::apiResource('messages', TicketMessageController::class);
 
+        Route::put('close', [TicketController::class, 'closeTicket'])->name('close');
     });
 });

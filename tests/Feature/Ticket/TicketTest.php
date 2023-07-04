@@ -14,6 +14,18 @@ it('can user with permission get tickets', function () {
     $response->assertSuccessful();
 });
 
+it('can user with permission close a ticket', function () {
+    Auth::user()->givePermissionTo('tickets');
+
+    $ticket = Ticket::factory()->create([
+        'user_id' => Auth::id(),
+    ]);
+
+    $response = $this->put(route('tickets.close', $ticket));
+
+    $response->assertSuccessful();
+});
+
 it('can filter status tickets', function () {
     Auth::user()->givePermissionTo('tickets');
 

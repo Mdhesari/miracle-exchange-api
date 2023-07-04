@@ -5,6 +5,7 @@ namespace Modules\Helpdesk\Http\Controllers;
 use Illuminate\Auth\Access\AuthorizationException;
 use Mdhesari\LaravelQueryFilters\Actions\ApplyQueryFilters;
 use Modules\Helpdesk\Actions\ApplyTicketQueryFilters;
+use Modules\Helpdesk\Actions\CloseTicket;
 use Modules\Helpdesk\Actions\SetupTicket;
 use Modules\Helpdesk\Actions\UpdateTicket;
 use Illuminate\Http\JsonResponse;
@@ -115,5 +116,12 @@ class TicketController extends Controller
         return api()->success(null, [
             'items' => $query->paginate(),
         ]);
+    }
+
+    public function closeTicket(Ticket $ticket, CloseTicket $closeTicket): JsonResponse
+    {
+        $closeTicket($ticket);
+
+        return api()->success();
     }
 }
