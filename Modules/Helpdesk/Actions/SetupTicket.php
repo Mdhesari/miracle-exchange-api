@@ -11,7 +11,7 @@ class SetupTicket
     public function __invoke(array $data)
     {
         $ticket = Ticket::create(array_replace($data, [
-            'user_id' => Auth::id(),
+            'user_id' => $data['user_id'] ?? Auth::id(),
             'status'  => Auth::user()->can('tickets') & isset($data['status']) ? $data['status'] : Ticket::STATUS_PENDING_ADMIN,
         ]));
 

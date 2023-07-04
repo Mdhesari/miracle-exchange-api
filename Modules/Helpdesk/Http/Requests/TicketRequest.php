@@ -33,6 +33,7 @@ class TicketRequest extends FormRequest
             'subject'    => 'required|string',
             'department' => 'required|string',
             'notes'      => 'nullable|string',
+            'user_id'    => 'nullable|exists:users,id'
         ];
     }
 }
