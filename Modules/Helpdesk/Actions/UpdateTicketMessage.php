@@ -2,8 +2,8 @@
 
 namespace Modules\Helpdesk\Actions;
 
-use App\Events\Ticket\TicketMessageUpdated;
 use Modules\Helpdesk\Entities\TicketMessage;
+use Modules\Helpdesk\Events\TicketMessageUpdated;
 
 class UpdateTicketMessage
 {

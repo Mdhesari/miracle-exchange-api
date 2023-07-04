@@ -2,8 +2,8 @@
 
 namespace Modules\Helpdesk\Actions;
 
-use App\Events\Ticket\TicketUpdated;
 use Modules\Helpdesk\Entities\Ticket;
+use Modules\Helpdesk\Events\TicketUpdated;
 
 class UpdateTicket
 {
