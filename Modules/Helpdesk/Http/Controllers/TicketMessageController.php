@@ -2,7 +2,6 @@
 
 namespace Modules\Helpdesk\Http\Controllers;
 
-use App\Jobs\Ticket\SetMessagesAsRead;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Mdhesari\LaravelQueryFilters\Actions\ApplyQueryFilters;
@@ -13,6 +12,7 @@ use Modules\Helpdesk\Entities\Ticket;
 use Modules\Helpdesk\Entities\TicketMessage;
 use Illuminate\Http\Request;
 use Modules\Helpdesk\Http\Requests\TicketMessageRequest;
+use Modules\Helpdesk\Jobs\SetMessagesAsRead;
 use Throwable;
 
 class TicketMessageController extends Controller
