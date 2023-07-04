@@ -18,7 +18,7 @@
         "laravel/telescope": "^4.15",
         "laravel/tinker": "^2.8",
         "mdhesari/api-response": "dev-mdhesari-master",
-        "mdhesari/laravel-query-filters": "*",
+        "mdhesari/laravel-query-filters": "^3.0",
         "nwidart/laravel-modules": "^10.0",
         "owen-it/laravel-auditing": "*",
         "rakutentech/laravel-request-docs": "^2.19",
