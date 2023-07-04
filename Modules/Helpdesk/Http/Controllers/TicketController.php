@@ -109,6 +109,11 @@ class TicketController extends Controller
         return api()->success();
     }
 
+    /**
+     * @param Request $request
+     * @param ApplyQueryFilters $applyQueryFilters
+     * @return JsonResponse
+     */
     public function getMyTickets(Request $request, ApplyQueryFilters $applyQueryFilters): JsonResponse
     {
         $query = $applyQueryFilters($request->user()->tickets(), $request->all());
@@ -118,8 +123,16 @@ class TicketController extends Controller
         ]);
     }
 
+    /**
+     * @param Ticket $ticket
+     * @param CloseTicket $closeTicket
+     * @return JsonResponse
+     * @throws AuthorizationException
+     */
     public function closeTicket(Ticket $ticket, CloseTicket $closeTicket): JsonResponse
     {
+        $this->authorize('close', $ticket);
+
         $closeTicket($ticket);
 
         return api()->success();

@@ -22,10 +22,11 @@ class TicketPolicy
 
     public function message(User $user, Ticket $ticket): bool
     {
-        if ( $user->can('tickets') ) {
-            return true;
-        }
+        return $user->isOwner($ticket->user_id) || $user->can('tickets');
+    }
 
-        return $user->isOwner($ticket->user_id);
+    public function close(User $user, Ticket $ticket): bool
+    {
+        return $user->isOwner($ticket->user_id) || $user->can('tickets');
     }
 }
