@@ -9,12 +9,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Mdhesari\LaravelQueryFilters\Contracts\HasFilters;
 use Modules\Wallet\Traits\HasWallet;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject
+class User extends Authenticatable implements JWTSubject, HasFilters
 {
     use HasApiTokens, HasFactory, Notifiable, HasUuids, SoftDeletes, HasRoles, HasPermissions;
 
@@ -98,5 +99,10 @@ class User extends Authenticatable implements JWTSubject
     public function getSubject(): mixed
     {
         return $this->full_name;
+    }
+
+    public function getSearchParams()
+    {
+        return ['first_name', 'last_name', 'email', 'mobile'];
     }
 }
