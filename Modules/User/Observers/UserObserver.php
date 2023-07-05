@@ -11,7 +11,7 @@ class UserObserver
     public function creating(User $user)
     {
         if (! $user->gender) {
-            $user->gender = UserGender::Male;
+            $user->gender = UserGender::Male->name;
         }
     }
 
