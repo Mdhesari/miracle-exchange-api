@@ -31,25 +31,25 @@ class UserRequest extends FormRequest
     public function rules()
     {
         $data = $this->getRules([
-            'first_name'      => 'nullable|string|max:200',
-            'last_name'       => 'nullable|string|max:200',
-            'national_code'   => 'nullable|string',
-            'account_number'  => 'nullable|string',
-            'birthday'        => 'nullable|date',
-            'mobile'          => ['required', 'ir_mobile', Rule::unique('users', 'mobile')->ignore($this?->user?->id)->whereNull('deleted_at')],
-            'email'           => ['nullable', 'email', Rule::unique('users', 'email')->ignore($this?->user?->id)->whereNull('deleted_at')],
-            'roles.*'         => 'nullable|exists:roles,id',
-            'password'        => 'nullable|min:8|confirmed',
-            'old_password'    => 'nullable|min:8',
-            'sajam_code'      => 'nullable|string',
-            'bank_name'       => 'nullable|string',
-            'bank_number'     => 'nullable|string',
-            'sheba_code'      => 'nullable|string',
-            'type'            => ['nullable', Rule::in(array_column(UserTypes::cases(), 'name'))],
-            'gender'          => ['nullable', Rule::in(array_column(UserGender::cases(), 'name'))],
+            'first_name'     => 'nullable|string|max:200',
+            'last_name'      => 'nullable|string|max:200',
+            'national_code'  => 'nullable|string',
+            'account_number' => 'nullable|string',
+            'birthday'       => 'nullable|date|date_format:Y-m-d',
+            'mobile'         => ['required', 'ir_mobile', Rule::unique('users', 'mobile')->ignore($this?->user?->id)->whereNull('deleted_at')],
+            'email'          => ['nullable', 'email', Rule::unique('users', 'email')->ignore($this?->user?->id)->whereNull('deleted_at')],
+            'roles.*'        => 'nullable|exists:roles,id',
+            'password'       => 'nullable|min:8|confirmed',
+            'old_password'   => 'nullable|min:8',
+            'sajam_code'     => 'nullable|string',
+            'bank_name'      => 'nullable|string',
+            'bank_number'    => 'nullable|string',
+            'sheba_code'     => 'nullable|string',
+            'type'           => ['nullable', Rule::in(array_column(UserTypes::cases(), 'name'))],
+            'gender'         => ['nullable', Rule::in(array_column(UserGender::cases(), 'name'))],
         ]);
 
-        if ( $this->user()?->can('users') ) {
+        if ($this->user()?->can('users')) {
             $data['status'] = ['nullable', 'bail', Rule::in(array_column(UserStatus::cases(), 'name'))];
         }
 
