@@ -12,6 +12,7 @@ use Illuminate\Validation\ValidationException;
 use Shetabit\Multipay\Exceptions\PurchaseFailedException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 
 class Handler extends ExceptionHandler
 {
@@ -63,19 +64,23 @@ class Handler extends ExceptionHandler
             return api()->forbidden(empty($e->getMessage()) ? config('api.messages.forbidden') : $e->getMessage());
         }
 
-        if ( $e instanceof AuthenticationException ) {
+        if ($e instanceof AuthenticationException) {
             return api(403, __('auth.unauthenticated'));
         }
 
-        if ( $e instanceof NotFoundHttpException ) {
+        if ($e instanceof NotFoundHttpException) {
             return api()->notFound();
         }
 
-        if ( $e instanceof ValidationException ) {
+        if ($e instanceof TokenExpiredException) {
+            return api(401, $e->getMessage());
+        }
+
+        if ($e instanceof ValidationException) {
             return api()->validation(null, $e->validator->errors()->toArray());
         }
 
-        if ( $e instanceof \Symfony\Component\HttpKernel\Exception\HttpException ) {
+        if ($e instanceof \Symfony\Component\HttpKernel\Exception\HttpException) {
             return api($e->getStatusCode() ?: 500, $e->getMessage());
         }
 
