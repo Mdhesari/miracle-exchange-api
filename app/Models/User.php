@@ -29,6 +29,7 @@ class User extends Authenticatable implements JWTSubject, HasFilters
         'last_name',
         'national_code',
         'birthday',
+        'gender',
         'email',
         'mobile',
         'banned_at',

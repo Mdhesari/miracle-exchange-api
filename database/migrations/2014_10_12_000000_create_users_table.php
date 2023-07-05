@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\UserGender;
 use App\Enums\UserStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -21,6 +22,8 @@ return new class extends Migration {
             $table->string('email')->unique()->nullable();
             $table->string('mobile')->unique();
             $table->string('password')->nullable();
+
+            $table->enum('gender', array_column(UserGender::cases(), 'name'));
 
             $table->date('birthday')->nullable();
             $table->timestamp('email_verified_at')->nullable();
