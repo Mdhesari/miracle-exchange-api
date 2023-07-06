@@ -19,10 +19,10 @@ class StatisticsController extends Controller
     {
         return api()->success(null, [
             'items' => [
-                'orders'      => $this->getOrdersCount(),
-                'users'       => $this->getUsersCount(),
-                'received'    => $this->getReceivedTransactionsQuantity(),
-                'transferred' => $this->getTransferredTransactionsQuantity(),
+                'orders_count'    => $this->getOrdersCount(),
+                'users_count'     => $this->getUsersCount(),
+                'received_qua '   => $this->getReceivedTransactionsQuantity(),
+                'transferred_qua' => $this->getTransferredTransactionsQuantity(),
             ],
         ]);
     }
