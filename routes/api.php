@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Statistics\StatisticsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Silence is golden
+Route::get('statistics', [StatisticsController::class, 'index'])->name('statistics');
