@@ -11,6 +11,11 @@ use Modules\Wallet\Entities\Transaction;
 
 class StatisticsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth:api', 'can:statistics']);
+    }
+
     /**
      * @param Request $request
      * @return JsonResponse

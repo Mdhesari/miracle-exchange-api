@@ -12,6 +12,7 @@ class RolePermissionSeeder extends Seeder
     public function run()
     {
         $permissions = [
+            'statistics',
             'tickets',
             'transactions',
             'markets',
