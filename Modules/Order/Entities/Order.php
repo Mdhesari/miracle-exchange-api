@@ -3,6 +3,7 @@
 namespace Modules\Order\Entities;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Lang;
@@ -17,7 +18,7 @@ use Modules\Wallet\Traits\Transactionable;
 
 class Order extends Model implements Expandable
 {
-    use HasFactory, HasExpandScope, HasTransaction;
+    use HasFactory, HasExpandScope, HasTransaction, HasUuids;
 
     protected $fillable = [
         'market_id',
