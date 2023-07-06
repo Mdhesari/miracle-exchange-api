@@ -21,7 +21,7 @@ class CreateAdminOrderTransaction
             'admin_id'  => Auth::id(),
         ]);
 
-        if ( isset($data['media']) ) {
+        if (isset($data['media'])) {
             array_map(fn($file) => $transaction->addReferenceMedia($file), $data['media']);
         }
 
