@@ -64,11 +64,11 @@ class OTPController extends Controller
         /**
          * Validate entered otp to the OTP we have in database.
          */
-
-        if (! $otp || $token != $otp->otp || now()->addSeconds($this->otpValidationTime) < $otp->otp_sent_at) {
+// || now()->addSeconds($this->otpValidationTime) < $otp->otp_sent_at
+        if (! $otp || $token != $otp->otp) {
 
             throw ValidationException::withMessages([
-                'otp' => __('responses.auth.otp.wrongToken'),
+                'otp' => __('auth.unauthenticated'),
             ]);
 
         }
