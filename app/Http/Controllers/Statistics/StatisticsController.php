@@ -34,12 +34,12 @@ class StatisticsController extends Controller
 
     private function getOrdersCount()
     {
-        return cache()->rememberForever('count::orders', fn() => Order::count());
+        return cache()->rememberForever('orders::count', fn() => Order::count());
     }
 
     private function getUsersCount()
     {
-        return cache()->rememberForever('count::users', fn() => User::count());
+        return cache()->rememberForever('users::count', fn() => User::count());
     }
 
     private function getReceivedTransactionsQuantity()
