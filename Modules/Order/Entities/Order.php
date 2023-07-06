@@ -27,16 +27,18 @@ class Order extends Model implements Expandable
         'executed_price',
         'executed_quantity',
         'cumulative_quote_quantity',
+        'original_cumulative_quote_quantity',
         'fill_percentage',
         'status',
     ];
 
     protected $casts = [
-        'original_market_price'     => 'decimal:0',
-        'executed_price'            => 'decimal:0',
-        'executed_quantity'         => 'decimal:2',
-        'cumulative_quote_quantity' => 'decimal:0',
-        'fill_percentage'           => 'decimal:0',
+        'original_market_price'              => 'decimal:0',
+        'executed_price'                     => 'decimal:0',
+        'executed_quantity'                  => 'decimal:2',
+        'cumulative_quote_quantity'          => 'decimal:0',
+        'original_cumulative_quote_quantity' => 'decimal:0',
+        'fill_percentage'                    => 'decimal:0',
     ];
 
     protected $appends = [

@@ -22,6 +22,7 @@ return new class extends Migration {
             $table->float('executed_price', 12);
             $table->float('executed_quantity', 12);
             $table->float('cumulative_quote_quantity', 12);
+            $table->float('original_cumulative_quote_quantity', 12);
             $table->tinyInteger('fill_percentage');
 
             $table->enum('status', array_column(OrderStatus::cases(), 'name'));

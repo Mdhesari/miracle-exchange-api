@@ -14,10 +14,11 @@ class CreateOrder
 
         $data['original_market_price'] = $market->price;
         $data['executed_price'] = $market->price;
-        $data['executed_quantity'] = floatval(number_format(round($data['cumulative_quote_quantity'] / $market->price, 2), 2, null, null));
+        $data['original_cumulative_quote_quantity'] = $data['cumulative_quote_quantity'];
+        $data['executed_quantity'] = round($data['cumulative_quote_quantity'] / $market->price, 2);
         $data['cumulative_quote_quantity'] = $data['executed_quantity'] * floatval($market->price);
 
-        if ( ! isset($data['user_id']) ) {
+        if (! isset($data['user_id'])) {
             $data['user_id'] = Auth::id();
         }
 
