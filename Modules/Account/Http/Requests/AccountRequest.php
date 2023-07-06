@@ -15,7 +15,7 @@ class AccountRequest extends FormRequest
     {
         return [
             'title'          => 'required|string',
-            'sheba_number'   => 'required|string|ir_sheba',
+            'sheba_number'   => 'required|string',
             'account_number' => 'required|string',
             'account_name'   => 'required|string',
             'user_id'        => 'nullable|exists:users,id',
