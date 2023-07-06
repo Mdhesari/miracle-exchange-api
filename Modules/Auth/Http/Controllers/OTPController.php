@@ -39,11 +39,11 @@ class OTPController extends Controller
 
     public function __construct()
     {
-        $this->delayBetweenEachOTP = config('auth.otp-delay');
+        $this->delayBetweenEachOTP = config('auth.otp-delay') ?: 30;
 
-        $this->otpValidationTime = config('auth.otp-expires-after');
+        $this->otpValidationTime = config('auth.otp-expires-after') ?: 120;
 
-        $this->tokenLength = config('auth.otp-token-length');
+        $this->tokenLength = config('auth.otp-token-length') ?: 6;
     }
 
     /**
@@ -65,10 +65,10 @@ class OTPController extends Controller
          * Validate entered otp to the OTP we have in database.
          */
 
-        if ( ! $otp || $token != $otp->otp || now()->addSeconds($this->otpValidationTime) < $otp->otp_sent_at ) {
+        if (! $otp || $token != $otp->otp || now()->addSeconds($this->otpValidationTime) < $otp->otp_sent_at) {
 
             throw ValidationException::withMessages([
-                'token' => __('responses.auth.otp.wrongToken'),
+                'otp' => __('responses.auth.otp.wrongToken'),
             ]);
 
         }
@@ -93,11 +93,11 @@ class OTPController extends Controller
 
         $otpExist = OTP::whereMobile($mobile)->unverified();
 
-        if ( $otpExist->exists() ) {
+        if ($otpExist->exists()) {
 
             $lastSentTokenDiffInSeconds = now()->diffInSeconds($otpExist->latest()->first()->otp_sent_at);
 
-            if ( $lastSentTokenDiffInSeconds < $this->delayBetweenEachOTP ) {
+            if ($lastSentTokenDiffInSeconds < $this->delayBetweenEachOTP) {
 
                 throw new OTPRateLimitException(__('responses.auth.otp.pleaseWait', ['seconds' => $this->delayBetweenEachOTP - $lastSentTokenDiffInSeconds]), 429);
 
@@ -148,13 +148,13 @@ class OTPController extends Controller
         return 12345678;
         $token = mt_rand(pow(10, $length - 1), pow(10, $length) - 1);
 
-        if ( $table && $column ) {
+        if ($table && $column) {
 
-            if ( Schema::hasColumn($table, $column) ) {
+            if (Schema::hasColumn($table, $column)) {
 
                 $isExists = DB::table($table)->where($column, $token)->exists();
 
-                if ( $isExists ) {
+                if ($isExists) {
 
                     $this->tokenGenerator($length, $table, $column);
 
