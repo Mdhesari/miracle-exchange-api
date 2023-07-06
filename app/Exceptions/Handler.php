@@ -9,6 +9,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Modules\Auth\Exceptions\OTPRateLimitException;
 use Shetabit\Multipay\Exceptions\PurchaseFailedException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
@@ -82,6 +83,10 @@ class Handler extends ExceptionHandler
 
         if ($e instanceof \Symfony\Component\HttpKernel\Exception\HttpException) {
             return api($e->getStatusCode() ?: 500, $e->getMessage());
+        }
+
+        if ($e instanceof OTPRateLimitException) {
+            return api(429, $e->getMessage());
         }
 
         return $response;
