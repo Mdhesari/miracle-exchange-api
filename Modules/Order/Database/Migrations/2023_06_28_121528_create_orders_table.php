@@ -16,7 +16,7 @@ return new class extends Migration {
 
             $table->foreignUuid('market_id');
             $table->foreignId('user_id');
-            $table->foreignId('account_id')->nullable();
+            $table->foreignUuid('account_id')->nullable();
 
             $table->float('original_market_price', 12);
             $table->float('executed_price', 12);

@@ -15,7 +15,7 @@ class CreateWalletsTable extends Migration
     public function up()
     {
         Schema::create('wallets', function (Blueprint $table) {
-            $table->id();
+            $table->uuid()->primary();
 
             //TODO: discuss
 //            $table->string('type')->nullable();

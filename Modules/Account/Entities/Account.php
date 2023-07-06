@@ -3,6 +3,7 @@
 namespace Modules\Account\Entities;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Mdhesari\LaravelQueryFilters\Contracts\Expandable;
@@ -11,7 +12,7 @@ use Modules\Account\Database\factories\AccountFactory;
 
 class Account extends Model implements Expandable
 {
-    use HasFactory, HasExpandScope;
+    use HasFactory, HasExpandScope, HasUuids;
 
     protected $fillable = [
         'title',

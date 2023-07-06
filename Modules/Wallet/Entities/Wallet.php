@@ -2,6 +2,7 @@
 
 namespace Modules\Wallet\Entities;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,7 +16,7 @@ use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 
 class Wallet extends Model implements HasFilters, Expandable, AuditableContract
 {
-    use HasFactory, SoftDeletes, HasExpandScope, Auditable;
+    use HasFactory, SoftDeletes, HasExpandScope, Auditable, HasUuids;
 
     const STATUS_ACTIVE = 'active';
     const STATUS_INACTIVE = 'inactive';
@@ -98,7 +99,7 @@ class Wallet extends Model implements HasFilters, Expandable, AuditableContract
             'reference'   => $data['reference'] ?? null,
         ]);
 
-        if ( isset($data['transactionable']) ) {
+        if (isset($data['transactionable'])) {
             $data = array_replace($data, [
                 'transactionable_id'   => $data['transactionable']->id,
                 'transactionable_type' => get_class($data['transactionable']),
