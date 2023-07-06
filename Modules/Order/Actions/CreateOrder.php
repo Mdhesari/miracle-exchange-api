@@ -8,15 +8,16 @@ use Modules\Order\Entities\Order;
 
 class CreateOrder
 {
+    public function __construct(
+        private PrepareOrderData $prepareOrderData
+    )
+    {
+        //
+    }
+
     public function __invoke(array $data)
     {
-        $market = Market::find($data['market_id']);
-
-        $data['original_market_price'] = $market->price;
-        $data['executed_price'] = $market->price;
-        $data['original_cumulative_quote_quantity'] = $data['cumulative_quote_quantity'];
-        $data['executed_quantity'] = round($data['cumulative_quote_quantity'] / $market->price, 2);
-        $data['cumulative_quote_quantity'] = $data['executed_quantity'] * floatval($market->price);
+        $data = ($this->prepareOrderData)($data);
 
         if (! isset($data['user_id'])) {
             $data['user_id'] = Auth::id();
