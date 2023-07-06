@@ -18,6 +18,13 @@ class OTPRequest extends FormRequest
         ];
     }
 
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'mobile' => substr($this->mobile, -10),
+        ]);
+    }
+
     /**
      * Determine if the user is authorized to make this request.
      *
