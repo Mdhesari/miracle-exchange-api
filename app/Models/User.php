@@ -68,6 +68,11 @@ class User extends Authenticatable implements JWTSubject, HasFilters
         return "{$this->first_name} {$this->last_name}";
     }
 
+    public function setMobileAttribute($mobile)
+    {
+        $this->attributes['mobile'] = substr($mobile, -10);
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
