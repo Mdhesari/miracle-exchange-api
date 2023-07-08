@@ -75,7 +75,7 @@ class Order extends Model implements Expandable
     public function getExpandRelations(): array
     {
         return [
-            'user', 'market', 'account', 'transactions',
+            'user', 'market', 'account', 'transactions', 'media',
         ];
     }
 

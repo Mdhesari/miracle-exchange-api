@@ -20,8 +20,10 @@ class UserDatabaseSeeder extends Seeder
 
         $admins = [
             [
-                'mobile'   => '9121234567',
-                'password' => 'secret@exchange',
+                'first_name' => 'Default',
+                'last_name'  => 'Admin',
+                'mobile'     => '9121234567',
+                'password'   => 'secret@exchange',
             ],
             [
                 'mobile'   => '9393982868',
