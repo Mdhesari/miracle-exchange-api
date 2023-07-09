@@ -74,15 +74,16 @@ class OrderController extends Controller
      * @return JsonResponse
      * @throws AuthorizationException
      */
-    public function show(Order $order): JsonResponse
+    public function show(Request $request, Order $order): JsonResponse
     {
         $this->authorize('show', $order);
 
         $query = Order::query();
+        $data = $request->all();
 
         if (isset($data['expand'])) {
             //TODO: temporary in order to fix scope conflicts
-            in_array('transactions', explode(',', $data['expand'])) && $query->with('transactions');;
+            in_array('transactions', $data['expand']) && $query->with('transactions');;
         }
 
         return api()->success(null, [
