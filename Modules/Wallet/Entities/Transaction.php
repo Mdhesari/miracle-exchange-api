@@ -26,7 +26,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Transaction extends Model implements HasFilters, Expandable, AuditableContract, HasMedia
 {
-    use HasFactory, HasExpandScope, HasUuids, Transactionable, UuidAudit, InteractsWithMedia;
+    use HasFactory, HasExpandScope, HasUuids, UuidAudit, InteractsWithMedia;
 
     /*
      * Status
