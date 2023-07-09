@@ -2,6 +2,7 @@
 
 namespace Modules\Order\Actions;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Modules\Order\Entities\Order;
 use Modules\Order\Enums\OrderStatus;
@@ -10,6 +11,11 @@ use Modules\Wallet\Entities\Transaction;
 
 class CreateAdminOrderTransaction
 {
+    /**
+     * @param Order $order
+     * @param array $data
+     * @return Model
+     */
     public function __invoke(Order $order, array $data)
     {
         $transaction = $order->transactions()->create([
