@@ -128,7 +128,7 @@ class Wallet extends Model implements HasFilters, Expandable, AuditableContract
         return new WalletFactory;
     }
 
-    public function getSearchParams()
+    public function getSearchParams(): array
     {
         return [
             'user.name',

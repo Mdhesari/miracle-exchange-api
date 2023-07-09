@@ -40,7 +40,7 @@ class Role extends \Spatie\Permission\Models\Role implements Expandable, \OwenIt
         ];
     }
 
-    public function getSearchParams()
+    public function getSearchParams(): array
     {
         return [
             'name'

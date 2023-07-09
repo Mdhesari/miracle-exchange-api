@@ -107,7 +107,7 @@ class User extends Authenticatable implements JWTSubject, HasFilters
         return $this->full_name;
     }
 
-    public function getSearchParams()
+    public function getSearchParams(): array
     {
         return ['first_name', 'last_name', 'email', 'mobile'];
     }

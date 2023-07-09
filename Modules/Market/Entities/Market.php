@@ -53,7 +53,7 @@ class Market extends Model implements Expandable, HasFilters
         return ['orders'];
     }
 
-    public function getSearchParams()
+    public function getSearchParams(): array
     {
         return ['name', 'symbol'];
     }
