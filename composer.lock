@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e10b1e691639c35879b337ba15c0ffcf",
+    "content-hash": "7138ea13bbcabfe16f47046d75028d87",
     "packages": [
         {
             "name": "andreaselia/laravel-api-to-postman",
@@ -3098,23 +3098,23 @@
         },
         {
             "name": "mdhesari/laravel-query-filters",
-            "version": "2.1.4",
+            "version": "3.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mdhesari/laravel-query-filters.git",
-                "reference": "d41f90fdb752bd75e5948231b9cec820b8331b78"
+                "reference": "7eb6189e6c50f4e176d3c5137fe5a86e14c53a3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mdhesari/laravel-query-filters/zipball/d41f90fdb752bd75e5948231b9cec820b8331b78",
-                "reference": "d41f90fdb752bd75e5948231b9cec820b8331b78",
+                "url": "https://api.github.com/repos/Mdhesari/laravel-query-filters/zipball/7eb6189e6c50f4e176d3c5137fe5a86e14c53a3b",
+                "reference": "7eb6189e6c50f4e176d3c5137fe5a86e14c53a3b",
                 "shasum": ""
             },
             "require": {
                 "ext-pdo": "*",
                 "friendsofphp/php-cs-fixer": "^3.4",
-                "illuminate/support": "^8.0|^9.0|^10.0",
-                "php": "^8.0"
+                "php": "^8.0",
+                "wendelladriel/laravel-validated-dto": "^2.11"
             },
             "require-dev": {
                 "orchestra/testbench": "^7.0|^6.0|^5.0"
@@ -3149,9 +3149,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Mdhesari/laravel-query-filters/issues",
-                "source": "https://github.com/Mdhesari/laravel-query-filters/tree/2.1.4"
+                "source": "https://github.com/Mdhesari/laravel-query-filters/tree/3.3.2"
             },
-            "time": "2023-06-17T13:57:47+00:00"
+            "time": "2023-07-09T09:46:41+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -8220,6 +8220,80 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "wendelladriel/laravel-validated-dto",
+            "version": "v2.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WendellAdriel/laravel-validated-dto.git",
+                "reference": "0645330e9398120ce18d8937a099f4daff028b97"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WendellAdriel/laravel-validated-dto/zipball/0645330e9398120ce18d8937a099f4daff028b97",
+                "reference": "0645330e9398120ce18d8937a099f4daff028b97",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^9.0|^10.0",
+                "illuminate/database": "^9.0|^10.0",
+                "illuminate/http": "^9.0|^10.0",
+                "illuminate/support": "^9.0|^10.0",
+                "illuminate/validation": "^9.0|^10.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "laravel/pint": "~1.5.0",
+                "orchestra/testbench": "^6.0|^7.20|^8.0",
+                "pestphp/pest": "v1.22.6",
+                "pestphp/pest-plugin-faker": "^1.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "WendellAdriel\\ValidatedDTO\\Providers\\ValidatedDTOServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "WendellAdriel\\ValidatedDTO\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Wendell Adriel",
+                    "email": "wendelladriel.ti@gmail.com"
+                }
+            ],
+            "description": "Data Transfer Objects with validation for Laravel applications",
+            "keywords": [
+                "Data Transfer Object",
+                "dto",
+                "laravel",
+                "validation"
+            ],
+            "support": {
+                "issues": "https://github.com/WendellAdriel/laravel-validated-dto/issues",
+                "source": "https://github.com/WendellAdriel/laravel-validated-dto"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/wendelladriel",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/WendellAdriel",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-05-30T16:33:31+00:00"
         }
     ],
     "packages-dev": [
