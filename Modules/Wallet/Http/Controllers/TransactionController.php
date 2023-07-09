@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Order\Actions\CreateAdminOrderTransaction;
 use Modules\Wallet\Actions\Transaction\ApplyTransactionQueryFilters;
 use Modules\Wallet\Actions\UpdateReference;
 use Modules\Wallet\Actions\VerifyTransaction;
@@ -67,17 +68,17 @@ class TransactionController extends Controller
     /**
      * @param VerifyTransactionRequest $request
      * @param Transaction $transaction
-     * @param VerifyTransaction $verifyTransaction
+     * @param CreateAdminOrderTransaction $createAdminOrderTransaction
      * @return JsonResponse
      * @throws AuthorizationException
-     * @throws FileDoesNotExist
-     * @throws FileIsTooBig
      */
-    public function verify(VerifyTransactionRequest $request, Transaction $transaction, VerifyTransaction $verifyTransaction): JsonResponse
+    public function verify(VerifyTransactionRequest $request, Transaction $transaction, CreateAdminOrderTransaction $createAdminOrderTransaction): JsonResponse
     {
         $this->authorize('verify', $transaction);
 
-        $verifyTransaction($transaction, $request->validated());
+        $transaction->verify();
+
+        $transaction = $createAdminOrderTransaction($transaction->transactionable, $request->validated());
 
         return api()->success(null, [
             'item' => Transaction::find($transaction->id),
