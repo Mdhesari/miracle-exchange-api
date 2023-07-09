@@ -10,7 +10,5 @@ class DeleteUserResources
     {
         $user->roles()->sync([]);
         $user->permissions()->sync([]);
-
-        $user->media()->delete();
     }
 }
