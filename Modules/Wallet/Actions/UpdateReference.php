@@ -17,6 +17,7 @@ class UpdateReference
         })->first(['id'])->id;
 
         $transaction->update([
+            'paid_at'   => now(),
             'reference' => $data['reference'],
             'status'    => Transaction::STATUS_ADMIN_PENDING,
             'admin_id'  => $admin_id,
