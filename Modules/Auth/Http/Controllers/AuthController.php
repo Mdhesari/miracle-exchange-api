@@ -81,9 +81,13 @@ class AuthController extends Controller
      */
     protected function respondWithToken($otp)
     {
-        $user = User::firstOrCreate([
+        $user = User::withTrashed()->firstOrCreate([
             'mobile' => substr($otp->mobile, -10)
         ]);
+
+        if ($user->trashed()) {
+            $user->restore();
+        }
 
         $token = auth()->login($user);
 
