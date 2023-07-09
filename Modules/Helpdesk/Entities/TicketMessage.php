@@ -3,6 +3,7 @@
 namespace Modules\Helpdesk\Entities;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -19,7 +20,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class TicketMessage extends Model implements HasMedia, Expandable
 {
-    use SoftDeletes, HasFactory, InteractsWithMedia, HasExpandScope;
+    use SoftDeletes, HasFactory, InteractsWithMedia, HasExpandScope, HasUuids;
 
     const MEDIA_ATTACHMENTS = 'attachments';
 
