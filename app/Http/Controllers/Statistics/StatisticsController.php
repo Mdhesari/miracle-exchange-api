@@ -26,7 +26,7 @@ class StatisticsController extends Controller
             'items' => [
                 'orders_count'    => $this->getOrdersCount(),
                 'users_count'     => $this->getUsersCount(),
-                'received_qua '   => $this->getReceivedTransactionsQuantity(),
+                'received_qua'   => $this->getReceivedTransactionsQuantity(),
                 'transferred_qua' => $this->getTransferredTransactionsQuantity(),
             ],
         ]);
