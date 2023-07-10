@@ -16,7 +16,7 @@ class CreateTicketMessagesTable extends Migration
         Schema::create('ticket_messages', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
-            $table->longText('message');
+            $table->longText('message')->nullable();
 
             $table->boolean('is_read')->default(false);
 

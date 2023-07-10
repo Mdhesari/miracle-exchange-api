@@ -25,7 +25,7 @@ class TicketMessageRequest extends FormRequest
     public function rules()
     {
         return [
-            'message'       => 'required|string',
+            'message'       => 'nullable|string',
             'attachments'   => 'nullable|array',
             'attachments.*' => ['nullable', 'file', 'max:10000'],
         ];
