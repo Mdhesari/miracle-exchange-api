@@ -143,9 +143,9 @@ class OTPController extends Controller
      * @return int
      */
 
-    public function tokenGenerator(int $length = 6, string $table = null, string $column = null): int
+    public function tokenGenerator(int $length = 4, string $table = null, string $column = null): int
     {
-        return 12345678;
+        return 1234;
         $token = mt_rand(pow(10, $length - 1), pow(10, $length) - 1);
 
         if ($table && $column) {
