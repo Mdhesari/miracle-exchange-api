@@ -10,6 +10,10 @@ class ApplyOrderQueryFilters extends BaseQueryFilters
     {
         parent::__invoke($query, $data);
 
+        if ($this->user()->cannot('accounts')) {
+            $query->where('user_id', $this->user()->id);
+        }
+
         if (isset($data['status'])) {
             $query->where('status', $data['status']);
         }
