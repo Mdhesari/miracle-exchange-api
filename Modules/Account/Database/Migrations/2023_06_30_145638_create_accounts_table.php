@@ -14,9 +14,9 @@ return new class extends Migration {
             $table->uuid('id')->primary();
 
             $table->string('title');
-            $table->string('sheba_number');
-            $table->string('account_number');
-            $table->string('account_name');
+            $table->string('sheba_number')->nullable();
+            $table->string('account_number')->nullable();
+            $table->string('account_name')->nullable();
 
             $table->foreignId('user_id');
 
