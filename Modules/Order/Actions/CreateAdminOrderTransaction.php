@@ -18,12 +18,15 @@ class CreateAdminOrderTransaction
      */
     public function __invoke(Order $order, array $data)
     {
+        if (! isset($data['type'])) {
+            $data['type'] = Transaction::TYPE_WITHDRAW;
+        }
+
         $transaction = $order->transactions()->create([
             'reference' => $data['reference'],
             'quantity'  => $order->cumulative_quote_quantity,
             'status'    => Transaction::STATUS_VERIFIED,
             'user_id'   => $order->user_id,
-            'type'      => Transaction::TYPE_WITHDRAW,
             'meta'      => [
                 'admin_id' => Auth::id(),
             ]

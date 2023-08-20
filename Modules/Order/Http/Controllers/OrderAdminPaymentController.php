@@ -2,12 +2,9 @@
 
 namespace Modules\Order\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Modules\Order\Actions\CreateAdminOrderTransaction;
-use Modules\Order\Actions\CreateOrderTransaction;
 use Modules\Order\Entities\Order;
 use Modules\Order\Http\Requests\OrderAdminPaymentRequest;
-use Modules\Order\Http\Requests\OrderPaymentRequest;
 use Modules\Wallet\Entities\Transaction;
 
 class OrderAdminPaymentController extends Controller
@@ -22,7 +19,7 @@ class OrderAdminPaymentController extends Controller
      */
     public function __invoke(OrderAdminPaymentRequest $request, Order $order, CreateAdminOrderTransaction $createAdminOrderTransaction): \Illuminate\Http\JsonResponse
     {
-        $transaction = $createAdminOrderTransaction($order, $request->validated());
+        $transaction = $createAdminOrderTransaction($order, [$request->validated(), ...['type' => Transaction::TYPE_WITHDRAW]]);
 
         return api()->success(null, [
             'item' => Transaction::with('transactionable')->find($transaction->id)
