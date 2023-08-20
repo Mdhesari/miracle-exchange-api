@@ -23,8 +23,10 @@ class CreateAdminOrderTransaction
             'quantity'  => $order->cumulative_quote_quantity,
             'status'    => Transaction::STATUS_VERIFIED,
             'user_id'   => $order->user_id,
-            'type'      => Transaction::TYPE_DEPOSIT,
-            'admin_id'  => Auth::id(),
+            'type'      => Transaction::TYPE_WITHDRAW,
+            'meta'      => [
+                'admin_id' => Auth::id(),
+            ]
         ]);
 
         if (isset($data['media'])) {
