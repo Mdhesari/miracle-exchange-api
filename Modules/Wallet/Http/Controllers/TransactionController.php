@@ -10,13 +10,10 @@ use Illuminate\Routing\Controller;
 use Modules\Order\Actions\CreateAdminOrderTransaction;
 use Modules\Wallet\Actions\Transaction\ApplyTransactionQueryFilters;
 use Modules\Wallet\Actions\UpdateReference;
-use Modules\Wallet\Actions\VerifyTransaction;
 use Modules\Wallet\Entities\Transaction;
 use Modules\Wallet\Http\Requests\ReferenceTransactionRequest;
 use Modules\Wallet\Http\Requests\RejectTransactionRequest;
 use Modules\Wallet\Http\Requests\VerifyTransactionRequest;
-use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
-use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class TransactionController extends Controller
 {

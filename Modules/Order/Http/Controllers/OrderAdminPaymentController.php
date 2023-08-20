@@ -19,7 +19,10 @@ class OrderAdminPaymentController extends Controller
      */
     public function __invoke(OrderAdminPaymentRequest $request, Order $order, CreateAdminOrderTransaction $createAdminOrderTransaction): \Illuminate\Http\JsonResponse
     {
-        $transaction = $createAdminOrderTransaction($order, [...$request->validated(), ...['type' => Transaction::TYPE_WITHDRAW]]);
+        $data = $request->validated();
+        $data['type'] = Transaction::TYPE_WITHDRAW;
+
+        $transaction = $createAdminOrderTransaction($order, $data);
 
         return api()->success(null, [
             'item' => Transaction::with('transactionable')->find($transaction->id)

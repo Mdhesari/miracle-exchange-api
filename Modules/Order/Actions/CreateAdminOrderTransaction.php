@@ -27,6 +27,7 @@ class CreateAdminOrderTransaction
             'quantity'  => $order->cumulative_quote_quantity,
             'status'    => Transaction::STATUS_VERIFIED,
             'user_id'   => $order->user_id,
+            'type'      => $data['type'],
             'meta'      => [
                 'admin_id' => Auth::id(),
             ]
