@@ -19,7 +19,7 @@ class CreateAdminOrderTransaction
     public function __invoke(Order $order, array $data)
     {
         if (! isset($data['type'])) {
-            $data['type'] = Transaction::TYPE_WITHDRAW;
+            $data['type'] = Transaction::TYPE_DEPOSIT;
         }
 
         $transaction = $order->transactions()->create([
