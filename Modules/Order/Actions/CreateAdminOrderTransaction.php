@@ -21,13 +21,17 @@ class CreateAdminOrderTransaction
         if (! isset($data['type'])) {
             $data['type'] = Transaction::TYPE_DEPOSIT;
         }
+        if (! isset($data['status'])) {
+            $data['status'] = Transaction::STATUS_PENDING;
+
+        }
 
         $transaction = $order->transactions()->create([
             'reference' => $data['reference'],
             'quantity'  => $order->cumulative_quote_quantity,
-            'status'    => Transaction::STATUS_VERIFIED,
             'user_id'   => $order->user_id,
             'type'      => $data['type'],
+            'status'    => $data['status'],
             'meta'      => [
                 'admin_id' => Auth::id(),
             ]

@@ -21,6 +21,7 @@ class OrderAdminPaymentController extends Controller
     {
         $data = $request->validated();
         $data['type'] = Transaction::TYPE_WITHDRAW;
+        $data['status'] = Transaction::STATUS_PENDING;
 
         $transaction = $createAdminOrderTransaction($order, $data);
 
