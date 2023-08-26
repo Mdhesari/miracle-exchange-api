@@ -1,0 +1,150 @@
+{
+  "sekkeh": { "title": "سکه امامی", "country_code": "", "symbol": "ریال" },
+  "abshodeh": {
+    "title": "مثقال طلای آبشده",
+    "country_code": "",
+    "symbol": "ریال"
+  },
+  "usd_farda_buy": {
+    "title": "دلار فردایی خرید",
+    "country_code": "US",
+    "symbol": "$"
+  },
+  "usd_farda_sell": {
+    "title": "دلار فردایی فروش",
+    "country_code": "US",
+    "symbol": "$"
+  },
+  "aed_sell": {
+    "title": "درهم دوبی فروش",
+    "country_code": "AE",
+    "symbol": "د.إ"
+  },
+  "usd_sell": {
+    "title": "دلار تهران فروش",
+    "country_code": "US",
+    "symbol": "$"
+  },
+  "usd_buy": {
+    "title": "دلار تهران خرید",
+    "country_code": "US",
+    "symbol": "$"
+  },
+  "18ayar": {
+    "title": "گرم طلای 18 عیار",
+    "country_code": "",
+    "symbol": "ریال"
+  },
+  "dirham_dubai": {
+    "title": "درهم دوبی فروش",
+    "country_code": "AE",
+    "symbol": "د.إ"
+  },
+  "harat_naghdi_buy": {
+    "title": "دلار هرات خرید",
+    "country_code": "US",
+    "symbol": "$"
+  },
+  "harat_naghdi_sell": {
+    "title": "دلار هرات فروش",
+    "country_code": "US",
+    "symbol": "$"
+  },
+  "dolar_harat_sell": {
+    "title": "دلار هرات فروش نقد",
+    "country_code": "US",
+    "symbol": "$"
+  },
+  "bahar": { "title": "سکه بهار آزادی", "country_code": "", "symbol": "ریال" },
+  "nim": { "title": "نیم سکه", "country_code": "", "symbol": "ریال" },
+  "rob": { "title": "ربع سکه", "country_code": "", "symbol": "ریال" },
+  "gerami": { "title": "سکه گرمی", "country_code": "", "symbol": "ریال" },
+  "dolar_soleimanie_sell": {
+    "title": "دلار سلیمانیه",
+    "country_code": "",
+    "symbol": "$"
+  },
+  "dolar_kordestan_sell": {
+    "title": "دلار کردستان",
+    "country_code": "",
+    "symbol": "$"
+  },
+  "dolar_mashad_sell": {
+    "title": "دلار مشهد",
+    "country_code": "",
+    "symbol": "$"
+  },
+  "aed": { "title": "درهم امارات", "country_code": "AE", "symbol": "د.إ" },
+  "afn": { "title": "افغانی", "country_code": "AF", "symbol": "؋" },
+  "all": { "title": "لک آلبانی", "country_code": "AL", "symbol": "L" },
+  "amd": { "title": "درام ارمنستان", "country_code": "AM", "symbol": "դր." },
+  "aoa": { "title": "کوانزا آنگولا", "country_code": "AO", "symbol": "Kz" },
+  "ars": { "title": "پزو آرژانتین", "country_code": "AR", "symbol": "$" },
+  "aud": { "title": "دلار استرالیا", "country_code": "AU", "symbol": "$" },
+  "aud_hav": {
+    "title": "حواله دلار استرالیا",
+    "country_code": "AU",
+    "symbol": "$"
+  },
+  "azn": { "title": "منات آذربایجان", "country_code": "AZ", "symbol": "₼" },
+  "bam": { "title": "مارک بوسنی", "country_code": "BA", "symbol": "KM" },
+  "bdt": { "title": "تاکا بنگلادش", "country_code": "BD", "symbol": "৳" },
+  "bgn": { "title": "لو بلغارستان", "country_code": "BG", "symbol": "лв." },
+  "bhd": { "title": "دینار بهرین", "country_code": "BH", "symbol": "ب.د" },
+  "bif": { "title": "فرانک بوروندی", "country_code": "BI", "symbol": "FBu" },
+  "bnd": { "title": "دلار برونئی", "country_code": "BN", "symbol": "$" },
+  "bob": { "title": "بولیویان", "country_code": "BO", "symbol": "Bs." },
+  "brl": { "title": "رئال برزیل", "country_code": "BR", "symbol": "R$" },
+  "bsd": { "title": "دلار باهاماس", "country_code": "BS", "symbol": "$" },
+  "bub_18ayar": {
+    "title": "حباب طلای 18",
+    "country_code": "",
+    "symbol": "ریال"
+  },
+  "bub_abshodeh": {
+    "title": "حباب مثقال طلای آبشده",
+    "country_code": "",
+    "symbol": "ریال"
+  },
+  "bub_bahar": {
+    "title": "حباب سکه بهار آزادی",
+    "country_code": "",
+    "symbol": "ریال"
+  },
+  "bub_gerami": {
+    "title": "حباب سکه گرمی",
+    "country_code": "",
+    "symbol": "ریال"
+  },
+  "bub_nim": { "title": "حباب نیم سکه", "country_code": "", "symbol": "ریال" },
+  "bub_rob": { "title": "حباب ربع سکه", "country_code": "", "symbol": "ریال" },
+  "bub_sekkeh": {
+    "title": "حباب سکه امامی",
+    "country_code": "",
+    "symbol": "ریال"
+  },
+  "byn": { "title": "روبل بلاروس", "country_code": "BY", "symbol": "Br" },
+  "eur_hav": { "title": "حواله یورو", "country_code": "EU", "symbol": "€" },
+  "gbp_hav": {
+    "title": "حواله پوند انگلیس",
+    "country_code": "GB",
+    "symbol": "£"
+  },
+  "myr_hav": {
+    "title": "حواله رینگیت مالزی",
+    "country_code": "GB",
+    "symbol": "RM"
+  },
+  "try_hav": {
+    "title": "حواله لیر ترکیه",
+    "country_code": "TR",
+    "symbol": "₺"
+  },
+  "cny_hav": { "title": "حواله یوان چین", "country_code": "CN", "symbol": "¥" },
+  "cad_hav": {
+    "title": "حواله دلار کانادا",
+    "country_code": "CA",
+    "symbol": "$"
+  },
+  "jpy_hav": { "title": "حواله ین ژاپن", "country_code": "JP", "symbol": "¥" }
+}

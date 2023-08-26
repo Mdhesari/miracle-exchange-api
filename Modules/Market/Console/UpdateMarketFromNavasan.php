@@ -6,8 +6,6 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use Modules\Market\Entities\Market;
 use Psy\Command\ExitCommand;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 
 class UpdateMarketFromNavasan extends Command
 {
@@ -37,13 +35,19 @@ class UpdateMarketFromNavasan extends Command
 
         $bar = $this->output->createProgressBar(count($data));
 
+        $marketsName = json_decode(file_get_contents(__DIR__.'/markets.json'), true);
+
         $bar->start();
 
         foreach ($data as $key => $market) {
             try {
+                $marketName = $marketsName[$key] ?? null;
+
                 Market::firstOrCreate([
                     'symbol' => $key,
                 ], [
+                    'persian_name'     => is_array($marketName) ? $marketName['title'] : null,
+                    'country_code'     => is_array($marketName) ? $marketName['country_code'] : null,
                     'price'            => $market['value'],
                     'price_updated_at' => verta()->parse($market['date'])->toCarbon(),
                 ]);

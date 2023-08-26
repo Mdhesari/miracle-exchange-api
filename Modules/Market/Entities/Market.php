@@ -17,6 +17,8 @@ class Market extends Model implements Expandable, HasFilters
 
     protected $fillable = [
         'name',
+        'persian_name',
+        'country_code',
         'symbol',
         'price',
         'status',

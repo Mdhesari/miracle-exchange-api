@@ -2,14 +2,10 @@
 
 namespace Modules\Auth\Jobs;
 
-use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Support\Facades\Log;
-use Modules\Auth\Services\SMSIR;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class SendSMS
 {
@@ -41,7 +37,7 @@ class SendSMS
 
     public function handle()
     {
-        $this->SMS()->VerifyLookup($this->mobile, $this->parameters[0] ?? null, null, null, $this->templateId, null);
+        $this->SMS()->VerifyLookup($this->mobile, $this->parameters[0] ?? null, $this->parameters[1] ?? null, $this->parameters[2] ?? null, $this->templateId, $this->parameters[3] ?? null);
     }
 
     private function SMS()

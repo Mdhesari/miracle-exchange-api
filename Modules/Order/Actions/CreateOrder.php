@@ -3,8 +3,8 @@
 namespace Modules\Order\Actions;
 
 use Illuminate\Support\Facades\Auth;
-use Modules\Market\Entities\Market;
 use Modules\Order\Entities\Order;
+use Modules\Order\Events\OrderCreated;
 
 class CreateOrder
 {
@@ -23,7 +23,11 @@ class CreateOrder
             $data['user_id'] = Auth::id();
         }
 
-        return Order::create($data);
+        $order = Order::create($data);
+
+        event(new OrderCreated($order));
+
+        return $order;
 
     }
 }

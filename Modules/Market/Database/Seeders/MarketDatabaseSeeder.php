@@ -16,8 +16,5 @@ class MarketDatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-
-        Market::factory()->count(1)->create();
-        // $this->call("OthersTableSeeder");
     }
 }
