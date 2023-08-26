@@ -42,6 +42,7 @@ class Order extends Model implements Expandable
     ];
 
     protected $appends = [
+        'formatted_executed_price',
         'status_trans',
         'available_status',
     ];
@@ -56,7 +57,7 @@ class Order extends Model implements Expandable
         return array_column(OrderStatus::cases(), 'name');
     }
 
-    public function getFormattedExcecutedPrice()
+    public function getFormattedExecutedPrice()
     {
         return number_format($this->executed_price);
     }
