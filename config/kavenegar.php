@@ -1,4 +1,4 @@
-<?php 
+<?php
 return [
-    'apikey' => '',
+    'apikey' => env('KAVENEGAR_API_KEY'),
 ];

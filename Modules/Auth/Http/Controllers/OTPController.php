@@ -133,7 +133,7 @@ class OTPController extends Controller
          * Dispatch send sms job.
          */
 
-        //SendSMS::dispatch($mobile, "verifyOtp", $data);
+        SendSMS::dispatch($mobile, "loginOtp", $data);
     }
 
     /**
@@ -145,7 +145,6 @@ class OTPController extends Controller
 
     public function tokenGenerator(int $length = 4, string $table = null, string $column = null): int
     {
-        return 1234;
         $token = mt_rand(pow(10, $length - 1), pow(10, $length) - 1);
 
         if ($table && $column) {
