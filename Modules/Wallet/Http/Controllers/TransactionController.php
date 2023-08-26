@@ -75,7 +75,9 @@ class TransactionController extends Controller
 
         $transaction->verify();
 
-        $transaction = $createAdminOrderTransaction($transaction->transactionable, $request->validated());
+        $transaction = $createAdminOrderTransaction($transaction->transactionable, array_merge($request->validated(), [
+            'admin_id' => $request->user()->id,
+        ]));
 
         return api()->success(null, [
             'item' => Transaction::find($transaction->id),

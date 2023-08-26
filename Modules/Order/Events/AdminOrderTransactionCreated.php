@@ -2,10 +2,11 @@
 
 namespace Modules\Order\Events;
 
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\SerializesModels;
 use Modules\Wallet\Entities\Transaction;
 
-class AdminOrderTransactionCreated
+class AdminOrderTransactionCreated implements ShouldQueue
 {
     use SerializesModels;
 

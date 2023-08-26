@@ -23,7 +23,6 @@ class CreateAdminOrderTransaction
         }
         if (! isset($data['status'])) {
             $data['status'] = Transaction::STATUS_PENDING;
-
         }
 
         $transaction = $order->transactions()->create([

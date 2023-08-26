@@ -2,10 +2,11 @@
 
 namespace Modules\Wallet\Events;
 
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\SerializesModels;
 use Modules\Wallet\Entities\Transaction;
 
-class TransactionReferenceUpdated
+class TransactionReferenceUpdated implements ShouldQueue
 {
     use SerializesModels;
 

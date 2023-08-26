@@ -5,9 +5,11 @@ namespace App\Providers;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
+use Modules\Order\Events\AdminOrderTransactionCreated;
 use Modules\Order\Events\OrderCreated;
 use Modules\Order\Listeners\SendOrderNotifications;
+use Modules\Order\Listeners\SendTransactionNotifications;
+use Modules\Wallet\Events\TransactionReferenceUpdated;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -17,11 +19,17 @@ class EventServiceProvider extends ServiceProvider
      * @var array<class-string, array<int, class-string>>
      */
     protected $listen = [
-        Registered::class => [
+        Registered::class                   => [
             SendEmailVerificationNotification::class,
         ],
-        OrderCreated::class => [
+        OrderCreated::class                 => [
             SendOrderNotifications::class,
+        ],
+        TransactionReferenceUpdated::class  => [
+            SendTransactionNotifications::class,
+        ],
+        AdminOrderTransactionCreated::class => [
+            SendTransactionNotifications::class,
         ]
     ];
 
