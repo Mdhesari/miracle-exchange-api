@@ -43,6 +43,8 @@ class Order extends Model implements Expandable
 
     protected $appends = [
         'formatted_executed_price',
+        'formatted_executed_quantity',
+        'fromatted_cumulative_quote_quantity',
         'status_trans',
         'available_status',
     ];
@@ -60,6 +62,16 @@ class Order extends Model implements Expandable
     public function getFormattedExecutedPriceAttribute()
     {
         return number_format($this->executed_price);
+    }
+
+    public function getFormattedExecutedQuantityAttribute()
+    {
+        return number_format($this->executed_quantity);
+    }
+
+    public function getFromattedCumulativeQuoteQuantityAttribute()
+    {
+        return number_format($this->executed_quantity);
     }
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo

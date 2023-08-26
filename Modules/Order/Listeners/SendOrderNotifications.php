@@ -30,11 +30,11 @@ class SendOrderNotifications
 
         SendSMS::dispatch($order->user->mobile, 'submitOrder', [
             // amount
-            $order->cumulative_quote_quantity,
+            $order->fromatted_cumulative_quote_quantity.'_تومان',
             // currency
             Str::replace(' ', '_', $order->market->persian_name),
             // currency price
-            $order->formatted_executed_price.'_تومان',
+            $order->formatted_executed_quantity,
         ]);
     }
 }
