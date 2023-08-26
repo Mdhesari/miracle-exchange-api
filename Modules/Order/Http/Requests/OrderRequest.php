@@ -28,6 +28,6 @@ class OrderRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->isOwner($this->user_id) || $this->user()->can('orders');
+        return ! $this->user_id || $this->user()->isOwner($this->user_id) || $this->user()->can('orders');
     }
 }
