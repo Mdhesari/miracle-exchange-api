@@ -32,9 +32,9 @@ class SendOrderNotifications
             // amount
             $order->cumulative_quote_quantity,
             // currency
-            Str::replace(' ', '_', $order->market->persian_name_,
-                // currency price
-                $order->executed_price,
+            Str::replace(' ', '_', $order->market->persian_name),
+            // currency price
+            $order->executed_price,
         ]);
     }
 }
