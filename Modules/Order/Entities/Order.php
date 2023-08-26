@@ -57,7 +57,7 @@ class Order extends Model implements Expandable
         return array_column(OrderStatus::cases(), 'name');
     }
 
-    public function getFormattedExecutedPrice()
+    public function getFormattedExecutedPriceAttribute()
     {
         return number_format($this->executed_price);
     }
