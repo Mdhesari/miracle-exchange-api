@@ -2,6 +2,7 @@
 
 namespace Modules\Order\Listeners;
 
+use Illuminate\Support\Str;
 use Modules\Auth\Jobs\SendSMS;
 use Modules\Order\Events\OrderCreated;
 
@@ -31,9 +32,9 @@ class SendOrderNotifications
             // amount
             $order->cumulative_quote_quantity,
             // currency
-            $order->market->persian_name,
-            // currency price
-            $order->executed_price,
+            Str::replace(' ', '_', $order->market->persian_name_,
+                // currency price
+                $order->executed_price,
         ]);
     }
 }

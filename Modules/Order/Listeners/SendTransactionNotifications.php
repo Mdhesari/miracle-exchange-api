@@ -2,6 +2,7 @@
 
 namespace Modules\Order\Listeners;
 
+use Illuminate\Support\Str;
 use Modules\Auth\Jobs\SendSMS;
 use Modules\Order\Exceptions\InvalidTransactionException;
 use Modules\Wallet\Events\TransactionReferenceUpdated;
@@ -36,7 +37,7 @@ class SendTransactionNotifications
 
         SendSMS::dispatch($order->user->mobile, $transaction->admin_id ? 'submitAdminReceipt' : 'submitUserReceipt', [
             // currency
-            $order->market->persian_name,
+            Str::replace(' ', '_', $order->market->persian_name),
         ]);
     }
 }
