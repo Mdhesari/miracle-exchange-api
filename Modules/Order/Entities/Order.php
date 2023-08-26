@@ -71,7 +71,7 @@ class Order extends Model implements Expandable
 
     public function getFromattedCumulativeQuoteQuantityAttribute()
     {
-        return number_format($this->executed_quantity);
+        return number_format($this->cumulative_quote_quantity);
     }
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
