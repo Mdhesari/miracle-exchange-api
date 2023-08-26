@@ -48,6 +48,7 @@ class UpdateMarketFromNavasan extends Command
                 ], [
                     'persian_name'     => is_array($marketName) ? $marketName['title'] : null,
                     'country_code'     => is_array($marketName) ? $marketName['country_code'] : null,
+                    'symbol_char'      => is_array($marketName) ? $marketName['symbol'] : null,
                     'price'            => $market['value'],
                     'price_updated_at' => verta()->parse($market['date'])->toCarbon(),
                 ]);

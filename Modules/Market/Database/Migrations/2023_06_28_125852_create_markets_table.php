@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('name')->nullable();
             $table->string('persian_name')->nullable();
             $table->string('country_code', 8)->nullable();
-            $table->string('symbol_char', 8);
+            $table->string('symbol_char', 8)->nullable();
             $table->string('symbol', 64)->nullable();
 
             $table->float('price', 12, 0);
