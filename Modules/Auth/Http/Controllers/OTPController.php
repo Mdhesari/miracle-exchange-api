@@ -39,11 +39,11 @@ class OTPController extends Controller
 
     public function __construct()
     {
-        $this->delayBetweenEachOTP = config('auth.otp-delay') ?: 30;
+        $this->delayBetweenEachOTP = config('auth.otp-delay');
 
-        $this->otpValidationTime = config('auth.otp-expires-after') ?: 120;
+        $this->otpValidationTime = config('auth.otp-expires-after');
 
-        $this->tokenLength = config('auth.otp-token-length') ?: 4;
+        $this->tokenLength = config('auth.otp-token-length');
     }
 
     /**
