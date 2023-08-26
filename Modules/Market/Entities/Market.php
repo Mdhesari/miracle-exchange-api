@@ -19,6 +19,7 @@ class Market extends Model implements Expandable, HasFilters
         'name',
         'persian_name',
         'country_code',
+        'symbol_char',
         'symbol',
         'price',
         'status',
