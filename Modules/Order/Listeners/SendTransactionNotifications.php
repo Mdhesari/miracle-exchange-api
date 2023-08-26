@@ -26,7 +26,7 @@ class SendTransactionNotifications
      * @return void
      * @throws InvalidTransactionException
      */
-    public function handle(TransactionReferenceUpdated $event)
+    public function handle($event)
     {
         $transaction = $event->transaction;
         $order = $transaction->transactionable;
@@ -35,7 +35,7 @@ class SendTransactionNotifications
             throw new InvalidTransactionException;
         }
 
-        SendSMS::dispatch($order->user->mobile, $transaction->admin_id ? 'submitAdminReceipt' : 'submitUserReceipt', [
+        SendSMS::dispatch($order->user->mobile, $event instanceof TransactionReferenceUpdated ? 'submitUserReceipt' : 'submitAdminReceipt', [
             // currency
             Str::replace(' ', '_', $order->market->persian_name),
         ]);

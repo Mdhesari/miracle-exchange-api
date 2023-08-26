@@ -14,7 +14,6 @@ use Modules\Market\Entities\Market;
 use Modules\Order\Database\factories\OrderFactory;
 use Modules\Order\Enums\OrderStatus;
 use Modules\Wallet\Traits\HasTransaction;
-use Modules\Wallet\Traits\Transactionable;
 
 class Order extends Model implements Expandable
 {
@@ -55,6 +54,11 @@ class Order extends Model implements Expandable
     public function getAvailableStatusAttribute(): array
     {
         return array_column(OrderStatus::cases(), 'name');
+    }
+
+    public function getFormattedExcecutedPrice()
+    {
+        return number_format($this->executed_price);
     }
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo

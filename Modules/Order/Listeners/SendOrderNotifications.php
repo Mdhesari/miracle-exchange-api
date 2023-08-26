@@ -34,7 +34,7 @@ class SendOrderNotifications
             // currency
             Str::replace(' ', '_', $order->market->persian_name),
             // currency price
-            $order->executed_price,
+            $order->formatted_executed_price.'_تومان',
         ]);
     }
 }
