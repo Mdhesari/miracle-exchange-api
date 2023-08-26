@@ -43,7 +43,7 @@ class OTPController extends Controller
 
         $this->otpValidationTime = config('auth.otp-expires-after') ?: 120;
 
-        $this->tokenLength = config('auth.otp-token-length') ?: 6;
+        $this->tokenLength = config('auth.otp-token-length') ?: 4;
     }
 
     /**
