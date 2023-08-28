@@ -43,7 +43,7 @@ class UpdateMarketFromNavasan extends Command
             try {
                 $marketName = $marketsName[$key] ?? null;
 
-                Market::firstOrCreate([
+                $market = Market::firstOrCreate([
                     'symbol' => $key,
                 ], [
                     'persian_name'     => is_array($marketName) ? $marketName['title'] : null,
@@ -52,6 +52,13 @@ class UpdateMarketFromNavasan extends Command
                     'price'            => $market['value'],
                     'price_updated_at' => verta()->parse($market['date'])->toCarbon(),
                 ]);
+
+                if (! $market->wasRecentlyCreated) {
+                    $market->update([
+                        'price'            => $market['value'],
+                        'price_updated_at' => verta()->parse($market['date'])->toCarbon(),
+                    ]);
+                }
             } catch (\Exception $e) {
                 Log::error($e);
             }
