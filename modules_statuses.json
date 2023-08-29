@@ -7,5 +7,6 @@
     "Order": true,
     "Market": true,
     "Gateway": true,
-    "Account": true
+    "Account": true,
+    "Bank": true
 }
