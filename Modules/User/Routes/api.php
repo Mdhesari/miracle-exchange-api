@@ -21,7 +21,8 @@ use Modules\User\Http\Controllers\UserController;
 Route::prefix('users')->name('users.')->group(function () {
     Route::put('{user}/restore', [UserController::class, 'restore'])->name('restore');
     Route::post('{user}/authorization', UserAuthorizationController::class)->name('authorize');
-    Route::put('{user}/authorization', AdminUserAuthorizationController::class)->name('authorize');
+    Route::put('{user}/authorization/accept', [AdminUserAuthorizationController::class, 'accept'])->name('authorize.accept');
+    Route::put('{user}/authorization/reject', [AdminUserAuthorizationController::class, 'reject'])->name('authorize.reject');
 });
 
 Route::apiResource('users', UserController::class);

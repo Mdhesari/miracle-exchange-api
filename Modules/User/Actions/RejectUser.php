@@ -5,19 +5,19 @@ namespace Modules\User\Actions;
 use App\Enums\UserStatus;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Modules\User\Events\UserAuthorized;
+use Modules\User\Events\UserRejected;
 
-class AuthorizeUser
+class RejectUser
 {
-    public function __invoke(User $user,)
+    public function __invoke(User $user)
     {
         $user->update([
-            'status' => UserStatus::Accepted->name,
+            'status' => UserStatus::Rejected->name,
             'meta'   => array_merge($user->meta ?? [], [
                 'admin_id' => Auth::user()->id,
             ])
         ]);
 
-        event(new UserAuthorized($user));
+        event(new UserRejected($user));
     }
 }
