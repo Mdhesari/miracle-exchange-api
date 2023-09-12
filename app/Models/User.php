@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\UserGender;
+use App\Enums\UserStatus;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -28,6 +30,7 @@ class User extends Authenticatable implements JWTSubject, HasFilters
         'last_name',
         'national_code',
         'birthday',
+        'status',
         'gender',
         'email',
         'mobile',
@@ -47,6 +50,8 @@ class User extends Authenticatable implements JWTSubject, HasFilters
 
     protected $appends = [
         'full_name',
+        'available_status',
+        'available_gender',
     ];
 
     /**
@@ -65,6 +70,16 @@ class User extends Authenticatable implements JWTSubject, HasFilters
     public function getFullNameAttribute()
     {
         return "{$this->first_name} {$this->last_name}";
+    }
+
+    public function getAvailableStatusAttribute()
+    {
+        return array_column(UserStatus::cases(), 'name');
+    }
+
+    public function getAvailableGenderAttribute()
+    {
+        return array_column(UserGender::cases(), 'name');
     }
 
     public function setMobileAttribute($mobile)

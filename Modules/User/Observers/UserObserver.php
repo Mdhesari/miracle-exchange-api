@@ -5,6 +5,7 @@ namespace Modules\User\Observers;
 use App\Enums\UserGender;
 use App\Models\User;
 use Modules\User\Actions\DeleteUserResources;
+use Modules\User\Enums\UserStatus;
 
 class UserObserver
 {
@@ -12,6 +13,10 @@ class UserObserver
     {
         if (! $user->gender) {
             $user->gender = UserGender::Male->name;
+        }
+
+        if (! $user->status) {
+            $user->status = UserStatus::Pending->name;
         }
     }
 

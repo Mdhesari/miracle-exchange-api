@@ -24,6 +24,7 @@ return new class extends Migration {
             $table->string('password')->nullable();
 
             $table->enum('gender', array_column(UserGender::cases(), 'name'));
+            $table->enum('status', array_column(UserStatus::cases(), 'name'));
 
             $table->date('birthday')->nullable();
             $table->timestamp('email_verified_at')->nullable();
