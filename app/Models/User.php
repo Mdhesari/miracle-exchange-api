@@ -47,6 +47,7 @@ class User extends Authenticatable implements JWTSubject, HasFilters, HasMedia, 
         'mobile',
         'banned_at',
         'password',
+        'meta',
     ];
 
     /**
@@ -64,6 +65,7 @@ class User extends Authenticatable implements JWTSubject, HasFilters, HasMedia, 
         'status_trans',
         'available_status',
         'available_gender',
+        'level',
     ];
 
     /**
@@ -77,6 +79,7 @@ class User extends Authenticatable implements JWTSubject, HasFilters, HasMedia, 
         'birthday'           => 'date',
         'banned_at'          => 'datetime',
         'password'           => 'hashed',
+        'meta'               => 'array',
     ];
 
     public function getStatusTransAttribute()
@@ -87,6 +90,11 @@ class User extends Authenticatable implements JWTSubject, HasFilters, HasMedia, 
     public function getFullNameAttribute()
     {
         return "{$this->first_name} {$this->last_name}";
+    }
+
+    public function getLevelAttribute()
+    {
+        return $this->asDecimal($this->status === UserStatus::Accepted->name ? 2 : 1, 0);
     }
 
     public function getAvailableStatusAttribute()

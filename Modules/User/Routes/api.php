@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\User\Controllers\UserAuthrizationController;
+use Modules\User\Http\Controllers\AdminUserAuthorizationController;
 use Modules\User\Http\Controllers\ProfileController;
 use Modules\User\Http\Controllers\UserAuthorizationController;
 use Modules\User\Http\Controllers\UserController;
@@ -20,6 +21,7 @@ use Modules\User\Http\Controllers\UserController;
 Route::prefix('users')->name('users.')->group(function () {
     Route::put('{user}/restore', [UserController::class, 'restore'])->name('restore');
     Route::post('{user}/authorization', UserAuthorizationController::class)->name('authorize');
+    Route::put('{user}/authorization', AdminUserAuthorizationController::class)->name('authorize');
 });
 
 Route::apiResource('users', UserController::class);

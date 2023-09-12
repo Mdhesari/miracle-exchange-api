@@ -33,6 +33,8 @@ return new class extends Migration {
             $table->rememberToken();
             $table->timestamps();
 
+            $table->json('meta')->nullable();
+
             $table->softDeletes();
         });
     }

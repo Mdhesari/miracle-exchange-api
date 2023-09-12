@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\UserStatus;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
@@ -23,4 +24,15 @@ it('can user request for authorization', function () {
 
     $this->assertNotNull($user->getFirstMedia(User::MEDIA_NATIONAL_ID));
     $this->assertNotNull($user->getFirstMedia(User::MEDIA_FACE_SCAN));
+});
+
+it('can admin authorize users', function () {
+    givePerm('users');
+
+    $response = $this->put(route('users.authorize', $user = User::factory()->create()));
+
+    $response->assertSuccessful();
+
+    $this->assertEquals(2, $user->refresh()->level);
+    $this->assertEquals(UserStatus::Accepted->name, $user->status);
 });
