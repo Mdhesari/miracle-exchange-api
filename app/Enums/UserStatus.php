@@ -4,7 +4,8 @@ namespace App\Enums;
 
 enum UserStatus
 {
-    case Enabled;
-    case Disabled;
+    case Accepted;
+    case Rejected;
     case Pending;
+    case AdminPending;
 }

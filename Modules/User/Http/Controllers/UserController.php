@@ -36,6 +36,7 @@ class UserController extends Controller
      * @QAparam mobile string
      * @QAparam type string ['Legal', 'Real']
      * @QAparam status string ['Enabled', 'Disabled', 'Pending']
+     * @QAparam expand string ['media']
      * @QAparam national_code string
      * @QAparam user_id integer
      * @QAparam investors boolean

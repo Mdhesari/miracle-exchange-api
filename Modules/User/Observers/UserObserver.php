@@ -3,9 +3,9 @@
 namespace Modules\User\Observers;
 
 use App\Enums\UserGender;
+use App\Enums\UserStatus;
 use App\Models\User;
 use Modules\User\Actions\DeleteUserResources;
-use Modules\User\Enums\UserStatus;
 
 class UserObserver
 {

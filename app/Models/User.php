@@ -10,15 +10,26 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Lang;
 use Laravel\Sanctum\HasApiTokens;
+use Mdhesari\LaravelQueryFilters\Contracts\Expandable;
 use Mdhesari\LaravelQueryFilters\Contracts\HasFilters;
+use Mdhesari\LaravelQueryFilters\Traits\HasExpandScope;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject, HasFilters
+class User extends Authenticatable implements JWTSubject, HasFilters, HasMedia, Expandable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasUuids, SoftDeletes, HasRoles, HasPermissions;
+    use HasApiTokens, HasFactory, Notifiable, HasUuids, SoftDeletes, HasRoles, HasPermissions, InteractsWithMedia, HasExpandScope;
+
+    const MEDIA_NATIONAL_ID = 'national_id';
+    const MEDIA_FACE_SCAN = 'face_scan';
 
     /**
      * The attributes that are mass assignable.
@@ -50,6 +61,7 @@ class User extends Authenticatable implements JWTSubject, HasFilters
 
     protected $appends = [
         'full_name',
+        'status_trans',
         'available_status',
         'available_gender',
     ];
@@ -66,6 +78,11 @@ class User extends Authenticatable implements JWTSubject, HasFilters
         'banned_at'          => 'datetime',
         'password'           => 'hashed',
     ];
+
+    public function getStatusTransAttribute()
+    {
+        return Lang::has($key = 'status.general.'.$this->status) ? Lang::get($key) : $this->status;
+    }
 
     public function getFullNameAttribute()
     {
@@ -102,6 +119,28 @@ class User extends Authenticatable implements JWTSubject, HasFilters
         return ['uuid'];
     }
 
+    /**
+     * @param string|UploadedFile $file
+     * @return mixed
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function addNationalIdImage(string|UploadedFile $file): mixed
+    {
+        return $this->addMedia($file)->toMediaCollection(self::MEDIA_NATIONAL_ID);
+    }
+
+    /**
+     * @param string|UploadedFile $file
+     * @return mixed
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function addFaceScanImage(string|UploadedFile $file): mixed
+    {
+        return $this->addMedia($file)->toMediaCollection(self::MEDIA_FACE_SCAN);
+    }
+
     protected function getDefaultGuardName(): string
     {
         return 'api';
@@ -124,5 +163,21 @@ class User extends Authenticatable implements JWTSubject, HasFilters
     public function getSearchParams(): array
     {
         return ['first_name', 'last_name', 'email', 'mobile'];
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection(self::MEDIA_FACE_SCAN)->acceptsMimeTypes([
+            'image/jpg', 'image/jpeg', 'image/png',
+        ]);
+
+        $this->addMediaCollection(self::MEDIA_NATIONAL_ID)->acceptsMimeTypes([
+            'image/jpg', 'image/jpeg', 'image/png',
+        ]);
+    }
+
+    public function getExpandRelations(): array
+    {
+        return ['media'];
     }
 }
