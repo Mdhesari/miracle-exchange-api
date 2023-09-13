@@ -2,7 +2,6 @@
 
 namespace Modules\Order\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Modules\Order\Actions\CreateOrderTransaction;
 use Modules\Order\Entities\Order;
 use Modules\Order\Http\Requests\OrderPaymentRequest;
@@ -10,6 +9,11 @@ use Modules\Wallet\Entities\Transaction;
 
 class OrderPaymentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     /**
      * Handle the incoming request.
      */

@@ -188,4 +188,9 @@ class User extends Authenticatable implements JWTSubject, HasFilters, HasMedia, 
     {
         return ['media'];
     }
+
+    public function isAccepted(): bool
+    {
+        return $this->status === UserStatus::Accepted->name;
+    }
 }
