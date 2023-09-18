@@ -20,6 +20,8 @@ return new class extends Migration {
             $table->string('symbol_char', 8)->nullable();
             $table->string('symbol', 64)->nullable();
 
+            $table->text('description')->nullable();
+
             $table->float('price', 12, 0);
 
             $table->enum('status', array_column(MarketStatus::cases(), 'name'));
