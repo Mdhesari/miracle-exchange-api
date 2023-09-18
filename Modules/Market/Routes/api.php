@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Modules\Market\Http\Controllers\MarketController;
+use Modules\Market\Http\Controllers\MarketToggleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +16,5 @@ use Modules\Market\Http\Controllers\MarketController;
 */
 
 Route::apiResource('markets', MarketController::class);
+
+Route::put('markets/{market}/status-toggle', MarketToggleController::class)->name('markets.status-toggle');

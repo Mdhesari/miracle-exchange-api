@@ -60,4 +60,25 @@ class Market extends Model implements Expandable, HasFilters
     {
         return ['name', 'symbol'];
     }
+
+    public function toggle(): static
+    {
+        $this->isEnabled() ? $this->disable() : $this->enable();
+
+        return $this;
+    }
+
+    private function disable(): bool
+    {
+        return $this->update([
+            'status' => MarketStatus::Disabled->name,
+        ]);
+    }
+
+    private function enable(): bool
+    {
+        return $this->update([
+            'status' => MarketStatus::Enabled->name,
+        ]);
+    }
 }

@@ -2,7 +2,6 @@
 
 use Modules\Market\Entities\Market;
 use Modules\Market\Enums\MarketStatus;
-use function Pest\Laravel\assertDatabaseMissing;
 use function Pest\Laravel\assertModelMissing;
 
 beforeEach(fn() => $this->actingAs());
@@ -57,6 +56,8 @@ it('can delete a market', function () {
 });
 
 it('can get markets', function () {
+    Market::factory()->create();
+
     $response = $this->get(route('markets.index'));
 
     $response->assertSuccessful()->assertJsonStructure([
@@ -101,4 +102,22 @@ it('cannot get a disabled market', function () {
     $response = $this->get(route('markets.show', $market));
 
     $response->assertForbidden();
+});
+
+it('can toggle market status', function () {
+    givePerm('markets');
+
+    $market = Market::factory()->create([
+        'status' => MarketStatus::Disabled->name,
+    ]);
+
+    $response = $this->put(route('markets.status-toggle', $market));
+
+    $response->assertSuccessful()->assertJson([
+        'data' => [
+            'item' => [
+                'status' => MarketStatus::Enabled->name,
+            ]
+        ]
+    ]);
 });
