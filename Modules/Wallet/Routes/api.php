@@ -17,19 +17,19 @@ use Modules\Wallet\Http\Controllers\WalletController;
 |
 */
 
-//Route::prefix('wallets')->name('wallets.')->group(function () {
-//    /**
-//     * Deposit
-//     */
+Route::prefix('wallets')->name('wallets.')->group(function () {
+    /**
+     * Deposit
+     */
 //    Route::post('deposit', [WalletController::class, 'deposit'])->name('deposit');
-//
-//    /**
-//     * Withdraw
-//     */
+
+    /**
+     * Withdraw
+     */
 //    Route::post('withdraw', [WalletController::class, 'withdraw'])->name('withdraw');
-//
-//    Route::apiResource(null, WalletController::class)->except(['store', 'update']);
-//});
+
+    Route::apiResource(null, WalletController::class)->except(['store', 'update']);
+});
 
 Route::prefix('transactions')->name('transactions.')->group(function () {
     Route::put('{transaction}/reference', [TransactionController::class, 'updateReference'])->name('reference');

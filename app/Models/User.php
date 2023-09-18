@@ -15,6 +15,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Mdhesari\LaravelQueryFilters\Contracts\Expandable;
 use Mdhesari\LaravelQueryFilters\Contracts\HasFilters;
 use Mdhesari\LaravelQueryFilters\Traits\HasExpandScope;
+use Modules\Wallet\Traits\HasWallet;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
@@ -26,7 +27,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject, HasFilters, HasMedia, Expandable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasUuids, SoftDeletes, HasRoles, HasPermissions, InteractsWithMedia, HasExpandScope;
+    use HasApiTokens, HasFactory, Notifiable, HasUuids, SoftDeletes, HasRoles, HasPermissions, InteractsWithMedia, HasExpandScope, HasWallet;
 
     const MEDIA_NATIONAL_ID = 'national_id';
     const MEDIA_FACE_SCAN = 'face_scan';

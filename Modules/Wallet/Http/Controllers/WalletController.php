@@ -5,6 +5,7 @@ namespace Modules\Wallet\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Validation\ValidationException;
 use Modules\Wallet\Actions\ApplyWalletQueryFilters;
 use Modules\Wallet\Actions\CreateDepositTransaction;
 use Modules\Wallet\Actions\CreateWithdrawTransaction;
@@ -12,6 +13,8 @@ use Modules\Wallet\Entities\Transaction;
 use Modules\Wallet\Entities\Wallet;
 use Modules\Wallet\Http\Requests\DepositRequest;
 use Modules\Wallet\Http\Requests\WithdrawRequest;
+use WendellAdriel\ValidatedDTO\Exceptions\CastTargetException;
+use WendellAdriel\ValidatedDTO\Exceptions\MissingCastTypeException;
 
 class WalletController extends Controller
 {
@@ -26,14 +29,16 @@ class WalletController extends Controller
      *
      * @param Request $request
      * @param ApplyWalletQueryFilters $applyWalletQueryFilters
+     * @return JsonResponse
+     * @throws ValidationException
+     * @throws CastTargetException
+     * @throws MissingCastTypeException
      * @QAparam s string
      * @QAparam oldest boolean
      * @QAparam active boolean
      * @QAparam user_id integer
      * @QAparam date_from integer
      * @QAparam date_to integer
-     * @return JsonResponse
-     * @return JsonResponse
      */
     public function index(Request $request, ApplyWalletQueryFilters $applyWalletQueryFilters): JsonResponse
     {
@@ -96,7 +101,7 @@ class WalletController extends Controller
      * @param WithdrawRequest $request
      * @param CreateWithdrawTransaction $createWithdrawTransaction
      * @return JsonResponse
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function withdraw(WithdrawRequest $request, CreateWithdrawTransaction $createWithdrawTransaction): JsonResponse
     {
