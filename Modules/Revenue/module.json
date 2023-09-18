@@ -1,0 +1,11 @@
+{
+    "name": "Revenue",
+    "alias": "revenue",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Revenue\\Providers\\RevenueServiceProvider"
+    ],
+    "files": []
+}

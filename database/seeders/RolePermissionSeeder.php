@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Seeder;
 use Modules\RolePermission\Entities\Permission;
 use Modules\RolePermission\Entities\Role;
@@ -20,6 +19,7 @@ class RolePermissionSeeder extends Seeder
             'gateways',
             'users',
             'accounts',
+            'revenues'
         ];
 
         foreach ($permissions as $name) {
