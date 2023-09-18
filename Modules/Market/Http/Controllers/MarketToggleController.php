@@ -2,6 +2,7 @@
 
 namespace Modules\Market\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Market\Actions\ToggleMarket;
@@ -14,7 +15,13 @@ class MarketToggleController extends Controller
         $this->middleware(['auth:api', 'can:markets']);
     }
 
-    public function __invoke(Request $request, Market $market, ToggleMarket $toggleMarket): \Illuminate\Http\JsonResponse
+    /**
+     * @param Request $request
+     * @param Market $market
+     * @param ToggleMarket $toggleMarket
+     * @return JsonResponse
+     */
+    public function __invoke(Request $request, Market $market, ToggleMarket $toggleMarket): JsonResponse
     {
         $toggleMarket($market);
 
