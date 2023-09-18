@@ -44,4 +44,9 @@ class Revenue extends Model
     {
         return $this->belongsTo(Wallet::class);
     }
+
+    public function revenuable(): \Illuminate\Database\Eloquent\Relations\MorphTo
+    {
+        return $this->morphTo();
+    }
 }
