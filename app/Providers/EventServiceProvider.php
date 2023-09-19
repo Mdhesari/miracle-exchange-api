@@ -9,6 +9,8 @@ use Modules\Order\Events\AdminOrderTransactionCreated;
 use Modules\Order\Events\OrderCreated;
 use Modules\Order\Listeners\SendOrderNotifications;
 use Modules\Order\Listeners\SendTransactionNotifications;
+use Modules\Revenue\Listeners\CreateRevenueForInviter;
+use Modules\Wallet\Events\Transaction\TransactionVerified;
 use Modules\Wallet\Events\TransactionReferenceUpdated;
 
 class EventServiceProvider extends ServiceProvider
@@ -30,7 +32,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         AdminOrderTransactionCreated::class => [
             SendTransactionNotifications::class,
-        ]
+        ],
+        TransactionVerified::class          => [
+            CreateRevenueForInviter::class,
+        ],
     ];
 
     /**

@@ -14,13 +14,13 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('revenues', function (Blueprint $table) {
-            $table->uuid()->primary();
+            $table->uuid('id')->primary();
 
             $table->text('description')->nullable();
 
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('wallet_id')->constrained('users');
-            $table->foreignId('admin_id')->constrained('users');
+            $table->foreignId('wallet_id')->nullable()->constrained('users');
+            $table->foreignId('admin_id')->nullable()->constrained('users');
             $table->uuidMorphs('revenuable');
 
             $table->float('quantity');

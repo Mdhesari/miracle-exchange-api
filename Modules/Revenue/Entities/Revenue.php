@@ -19,6 +19,8 @@ class Revenue extends Model
      */
     protected $fillable = [
         'description',
+        'revenuable_type',
+        'revenuable_id',
         'user_id',
         'wallet_id',
         'admin_id',

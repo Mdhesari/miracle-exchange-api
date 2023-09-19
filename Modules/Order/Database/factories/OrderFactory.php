@@ -22,13 +22,15 @@ class OrderFactory extends Factory
     public function definition()
     {
         return [
-            'market_id'                 => ($market = Market::factory()->create([
+            'market_id'                          => ($market = Market::factory()->create([
                 'price' => 100,
             ])),
-            'cumulative_quote_quantity' => 100 * 100,
-            'executed_quantity'         => 100,
-            'original_market_price'     => 100,
-            'executed_price'            => 100,
+            'original_cumulative_quote_quantity' => 100,
+            'cumulative_quote_quantity'          => 100 * 100,
+            'executed_quantity'                  => 100,
+            'original_market_price'              => 100,
+            'executed_price'                     => 100,
+            'fill_percentage'                    => 0,
         ];
     }
 }

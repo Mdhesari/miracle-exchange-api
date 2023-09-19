@@ -8,6 +8,6 @@
     "Market": true,
     "Gateway": true,
     "Account": true,
-    "Bank": true,
+    "Bank": false,
     "Revenue": true
 }

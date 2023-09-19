@@ -2,7 +2,6 @@
 
 namespace Modules\Revenue\Providers;
 
-use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Support\ServiceProvider;
 
 class RevenueServiceProvider extends ServiceProvider

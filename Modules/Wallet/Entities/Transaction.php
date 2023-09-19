@@ -3,6 +3,7 @@
 namespace Modules\Wallet\Entities;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,9 +13,9 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\Lang;
 use Mdhesari\LaravelQueryFilters\Contracts\Expandable;
 use Mdhesari\LaravelQueryFilters\Traits\HasExpandScope;
+use Modules\Revenue\Traits\Revenuable;
 use Modules\Wallet\Database\Factories\TransactionFactory;
 use Mdhesari\LaravelQueryFilters\Contracts\HasFilters;
-use Modules\Wallet\Services\Audit\Traits\HasUuids;
 use Modules\Wallet\Services\Audit\Traits\UuidAudit;
 use Modules\Wallet\Traits\Transactionable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
@@ -26,7 +27,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Transaction extends Model implements HasFilters, Expandable, AuditableContract, HasMedia
 {
-    use HasFactory, HasExpandScope, HasUuids, UuidAudit, InteractsWithMedia;
+    use HasFactory, HasExpandScope, HasUuids, UuidAudit, InteractsWithMedia, Revenuable;
 
     /*
      * Status

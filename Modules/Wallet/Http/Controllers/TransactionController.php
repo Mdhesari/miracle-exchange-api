@@ -11,6 +11,7 @@ use Modules\Order\Actions\CreateAdminOrderTransaction;
 use Modules\Wallet\Actions\Transaction\ApplyTransactionQueryFilters;
 use Modules\Wallet\Actions\UpdateReference;
 use Modules\Wallet\Entities\Transaction;
+use Modules\Wallet\Events\Transaction\TransactionVerified;
 use Modules\Wallet\Http\Requests\ReferenceTransactionRequest;
 use Modules\Wallet\Http\Requests\RejectTransactionRequest;
 use Modules\Wallet\Http\Requests\VerifyTransactionRequest;
@@ -74,6 +75,8 @@ class TransactionController extends Controller
         $this->authorize('verify', $transaction);
 
         $transaction->verify();
+
+        event(new TransactionVerified($transaction));
 
         $transaction = $createAdminOrderTransaction($transaction->transactionable, array_merge($request->validated(), [
             'admin_id' => $request->user()->id,

@@ -15,6 +15,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Mdhesari\LaravelQueryFilters\Contracts\Expandable;
 use Mdhesari\LaravelQueryFilters\Contracts\HasFilters;
 use Mdhesari\LaravelQueryFilters\Traits\HasExpandScope;
+use Modules\Wallet\Traits\HasTransaction;
 use Modules\Wallet\Traits\HasWallet;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -27,7 +28,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject, HasFilters, HasMedia, Expandable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasUuids, SoftDeletes, HasRoles, HasPermissions, InteractsWithMedia, HasExpandScope, HasWallet;
+    use HasApiTokens, HasFactory, Notifiable, HasUuids, SoftDeletes, HasRoles, HasPermissions, InteractsWithMedia, HasExpandScope, HasWallet, HasTransaction;
 
     const MEDIA_NATIONAL_ID = 'national_id';
     const MEDIA_FACE_SCAN = 'face_scan';
@@ -40,6 +41,8 @@ class User extends Authenticatable implements JWTSubject, HasFilters, HasMedia, 
     protected $fillable = [
         'first_name',
         'last_name',
+        'inviter_id',
+        'inviter_has_revenue',
         'national_code',
         'birthday',
         'status',
@@ -75,13 +78,19 @@ class User extends Authenticatable implements JWTSubject, HasFilters, HasMedia, 
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at'  => 'datetime',
-        'mobile_verified_at' => 'datetime',
-        'birthday'           => 'date',
-        'banned_at'          => 'datetime',
-        'password'           => 'hashed',
-        'meta'               => 'array',
+        'email_verified_at'   => 'datetime',
+        'mobile_verified_at'  => 'datetime',
+        'birthday'            => 'date',
+        'banned_at'           => 'datetime',
+        'password'            => 'hashed',
+        'meta'                => 'array',
+        'inviter_has_revenue' => 'boolean',
     ];
+
+    public function inviter(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class, 'inviter_id');
+    }
 
     public function getStatusTransAttribute()
     {
@@ -193,5 +202,10 @@ class User extends Authenticatable implements JWTSubject, HasFilters, HasMedia, 
     public function isAccepted(): bool
     {
         return $this->status === UserStatus::Accepted->name;
+    }
+
+    public function getOwner()
+    {
+        return $this->full_name;
     }
 }

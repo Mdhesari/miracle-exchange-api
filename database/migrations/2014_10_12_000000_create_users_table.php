@@ -16,7 +16,9 @@ return new class extends Migration {
             $table->id();
             $table->uuid();
 
-            $table->foreignId('inviter')->nullable()->constrained('users');
+            $table->foreignId('inviter_id')->nullable()->constrained('users');
+
+            $table->boolean('inviter_has_revenue')->nullable();
 
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
