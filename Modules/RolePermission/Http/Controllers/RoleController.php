@@ -30,13 +30,13 @@ class RoleController extends Controller
      * @param Request $request
      * @param ApplyRoleQueryFilters $applyQueryFilters
      * @return JsonResponse
-     * @QAparam s string
-     * @QAparam permission string
-     * @QAparam role_id integer
-     * @QAparam oldest boolean
-     * @QAparam user_id integer
-     * @QAparam date_from integer
-     * @QAparam date_to integer
+     * @LRDparam s string
+     * @LRDparam permission string
+     * @LRDparam role_id integer
+     * @LRDparam oldest boolean
+     * @LRDparam user_id integer
+     * @LRDparam date_from integer
+     * @LRDparam date_to integer
      */
     public function index(Request $request, ApplyRoleQueryFilters $applyQueryFilters): JsonResponse
     {

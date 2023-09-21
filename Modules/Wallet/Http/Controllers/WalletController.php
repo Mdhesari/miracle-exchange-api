@@ -33,12 +33,12 @@ class WalletController extends Controller
      * @throws ValidationException
      * @throws CastTargetException
      * @throws MissingCastTypeException
-     * @QAparam s string
-     * @QAparam oldest boolean
-     * @QAparam active boolean
-     * @QAparam user_id integer
-     * @QAparam date_from integer
-     * @QAparam date_to integer
+     * @LRDparam s string
+     * @LRDparam oldest boolean
+     * @LRDparam active boolean
+     * @LRDparam user_id integer
+     * @LRDparam date_from integer
+     * @LRDparam date_to integer
      */
     public function index(Request $request, ApplyWalletQueryFilters $applyWalletQueryFilters): JsonResponse
     {

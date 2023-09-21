@@ -73,7 +73,7 @@ class OrderController extends Controller
      * @param Order $order
      * @return JsonResponse
      * @throws AuthorizationException
-     * @QAparam expand string [user, admin, shipping, orderables, coupon]
+     * @LRDparam expand string [user, admin, shipping, orderables, coupon]
      */
     public function show(Request $request, Order $order): JsonResponse
     {

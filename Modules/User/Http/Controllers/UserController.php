@@ -39,19 +39,19 @@ class UserController extends Controller
      * @throws ValidationException
      * @throws CastTargetException
      * @throws MissingCastTypeException
-     * @QAparam s string
-     * @QAparam mobile string
-     * @QAparam type string ['Legal', 'Real']
-     * @QAparam status string ['Enabled', 'Disabled', 'Pending', 'AdminPending']
-     * @QAparam expand string ['media']
-     * @QAparam national_code string
-     * @QAparam user_id integer
-     * @QAparam investors boolean
-     * @QAparam funders boolean
-     * @QAparam admins boolean
-     * @QAparam oldest boolean
-     * @QAparam date_from integer
-     * @QAparam date_to integer
+     * @LRDparam s string
+     * @LRDparam mobile string
+     * @LRDparam type string ['Legal', 'Real']
+     * @LRDparam status string ['Enabled', 'Disabled', 'Pending', 'AdminPending']
+     * @LRDparam expand string ['media']
+     * @LRDparam national_code string
+     * @LRDparam user_id integer
+     * @LRDparam investors boolean
+     * @LRDparam funders boolean
+     * @LRDparam admins boolean
+     * @LRDparam oldest boolean
+     * @LRDparam date_from integer
+     * @LRDparam date_to integer
      */
     public function index(Request $request, ApplyUserQueryFilters $applyUserQueryFilters): JsonResponse
     {

@@ -30,12 +30,12 @@ class TicketMessageController extends Controller
      * @param Request $request
      * @param Ticket $ticket
      * @param ApplyQueryFilters $applyQueryFilters
-     * @QAparam s string
-     * @QAparam status string
-     * @QAparam oldest boolean
-     * @QAparam user_id integer
-     * @QAparam date_from integer
-     * @QAparam date_to integer
+     * @LRDparam s string
+     * @LRDparam status string
+     * @LRDparam oldest boolean
+     * @LRDparam user_id integer
+     * @LRDparam date_from integer
+     * @LRDparam date_to integer
      * @return JsonResponse
      * @throws AuthorizationException
      */
