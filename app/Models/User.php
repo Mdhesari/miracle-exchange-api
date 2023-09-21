@@ -7,6 +7,7 @@ use App\Enums\UserGender;
 use App\Enums\UserStatus;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -224,5 +225,10 @@ class User extends Authenticatable implements JWTSubject, HasFilters, HasMedia, 
     public function getOwner()
     {
         return $this->full_name;
+    }
+
+    public function media(): MorphMany
+    {
+        return $this->morphMany(config('media-library.media_model'), 'model', 'model_type', 'model_id', 'uuid');
     }
 }
