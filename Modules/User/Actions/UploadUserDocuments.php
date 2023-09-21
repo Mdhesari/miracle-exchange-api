@@ -22,7 +22,7 @@ class UploadUserDocuments
         }
 
         if (isset($data['national_id_image_back'])) {
-            $user->addNationalIdImage($data['national_id_image_back']);
+            $user->addNationalIdImageBack($data['national_id_image_back']);
         }
 
         if (isset($data['face_image'])) {
