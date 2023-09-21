@@ -14,9 +14,9 @@ class UserAuthorizationRequest extends FormRequest
     public function rules()
     {
         return [
-            'national_id_image'      => 'required|file|image|max:10000',
-            'national_id_image_back' => 'required|file|image|max:10000',
-            'face_image'             => 'required|file|image|max:10000',
+            'national_id_image'      => 'nullable|file|image|max:10000',
+            'national_id_image_back' => 'nullable|file|image|max:10000',
+            'face_image'             => 'nullable|file|image|max:10000',
         ];
     }
 

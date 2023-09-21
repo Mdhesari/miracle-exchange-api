@@ -156,6 +156,17 @@ class User extends Authenticatable implements JWTSubject, HasFilters, HasMedia, 
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
      */
+    public function addNationalIdImageBack(string|UploadedFile $file): mixed
+    {
+        return $this->addMedia($file)->toMediaCollection(self::MEDIA_NATIONAL_ID_BACK);
+    }
+
+    /**
+     * @param string|UploadedFile $file
+     * @return mixed
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
     public function addFaceScanImage(string|UploadedFile $file): mixed
     {
         return $this->addMedia($file)->toMediaCollection(self::MEDIA_FACE_SCAN);

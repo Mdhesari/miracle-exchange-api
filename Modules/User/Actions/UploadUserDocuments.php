@@ -21,6 +21,10 @@ class UploadUserDocuments
             $user->addNationalIdImage($data['national_id_image']);
         }
 
+        if (isset($data['national_id_image_back'])) {
+            $user->addNationalIdImage($data['national_id_image_back']);
+        }
+
         if (isset($data['face_image'])) {
             $user->addFaceScanImage($data['face_image']);
         }

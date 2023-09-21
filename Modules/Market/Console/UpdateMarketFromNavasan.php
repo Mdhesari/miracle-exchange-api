@@ -60,7 +60,7 @@ class UpdateMarketFromNavasan extends Command
                     ]);
                 }
             } catch (\Exception $e) {
-                Log::error($e);
+                // report
             }
 
             $bar->advance();
