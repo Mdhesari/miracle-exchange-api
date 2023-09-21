@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Modules\User\Actions\ApplyUserQueryFilters;
 use Modules\User\Actions\CreateUser;
 use Modules\User\Actions\OnboardUser;
@@ -14,6 +15,9 @@ use Modules\User\Events\UserRestored;
 use Modules\User\Http\Requests\UserRequest;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
+use Throwable;
+use WendellAdriel\ValidatedDTO\Exceptions\CastTargetException;
+use WendellAdriel\ValidatedDTO\Exceptions\MissingCastTypeException;
 
 class UserController extends Controller
 {
@@ -32,10 +36,13 @@ class UserController extends Controller
      * @param Request $request
      * @param ApplyUserQueryFilters $applyUserQueryFilters
      * @return JsonResponse
+     * @throws ValidationException
+     * @throws CastTargetException
+     * @throws MissingCastTypeException
      * @QAparam s string
      * @QAparam mobile string
      * @QAparam type string ['Legal', 'Real']
-     * @QAparam status string ['Enabled', 'Disabled', 'Pending']
+     * @QAparam status string ['Enabled', 'Disabled', 'Pending', 'AdminPending']
      * @QAparam expand string ['media']
      * @QAparam national_code string
      * @QAparam user_id integer
@@ -99,7 +106,7 @@ class UserController extends Controller
      * @throws AuthorizationException
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function update(UserRequest $request, User $user, OnboardUser $onboardUser): JsonResponse
     {
