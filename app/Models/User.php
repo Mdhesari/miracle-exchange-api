@@ -31,6 +31,7 @@ class User extends Authenticatable implements JWTSubject, HasFilters, HasMedia, 
     use HasApiTokens, HasFactory, Notifiable, HasUuids, SoftDeletes, HasRoles, HasPermissions, InteractsWithMedia, HasExpandScope, HasWallet, HasTransaction;
 
     const MEDIA_NATIONAL_ID = 'national_id';
+    const MEDIA_NATIONAL_ID_BACK = 'national_id_back';
     const MEDIA_FACE_SCAN = 'face_scan';
 
     /**
@@ -41,6 +42,7 @@ class User extends Authenticatable implements JWTSubject, HasFilters, HasMedia, 
     protected $fillable = [
         'first_name',
         'last_name',
+        'invitation_code',
         'inviter_id',
         'inviter_has_revenue',
         'national_code',
@@ -190,6 +192,10 @@ class User extends Authenticatable implements JWTSubject, HasFilters, HasMedia, 
         ]);
 
         $this->addMediaCollection(self::MEDIA_NATIONAL_ID)->acceptsMimeTypes([
+            'image/jpg', 'image/jpeg', 'image/png',
+        ]);
+
+        $this->addMediaCollection(self::MEDIA_NATIONAL_ID_BACK)->acceptsMimeTypes([
             'image/jpg', 'image/jpeg', 'image/png',
         ]);
     }

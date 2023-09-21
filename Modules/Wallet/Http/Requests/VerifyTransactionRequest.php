@@ -16,7 +16,7 @@ class VerifyTransactionRequest extends FormRequest
         return [
             'reference' => 'required|string',
             'media'     => 'nullable|array',
-            'media.*'   => 'nullable|file|max:10000',
+            'media.*'   => 'nullable|file|mimes:jpeg,png,gif,pdf,doc,docx|max:10000',
         ];
     }
 

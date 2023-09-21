@@ -5,6 +5,7 @@ namespace Modules\User\Observers;
 use App\Enums\UserGender;
 use App\Enums\UserStatus;
 use App\Models\User;
+use Illuminate\Support\Str;
 use Modules\User\Actions\DeleteUserResources;
 
 class UserObserver
@@ -17,6 +18,10 @@ class UserObserver
 
         if (! $user->status) {
             $user->status = UserStatus::Pending->name;
+        }
+
+        if (! $user->invitation_code) {
+            $user->invitation_code = $this->getInvitationCode();
         }
     }
 
@@ -32,5 +37,12 @@ class UserObserver
     public function deleting(User $user)
     {
         app(DeleteUserResources::class)($user);
+    }
+
+    private function getInvitationCode(): string
+    {
+        $code = config('app.name').'_'.Str::random(6);
+
+        return User::where('invitation_code', $code)->exists() ? $this->getInvitationCode() : $code;
     }
 }
