@@ -201,15 +201,15 @@ class User extends Authenticatable implements JWTSubject, HasFilters, HasMedia, 
     {
         $this->addMediaCollection(self::MEDIA_FACE_SCAN)->acceptsMimeTypes([
             'image/jpg', 'image/jpeg', 'image/png',
-        ]);
+        ])->singleFile();
 
         $this->addMediaCollection(self::MEDIA_NATIONAL_ID)->acceptsMimeTypes([
             'image/jpg', 'image/jpeg', 'image/png',
-        ]);
+        ])->singleFile();
 
         $this->addMediaCollection(self::MEDIA_NATIONAL_ID_BACK)->acceptsMimeTypes([
             'image/jpg', 'image/jpeg', 'image/png',
-        ]);
+        ])->singleFile();
     }
 
     public function getExpandRelations(): array
