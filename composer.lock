@@ -3068,16 +3068,16 @@
         },
         {
             "name": "mdhesari/laravel-query-filters",
-            "version": "3.4.0",
+            "version": "3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mdhesari/laravel-query-filters.git",
-                "reference": "7af0b19032e9b5200cca97d31db741f35d6dea74"
+                "reference": "f258fefeaf13836177372a1e5b1c519bc941337b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mdhesari/laravel-query-filters/zipball/7af0b19032e9b5200cca97d31db741f35d6dea74",
-                "reference": "7af0b19032e9b5200cca97d31db741f35d6dea74",
+                "url": "https://api.github.com/repos/Mdhesari/laravel-query-filters/zipball/f258fefeaf13836177372a1e5b1c519bc941337b",
+                "reference": "f258fefeaf13836177372a1e5b1c519bc941337b",
                 "shasum": ""
             },
             "require": {
@@ -3119,9 +3119,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Mdhesari/laravel-query-filters/issues",
-                "source": "https://github.com/Mdhesari/laravel-query-filters/tree/3.4.0"
+                "source": "https://github.com/Mdhesari/laravel-query-filters/tree/3.4.1"
             },
-            "time": "2023-09-23T11:14:03+00:00"
+            "time": "2023-09-24T09:17:33+00:00"
         },
         {
             "name": "monolog/monolog",
