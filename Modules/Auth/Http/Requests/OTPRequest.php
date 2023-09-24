@@ -14,7 +14,7 @@ class OTPRequest extends FormRequest
     public function rules()
     {
         return [
-            'mobile' => ['required', 'regex:/^[0-9]{11}$/'],
+            'mobile' => ['required', 'regex:/^[0-9]{10}$/'],
         ];
     }
 
