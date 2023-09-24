@@ -84,6 +84,7 @@ class OrderController extends Controller
 
         if (isset($data['expand'])) {
             //TODO: temporary in order to fix scope conflicts
+            $data['expand'] = is_array($data['expand']) ? $data['expand'] : explode(',', $data['expand']);
             in_array('transactions', $data['expand']) && $query->with('transactions');;
         }
 
