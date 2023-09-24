@@ -36,7 +36,7 @@ class UserRequest extends FormRequest
             'national_code'  => 'nullable|string',
             'account_number' => 'nullable|string',
             'birthday'       => 'nullable|date|date_format:Y-m-d',
-            'mobile'         => ['required', 'regex:/^\d{11}$/', Rule::unique('users', 'mobile')->ignore($this?->user?->id)->whereNull('deleted_at')],
+            'mobile'         => ['required', 'regex:/^[0-9]{11}$/', Rule::unique('users', 'mobile')->ignore($this?->user?->id)->whereNull('deleted_at')],
             'email'          => ['nullable', 'email', Rule::unique('users', 'email')->ignore($this?->user?->id)->whereNull('deleted_at')],
             'roles.*'        => 'nullable|exists:roles,id',
             'password'       => 'nullable|min:8|confirmed',
