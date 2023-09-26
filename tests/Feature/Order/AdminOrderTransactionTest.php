@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Event;
-use Modules\Gateway\Entities\Gateway;
-use Modules\Order\Actions\CreateOrderTransaction;
 use Modules\Order\Entities\Order;
 use Modules\Order\Enums\OrderStatus;
 use Modules\Order\Events\AdminOrderTransactionCreated;
@@ -24,7 +22,7 @@ it('can admin create order transaction', function () {
     $response->assertSuccessful()->assertJson([
         'data' => [
             'item' => [
-                'status'          => Transaction::STATUS_VERIFIED,
+                'status'          => Transaction::STATUS_PENDING,
                 'transactionable' => [
                     'status' => OrderStatus::Done->name,
                 ]

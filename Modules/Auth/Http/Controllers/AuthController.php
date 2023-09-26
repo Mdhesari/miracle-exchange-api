@@ -2,13 +2,20 @@
 
 namespace Modules\Auth\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Contracts\Support\Renderable;
+use Exception;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Routing\Redirector;
+use Laravel\Socialite\Facades\Socialite;
+use Modules\Auth\Actions\SetupToken;
 use Modules\Auth\Http\Requests\LoginRequest;
 use Modules\Auth\Http\Requests\OTPRequest;
+use Modules\User\Actions\CreateUser;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class AuthController extends Controller
 {
@@ -75,27 +82,76 @@ class AuthController extends Controller
     /**
      * Get the token array structure.
      *
-     * @param string $token
-     *
+     * @param $otp
      * @return JsonResponse
      */
     protected function respondWithToken($otp)
     {
-        $user = User::withTrashed()->firstOrCreate([
-            'mobile' => substr($otp->mobile, -10)
+        $user = app(CreateUser::class)([
+            'mobile' => $otp->mobile,
         ]);
 
-        if ($user->trashed()) {
-            $user->restore();
-        }
-
-        $token = auth()->login($user);
+        $token = app(SetupToken::class)($user);
 
         return api()->success(null, [
             'access_token' => $token,
             'token_type'   => 'Bearer',
             'expires_in'   => auth()->factory()->getTTL() * 60
         ]);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function google(): mixed
+    {
+        return Socialite::driver('google')->setScopes(['openid', 'email'])->stateless()->redirect();
+    }
+
+    /**
+     * @param Request $request
+     * @param CreateUser $createUser
+     * @param SetupToken $setupToken
+     * @return Application|RedirectResponse|Redirector
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function googleCallback(Request $request, CreateUser $createUser, SetupToken $setupToken): Application|RedirectResponse|Redirector
+    {
+        try {
+            $user = Socialite::driver('google')->setScopes(['openid', 'email'])->stateless()->user();
+        } catch (Exception $e) {
+            throw $e;
+        }
+
+        $last_name = explode(' ', $user->name);
+        $first_name = '';
+
+        for ($i = 0; $i < count($last_name) - 1; $i++) {
+            $first_name = $last_name[$i].' ';
+        }
+
+        $first_name = trim($first_name);
+
+        $data = [
+            'email'             => $user->email,
+            'first_name'        => $first_name,
+            'last_name'         => $last_name[count($last_name) - 1],
+            'google_id'         => $user->id,
+            'meta'              => [
+                'google_avatar'          => $user->avatar,
+                'google_avatar_original' => $user->avatar_original,
+                'google_token'           => $user->token,
+                'google_token_expire_in' => $user->expiresIn,
+            ],
+            'email_verified_at' => now(),
+        ];
+
+        $user = $createUser($data);
+
+        $token = $setupToken($user, $request->only('platform'));
+
+        return redirect(config('services.google.frontend_redirect').'?'.http_build_query(compact('token')));
     }
 
     private function otp()

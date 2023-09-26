@@ -16,26 +16,29 @@ class CreateUser
      */
     public function __invoke(array $data)
     {
+        $key = isset($data['mobile']) ? 'mobile' : 'email';
+        $value = isset($data['mobile']) ? substr($data['mobile'], -10) : $data['email'];
+
         $user = User::withTrashed()->firstOrCreate([
-            'mobile' => substr($data['mobile'], -10),
+            $key => $value,
         ], $data);
 
-        if ( $user->trashed() ) {
+        if ($user->trashed()) {
             $user->restore();
             event(new UserRestored($user));
         } else {
             event(new UserCreated($user));
         }
 
-        if ( isset($data['avatar']) ) {
+        if (isset($data['avatar'])) {
             $user->addAvatar($data['avatar']);
         }
 
-        if ( isset($data['documents']) ) {
+        if (isset($data['documents'])) {
             array_map(fn($document) => $user->addDocument($document), $data['documents']);
         }
 
-        if ( isset($data['roles']) ) {
+        if (isset($data['roles'])) {
             $user->roles()->sync($data['roles']);
         }
 

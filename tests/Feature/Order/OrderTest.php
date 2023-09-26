@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\UserStatus;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use Modules\Account\Entities\Account;
@@ -8,14 +9,20 @@ use Modules\Market\Entities\Market;
 use Modules\Order\Actions\CreateOrderTransaction;
 use Modules\Order\Entities\Order;
 use Modules\Order\Enums\OrderStatus;
+use Modules\Order\Events\AdminOrderTransactionCreated;
+use Modules\Order\Events\OrderCreated;
 use Modules\Order\Events\OrderTransactionCreated;
 use Modules\Wallet\Entities\Transaction;
 use Modules\Wallet\Events\TransactionReferenceUpdated;
-use function Pest\Laravel\post;
 
-beforeEach(fn() => $this->actingAs());
+beforeEach(fn() => $this->actingAs() && Auth::user()->update([
+        'status' => UserStatus::Accepted->name,
+    ])
+);
 
 it('can setup order', function () {
+    Event::fake([OrderCreated::class, TransactionReferenceUpdated::class, OrderTransactionCreated::class, AdminOrderTransactionCreated::class]);
+
     $response = $this->post(route('orders.store'), [
         'cumulative_quote_quantity' => 20000000,
         'market_id'                 => ($market = Market::factory()->create())->id,
@@ -32,6 +39,8 @@ it('can setup order', function () {
 });
 
 it('can setup order with account', function () {
+    Event::fake([OrderCreated::class, TransactionReferenceUpdated::class, OrderTransactionCreated::class, AdminOrderTransactionCreated::class]);
+
     $response = $this->post(route('orders.store'), [
         'cumulative_quote_quantity' => 20000000,
         'market_id'                 => ($market = Market::factory()->create())->id,
@@ -50,7 +59,7 @@ it('can setup order with account', function () {
 });
 
 it('can get transaction and choose payment method', function () {
-    Event::fake([OrderTransactionCreated::class]);
+    Event::fake([OrderCreated::class, TransactionReferenceUpdated::class, OrderTransactionCreated::class, AdminOrderTransactionCreated::class]);
 
     $gateway = Gateway::factory()->create();
 
@@ -65,7 +74,7 @@ it('can get transaction and choose payment method', function () {
     $response->assertSuccessful()->assertJson([
         'data' => [
             'item' => [
-                'gateway_id'      => 1,
+                'gateway_id'      => $gateway->id,
                 'quantity'        => $order->cumulative_quote_quantity,
                 'status'          => Transaction::STATUS_GATEWAY_PENDING,
                 'transactionable' => [
@@ -79,7 +88,7 @@ it('can get transaction and choose payment method', function () {
 });
 
 it('can update transaction reference and new order status', function () {
-    Event::fake([TransactionReferenceUpdated::class]);
+    Event::fake([OrderCreated::class, TransactionReferenceUpdated::class, OrderTransactionCreated::class, AdminOrderTransactionCreated::class]);
 
     $order = Order::factory()->create();
 

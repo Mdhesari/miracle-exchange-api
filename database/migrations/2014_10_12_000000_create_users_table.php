@@ -24,9 +24,10 @@ return new class extends Migration {
             $table->string('last_name')->nullable();
             $table->string('national_code')->nullable();
             $table->string('email')->unique()->nullable();
-            $table->string('mobile')->unique();
+            $table->string('mobile')->unique()->nullable();
             $table->string('password')->nullable();
             $table->string('invitation_code')->nullable();
+            $table->string('google_id')->nullable();
 
             $table->enum('gender', array_column(UserGender::cases(), 'name'));
             $table->enum('status', array_column(UserStatus::cases(), 'name'));

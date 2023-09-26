@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Modules\Auth\Http\Controllers\AuthController;
 
@@ -20,4 +19,7 @@ Route::prefix('auth')->name('auth.')->group(function () {
     Route::post('login', [AuthController::class, 'login'])->name('login');
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     Route::post('refresh', [AuthController::class, 'refresh'])->name('refresh');
+
+    Route::get('google', [AuthController::class, 'google']);
+    Route::get('google/callback', [AuthController::class, 'googleCallback']);
 });

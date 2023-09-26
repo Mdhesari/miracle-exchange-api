@@ -18,7 +18,7 @@ it('can user request for authorization', function () {
         'face_image'        => UploadedFile::fake()->image('face_scan.jpg'),
     ]);
 
-    $response->dump()->assertSuccessful();
+    $response->assertSuccessful();
 
     $user->refresh();
 
