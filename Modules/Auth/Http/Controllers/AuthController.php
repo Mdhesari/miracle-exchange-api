@@ -26,7 +26,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api')->except(['login', 'sendOTP']);
+        $this->middleware('auth:api')->except(['login', 'sendOTP', 'google', 'googleCallback']);
     }
 
     public function sendOTP(OTPRequest $request)
