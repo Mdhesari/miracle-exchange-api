@@ -28,13 +28,14 @@ class SendOrderNotifications
     {
         $order = $event->order;
 
-        SendSMS::dispatch($order->user->mobile, 'submitOrder', [
-            // amount
-            $order->fromatted_cumulative_quote_quantity.'_تومان',
-            // currency
-            Str::replace(' ', '_', $order->market->persian_name),
-            // currency price
-            $order->formatted_executed_quantity,
-        ]);
+        if ($order->user->mobile)
+            SendSMS::dispatch($order->user->mobile, 'submitOrder', [
+                // amount
+                $order->fromatted_cumulative_quote_quantity.'_تومان',
+                // currency
+                Str::replace(' ', '_', $order->market->persian_name),
+                // currency price
+                $order->formatted_executed_quantity,
+            ]);
     }
 }
