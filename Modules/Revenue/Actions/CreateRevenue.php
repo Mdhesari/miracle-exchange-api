@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Actions;
+namespace Modules\Revenue\Actions;
 
 use Modules\Revenue\Entities\Revenue;
 use Modules\Revenue\Events\RevenueCreated;

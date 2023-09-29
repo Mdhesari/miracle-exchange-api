@@ -2,7 +2,7 @@
 
 namespace Modules\Revenue\Listeners;
 
-use Modules\Actions\CreateRevenue;
+use Modules\Revenue\Actions\CreateRevenue;
 use Modules\Revenue\Enums\RevenueStatus;
 use Modules\Wallet\Entities\Transaction;
 

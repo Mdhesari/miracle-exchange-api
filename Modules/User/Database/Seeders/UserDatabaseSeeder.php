@@ -30,6 +30,10 @@ class UserDatabaseSeeder extends Seeder
                 'password' => 'secret@mahdi',
             ],
             [
+                'mobile'   => '9126111243',
+                'password' => 'secret@guest',
+            ],
+            [
                 'mobile'   => '9194347696',
                 'password' => 'secret@zahedi',
             ]
