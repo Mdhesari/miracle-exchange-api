@@ -25,6 +25,7 @@ class Market extends Model implements Expandable, HasFilters
         'price',
         'status',
         'price_updated_at',
+        'meta',
     ];
 
     protected $casts = [
