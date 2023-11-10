@@ -56,8 +56,6 @@ class MarketController extends Controller
      */
     public function show(Market $market): JsonResponse
     {
-        $this->authorize('show', $market);
-
         return api()->success(null, [
             'item' => Market::find($market->id),
         ]);
