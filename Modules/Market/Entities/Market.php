@@ -30,6 +30,7 @@ class Market extends Model implements Expandable, HasFilters
     protected $casts = [
         'price'            => 'decimal:0',
         'price_updated_at' => 'datetime',
+        'meta'             => 'array',
     ];
 
     protected static function newFactory()

@@ -20,6 +20,7 @@ class MarketRequest extends FormRequest
             'name'   => 'nullable|string',
             'symbol' => 'required|string',
             'price'  => 'required|numeric',
+            'meta'   => 'nullable|array',
         ]);
     }
 
