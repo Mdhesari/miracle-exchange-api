@@ -118,7 +118,11 @@ class LandingServiceProvider extends ServiceProvider
     private function routeBindings()
     {
         Route::bind('landing', function ($value) {
-            return Landing::whereSlug($value)->orWhere('id', $value)->firstOrFail();
+            if (is_int($value)) {
+                return Landing::find($value);
+            }
+
+            return Landing::whereSlug($value)->firstOrFail();
         });
     }
 }
