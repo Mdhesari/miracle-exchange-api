@@ -17,7 +17,7 @@ return new class extends Migration {
 
             $table->string('title');
             $table->string('slug');
-            $table->foreignId('market_id')->nullable();
+            $table->foreignUuid('market_id')->nullable();
             $table->json('meta')->nullable();
 
             $table->timestamps();
