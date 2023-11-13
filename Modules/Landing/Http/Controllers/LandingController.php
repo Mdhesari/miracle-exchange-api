@@ -14,7 +14,7 @@ class LandingController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:api', 'can:landing']);
+        $this->middleware(['auth:api', 'can:landing'])->except(['index', 'show']);
     }
 
     /**
