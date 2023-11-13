@@ -2,7 +2,6 @@
 
 namespace Modules\Market\Http\Controllers;
 
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Modules\Market\Actions\ApplyMarketQueryFilters;
@@ -52,7 +51,6 @@ class MarketController extends Controller
     /**
      * @param Market $market
      * @return JsonResponse
-     * @throws AuthorizationException
      */
     public function show(Market $market): JsonResponse
     {

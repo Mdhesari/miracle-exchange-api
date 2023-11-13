@@ -26,6 +26,7 @@
         "sadegh19b/laravel-persian-validation": "^1.4",
         "spatie/laravel-medialibrary": "^10.0.0",
         "spatie/laravel-permission": "^5.10",
+        "spatie/laravel-sluggable": "^3.5",
         "tymon/jwt-auth": "^2.0"
     },
     "require-dev": {

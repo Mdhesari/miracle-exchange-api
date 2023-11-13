@@ -9,5 +9,6 @@
     "Gateway": true,
     "Account": true,
     "Bank": false,
-    "Revenue": true
+    "Revenue": true,
+    "Landing": true
 }

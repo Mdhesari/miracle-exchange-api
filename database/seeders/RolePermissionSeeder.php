@@ -19,7 +19,8 @@ class RolePermissionSeeder extends Seeder
             'gateways',
             'users',
             'accounts',
-            'revenues'
+            'revenues',
+            'landing',
         ];
 
         foreach ($permissions as $name) {

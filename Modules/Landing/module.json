@@ -1,0 +1,11 @@
+{
+    "name": "Landing",
+    "alias": "landing",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Landing\\Providers\\LandingServiceProvider"
+    ],
+    "files": []
+}
