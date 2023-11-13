@@ -12,6 +12,8 @@ class Landing extends Model
 {
     use HasFactory, HasSlug;
 
+    protected $table = 'landing';
+
     protected $fillable = [
         'title',
         'slug',
