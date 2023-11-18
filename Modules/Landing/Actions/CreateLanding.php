@@ -8,6 +8,13 @@ class CreateLanding
 {
     public function __invoke(array $data)
     {
-        return Landing::create($data);
+        $landing = Landing::create($data);
+
+        if (isset($data['slug']) && $data['slug']) {
+            $landing->slug = $data['slug'];
+            $landing->save();
+        }
+
+        return $landing;
     }
 }

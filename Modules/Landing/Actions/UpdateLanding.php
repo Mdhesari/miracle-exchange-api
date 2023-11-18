@@ -10,6 +10,11 @@ class UpdateLanding
     {
         $landing->update($data);
 
+        if (isset($data['slug']) && $data['slug']) {
+            $landing->slug = $data['slug'];
+            $landing->save();
+        }
+
         return $landing;
     }
 }
