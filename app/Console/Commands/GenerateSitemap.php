@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Modules\Landing\Entities\Landing;
 use Modules\Market\Entities\Market;
+use Modules\Market\Enums\MarketStatus;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\SitemapIndex;
 
@@ -29,7 +30,7 @@ class GenerateSitemap extends Command
      */
     public function handle()
     {
-        $markets = array_map(fn($market_id) => sprintf('https://sarrafi.app/market/%s', $market_id), Market::enabled()->pluck('id'));
+        $markets = array_map(fn($market_id) => sprintf('https://sarrafi.app/market/%s', $market_id), Market::whereStatus(MarketStatus::Enabled->name)->pluck('id'));
 
         Sitemap::create()
             ->add($markets)
