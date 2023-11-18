@@ -3,7 +3,10 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Spatie\Sitemap\SitemapGenerator;
+use Modules\Landing\Entities\Landing;
+use Modules\Market\Entities\Market;
+use Spatie\Sitemap\Sitemap;
+use Spatie\Sitemap\SitemapIndex;
 
 class GenerateSitemap extends Command
 {
@@ -26,7 +29,34 @@ class GenerateSitemap extends Command
      */
     public function handle()
     {
-        SitemapGenerator::create('https://sarrafi.app/')
+        $markets = array_map(fn($market_id) => sprintf('https://sarrafi.app/market/%s', $market_id), Market::enabled()->pluck('id'));
+
+        Sitemap::create()
+            ->add($markets)
+            ->writeToFile(public_path($markets_path = 'sitemaps/markets.xml'));
+
+        $landing = array_map(fn($landing_id) => sprintf('https://sarrafi.app/currency/%s', $landing_id), Landing::pluck('slug'));
+
+        Sitemap::create()
+            ->add($landing)
+            ->writeToFile(public_path($currencies_path = 'sitemaps/currencies.xml'));
+
+        Sitemap::create()
+            ->add('https://sarrafi.app')
+            ->add('https://sarrafi.app/about-us')
+            ->add('https://sarrafi.app/contact-us')
+            ->add('https://sarrafi.app/usage-rules')
+            ->add('https://sarrafi.app/frequently-questions')
+            ->add('https://sarrafi.app/support')
+            ->add('https://sarrafi.app/transactions')
+            ->add('https://sarrafi.app/transfer')
+            ->writeToFile(public_path($pages_path = 'sitemaps/pages.xml'));
+
+
+        SitemapIndex::create()
+            ->add(url($pages_path))
+            ->add(url($markets_path))
+            ->add(url($currencies_path))
             ->writeToFile(public_path('sitemap.xml'));
     }
 }
