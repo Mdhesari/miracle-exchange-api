@@ -30,13 +30,13 @@ class GenerateSitemap extends Command
      */
     public function handle()
     {
-        $markets = array_map(fn($market_id) => sprintf('https://sarrafi.app/market/%s', $market_id), Market::whereStatus(MarketStatus::Enabled->name)->pluck('id'));
+        $markets = array_map(fn($market_id) => sprintf('https://sarrafi.app/market/%s', $market_id), Market::whereStatus(MarketStatus::Enabled->name)->pluck('id')->toArray());
 
         Sitemap::create()
             ->add($markets)
             ->writeToFile(public_path($markets_path = 'sitemaps/markets.xml'));
 
-        $landing = array_map(fn($landing_id) => sprintf('https://sarrafi.app/currency/%s', $landing_id), Landing::pluck('slug'));
+        $landing = array_map(fn($landing_id) => sprintf('https://sarrafi.app/currency/%s', $landing_id), Landing::pluck('slug')->toArray());
 
         Sitemap::create()
             ->add($landing)
