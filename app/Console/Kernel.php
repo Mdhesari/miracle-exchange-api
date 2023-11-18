@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command('market:update-navasan')->everyTwoMinutes();
+        $schedule->command('sitemap:generate')->daily();
     }
 
     /**
