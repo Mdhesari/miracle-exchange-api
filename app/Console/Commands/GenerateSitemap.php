@@ -55,9 +55,14 @@ class GenerateSitemap extends Command
 
 
         SitemapIndex::create()
-            ->add(url($pages_path))
-            ->add(url($markets_path))
-            ->add(url($currencies_path))
+            ->add($this->frontUrl($pages_path))
+            ->add($this->frontUrl($markets_path))
+            ->add($this->frontUrl($currencies_path))
             ->writeToFile(public_path('sitemap.xml'));
+    }
+
+    private function frontUrl(string $path)
+    {
+        return sprintf('https://sarrafi.app/%s', $path);
     }
 }
