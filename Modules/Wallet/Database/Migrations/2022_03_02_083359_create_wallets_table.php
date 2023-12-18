@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 use Modules\Wallet\Entities\Wallet;
 
 class CreateWalletsTable extends Migration
@@ -16,9 +16,6 @@ class CreateWalletsTable extends Migration
     {
         Schema::create('wallets', function (Blueprint $table) {
             $table->uuid('id')->primary();
-
-            //TODO: discuss
-//            $table->string('type')->nullable();
 
             $table->float('quantity', 16, 0);
 
