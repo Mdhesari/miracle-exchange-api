@@ -35,6 +35,7 @@ class UserRequest extends FormRequest
             'last_name'      => 'nullable|string|max:200',
             'national_code'  => 'nullable|string',
             'account_number' => 'nullable|string',
+            'inviter_code'   => ['nullable', 'string', Rule::exists('users', 'invitation_code')->whereNot('invitation_code', $this->user?->invitation_code)],
             'birthday'       => 'nullable|date|date_format:Y-m-d',
             'mobile'         => ['required', 'regex:/^[0-9]{10}$/', Rule::unique('users', 'mobile')->ignore($this?->user?->id)->whereNull('deleted_at')],
             'email'          => ['nullable', 'email', Rule::unique('users', 'email')->ignore($this?->user?->id)->whereNull('deleted_at')],

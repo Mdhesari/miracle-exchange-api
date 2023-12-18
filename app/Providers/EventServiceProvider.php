@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\User\UserInviterUpdated;
+use App\Listeners\User\SendInvitationRewardToUser;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -35,6 +37,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         TransactionVerified::class          => [
             CreateRevenueForInviter::class,
+        ],
+        UserInviterUpdated::class           => [
+            SendInvitationRewardToUser::class,
         ],
     ];
 

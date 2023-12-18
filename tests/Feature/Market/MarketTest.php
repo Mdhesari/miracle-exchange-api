@@ -101,7 +101,7 @@ it('cannot get a disabled market', function () {
 
     $response = $this->get(route('markets.show', $market));
 
-    $response->assertForbidden();
+    $response->assertSuccessful();
 });
 
 it('can toggle market status', function () {

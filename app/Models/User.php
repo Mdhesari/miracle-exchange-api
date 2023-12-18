@@ -222,6 +222,13 @@ class User extends Authenticatable implements JWTSubject, HasFilters, HasMedia, 
         return $this->status === UserStatus::Accepted->name;
     }
 
+    public function updateInviter(int $user_id): bool
+    {
+        return $this->forceFill([
+            'inviter_id' => $user_id,
+        ])->save();
+    }
+
     public function getOwner()
     {
         return $this->full_name;

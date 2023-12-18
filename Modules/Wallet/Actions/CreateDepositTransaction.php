@@ -2,8 +2,8 @@
 
 namespace Modules\Wallet\Actions;
 
-use Modules\Wallet\Wallet as WalletModule;
 use Modules\Wallet\Events\TransactionDepositCreated;
+use Modules\Wallet\Wallet as WalletModule;
 
 class CreateDepositTransaction
 {
@@ -13,7 +13,7 @@ class CreateDepositTransaction
 
         $wallet = $user->wallets()->first();
 
-        if ( ! $wallet ) {
+        if (! $wallet) {
             $wallet = app(SetupWallet::class)([
                 'user_id' => $user->id,
             ]);
@@ -22,6 +22,10 @@ class CreateDepositTransaction
         $wallet->refresh();
 
         $transaction = $wallet->deposit($data);
+
+        if ($transaction->isVerified()) {
+            $wallet->chargeWallet($transaction->quantity);
+        }
 
         event(new TransactionDepositCreated($transaction));
 

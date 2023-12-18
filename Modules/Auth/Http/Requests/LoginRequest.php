@@ -3,6 +3,7 @@
 namespace Modules\Auth\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class LoginRequest extends FormRequest
 {
@@ -14,8 +15,9 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'mobile' => ['required', 'regex:/^[0-9]{10}$/'],
-            'otp'    => ['required', 'string'],
+            'mobile'       => ['required', 'regex:/^[0-9]{10}$/'],
+            'otp'          => ['required', 'string'],
+            'inviter_code' => ['nullable', 'string', Rule::exists('users', 'invitation_code')->whereNot('invitation_code', $this->user?->invitation_code)],
         ];
     }
 

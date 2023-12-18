@@ -3,14 +3,14 @@
 namespace Modules\Wallet\Entities;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Lang;
 use Mdhesari\LaravelQueryFilters\Contracts\Expandable;
+use Mdhesari\LaravelQueryFilters\Contracts\HasFilters;
 use Mdhesari\LaravelQueryFilters\Traits\HasExpandScope;
 use Modules\Wallet\Database\Factories\WalletFactory;
-use Mdhesari\LaravelQueryFilters\Contracts\HasFilters;
 use OwenIt\Auditing\Auditable;
 use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 

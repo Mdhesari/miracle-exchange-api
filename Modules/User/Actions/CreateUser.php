@@ -2,6 +2,7 @@
 
 namespace Modules\User\Actions;
 
+use App\Events\User\UserInviterUpdated;
 use App\Models\User;
 use Modules\User\Events\UserCreated;
 use Modules\User\Events\UserRestored;
@@ -28,6 +29,14 @@ class CreateUser
             event(new UserRestored($user));
         } else {
             event(new UserCreated($user));
+        }
+
+        if (isset($data['inviter_code']) && is_null($user->inviter_id)) {
+            $inviter = User::select('id')->where('invitation_code', $data['inviter_code'])->firstOrFail();
+
+            $user->updateInviter($inviter->id);
+
+            event(new UserInviterUpdated($user));
         }
 
         if (isset($data['avatar'])) {

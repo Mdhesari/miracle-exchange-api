@@ -50,7 +50,11 @@ class AuthController extends Controller
 
         $otp = $this->otp()->verify($credentials['otp'], $credentials['mobile']);
 
-        return $this->respondWithToken($otp);
+        $user = app(CreateUser::class)([
+            'mobile'       => $otp->mobile,
+            'inviter_code' => $request->inviter_code,
+        ]);
+        return $this->respondWithToken($user);
     }
 
     /**
@@ -85,12 +89,8 @@ class AuthController extends Controller
      * @param $otp
      * @return JsonResponse
      */
-    protected function respondWithToken($otp)
+    protected function respondWithToken($user)
     {
-        $user = app(CreateUser::class)([
-            'mobile' => $otp->mobile,
-        ]);
-
         $token = app(SetupToken::class)($user);
 
         return api()->success(null, [
