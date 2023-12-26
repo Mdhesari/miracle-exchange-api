@@ -31,8 +31,8 @@ it('can setup order', function () {
     $response->assertSuccessful()->assertJson([
         'data' => [
             'item' => [
-                'executed_price'    => $market->price,
-                'executed_quantity' => number_format(20000000 / $market->price, 2, null, null),
+                'executed_price'    => $market->total_price,
+                'executed_quantity' => number_format(20000000 / $market->total_price, 2, null, null),
             ]
         ]
     ]);
@@ -50,8 +50,8 @@ it('can setup order with account', function () {
     $response->assertSuccessful()->assertJson([
         'data' => [
             'item' => [
-                'executed_price'    => $market->price,
-                'executed_quantity' => number_format(20000000 / $market->price, 2, null, null),
+                'executed_price'    => $market->total_price,
+                'executed_quantity' => number_format(20000000 / $market->total_price, 2, null, null),
                 'account_id'        => $acc_id,
             ]
         ]
