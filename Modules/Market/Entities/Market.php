@@ -22,6 +22,7 @@ class Market extends Model implements Expandable, HasFilters
         'country_code',
         'symbol_char',
         'symbol',
+        'profit_price',
         'price',
         'status',
         'price_updated_at',
@@ -30,9 +31,19 @@ class Market extends Model implements Expandable, HasFilters
 
     protected $casts = [
         'price'            => 'decimal:0',
+        'profit_price'     => 'decimal:0',
         'price_updated_at' => 'datetime',
         'meta'             => 'array',
     ];
+
+    protected $appends = [
+        'total_price',
+    ];
+
+    public function getTotalPriceAttribute()
+    {
+        return $this->price + ($this->profit_price ?: 0);
+    }
 
     protected static function newFactory()
     {

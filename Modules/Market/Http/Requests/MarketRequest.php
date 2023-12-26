@@ -17,10 +17,11 @@ class MarketRequest extends FormRequest
     public function rules()
     {
         return $this->getRules([
-            'name'   => 'nullable|string',
-            'symbol' => 'required|string',
-            'price'  => 'required|numeric',
-            'meta'   => 'nullable|array',
+            'name'         => 'nullable|string',
+            'symbol'       => 'required|string',
+            'price'        => 'required|numeric',
+            'profit_price' => 'nullable|numeric',
+            'meta'         => 'nullable|array',
         ]);
     }
 
