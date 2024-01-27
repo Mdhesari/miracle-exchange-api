@@ -20,6 +20,6 @@ class SendUserNotifications
     public function handle(object $event): void
     {
         if ($event->user->mobile)
-            SendSMS::dispatch($event->user->mobile, 'verifyUser', [$event->user]);
+            SendSMS::dispatch($event->user->mobile, 'verifyUser', [$event->user->full_name]);
     }
 }
