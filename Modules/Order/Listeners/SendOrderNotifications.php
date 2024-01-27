@@ -40,7 +40,7 @@ class SendOrderNotifications
             ]);
         }
 
-        foreach (User::permission('order')->whereNotNull('mobile')->cursor() as $user) {
+        foreach (User::permission('orders')->whereNotNull('mobile')->cursor() as $user) {
             SendSMS::dispatch($user->mobile, 'adminSubmitOrder', [
                 // currency
                 Str::replace(' ', '_', $order->market->persian_name),
