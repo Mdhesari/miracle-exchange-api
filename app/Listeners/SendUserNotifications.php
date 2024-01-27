@@ -20,6 +20,7 @@ class SendUserNotifications
     public function handle(object $event): void
     {
         if ($event->user->mobile)
-            SendSMS::dispatch($event->user->mobile, 'verifyUser', [$event->user->full_name]);
+            // Todo: user in persian should be translated...
+            SendSMS::dispatch($event->user->mobile, 'verifyUser', [$event->user->first_name ?: 'کاربر']);
     }
 }
