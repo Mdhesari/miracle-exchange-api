@@ -3,9 +3,10 @@
 namespace Modules\User\Events;
 
 use App\Models\User;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\SerializesModels;
 
-class UserAuthorized
+class UserAuthorized implements ShouldQueue
 {
     use SerializesModels;
 
