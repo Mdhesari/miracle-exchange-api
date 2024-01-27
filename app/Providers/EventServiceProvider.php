@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Events\User\UserInviterUpdated;
+use App\Listeners\SendUserNotifications;
 use App\Listeners\User\SendInvitationRewardToUser;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -12,6 +13,7 @@ use Modules\Order\Events\OrderCreated;
 use Modules\Order\Listeners\SendOrderNotifications;
 use Modules\Order\Listeners\SendTransactionNotifications;
 use Modules\Revenue\Listeners\CreateRevenueForInviter;
+use Modules\User\Events\UserAuthorized;
 use Modules\Wallet\Events\Transaction\TransactionVerified;
 use Modules\Wallet\Events\TransactionReferenceUpdated;
 
@@ -40,6 +42,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         UserInviterUpdated::class           => [
             SendInvitationRewardToUser::class,
+        ],
+        UserAuthorized::class               => [
+            SendUserNotifications::class,
         ],
     ];
 

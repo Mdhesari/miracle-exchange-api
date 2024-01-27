@@ -102,7 +102,7 @@ class User extends Authenticatable implements JWTSubject, HasFilters, HasMedia, 
 
     public function getFullNameAttribute()
     {
-        return "{$this->first_name} {$this->last_name}";
+        return is_null($this->full_name) && is_null($this->last_name) ? __('user.user') : trim("{$this->first_name} {$this->last_name}");
     }
 
     public function getLevelAttribute()
