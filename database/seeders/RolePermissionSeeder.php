@@ -21,6 +21,7 @@ class RolePermissionSeeder extends Seeder
             'accounts',
             'revenues',
             'landing',
+            'telegram',
         ];
 
         foreach ($permissions as $name) {

@@ -40,7 +40,7 @@ class CommentController extends Controller
 
         $query = Comment::query()->where('commentable_type', $commentable_type);
 
-        if ( $request->has('commentable_id') ) {
+        if ($request->has('commentable_id')) {
             $query->where('commentable_id', $request->get('commentable_id'));
         }
 
@@ -131,6 +131,8 @@ class CommentController extends Controller
         $commentable_type = $getCommentableType($type);
 
         $comment = Comment::where('commentable_type', $commentable_type)->where('id', $comment)->firstOrFail();
+
+        $this->authorize('update', $comment);
 
         $comment = $updateComment($comment, $request->validated());
 

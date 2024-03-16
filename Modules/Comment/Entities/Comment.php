@@ -4,14 +4,14 @@ namespace Modules\Comment\Entities;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Mdhesari\LaravelQueryFilters\Contracts\Expandable;
 use Mdhesari\LaravelQueryFilters\Contracts\HasFilters;
 use Mdhesari\LaravelQueryFilters\Traits\HasExpandScope;
+use Modules\Comment\Database\Factories\CommentFactory;
 
 class Comment extends \BeyondCode\Comments\Comment implements Expandable, HasFilters
 {
-    use HasExpandScope;
+    use HasExpandScope, HasFactory;
 
     protected $fillable = [
         'title',
@@ -24,7 +24,7 @@ class Comment extends \BeyondCode\Comments\Comment implements Expandable, HasFil
     ];
 
     protected $casts = [
-        'is_approved'   => 'boolean',
+        'is_approved' => 'boolean',
 //        'rate_quantity' => 'decimal:0',
     ];
 
@@ -41,5 +41,10 @@ class Comment extends \BeyondCode\Comments\Comment implements Expandable, HasFil
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    protected static function newFactory()
+    {
+        return app(CommentFactory::class);
     }
 }

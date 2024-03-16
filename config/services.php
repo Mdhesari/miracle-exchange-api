@@ -37,4 +37,8 @@ return [
         'redirect'          => env('GOOGLE_REDIRECT', 'https://back.sarrafi.app/api/auth/google/callback'),
         'frontend_redirect' => env('FRONTEND_GOOGLE_REDIRECT', 'https://sarrafi.app/auth/google'),
     ],
+
+    'telegram-bot-api' => [
+        'token' => env('TELEGRAM_BOT_TOKEN', 'YOUR BOT TOKEN HERE')
+    ],
 ];
