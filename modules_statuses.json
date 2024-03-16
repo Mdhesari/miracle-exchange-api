@@ -10,5 +10,6 @@
     "Account": true,
     "Bank": false,
     "Revenue": true,
-    "Landing": true
+    "Landing": true,
+    "Comment": true
 }

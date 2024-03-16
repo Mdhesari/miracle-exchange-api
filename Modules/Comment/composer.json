@@ -1,0 +1,27 @@
+{
+    "name": "mdhesari/laravel-comment-module",
+    "description": "",
+    "authors": [
+        {
+            "name": "Mohamad Fazel Hesari",
+            "email": "mdhesari99@gmail.com"
+        }
+    ],
+    "require": {
+        "beyondcode/laravel-comments": "^1.3",
+        "mdhesari/api-response": "^0.10",
+        "mdhesari/laravel-query-filters": "^0.2"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Comment\\": ""
+        }
+    }
+}
