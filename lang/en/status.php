@@ -2,9 +2,9 @@
 
 return [
     'general' => [
-        'Accepted'     => 'تایید شده',
-        'Rejected'     => 'رد شده',
-        'Pending'      => 'در انتظار بارگذاری مدارک',
-        'AdminPending' => 'در انتظار تایید ادمین',
+        'Accepted'     => 'Accepted',
+        'Rejected'     => 'Rejected',
+        'Pending'      => 'Pending document upload',
+        'AdminPending' => 'Pending admin approval',
     ],
 ];
