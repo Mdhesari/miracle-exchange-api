@@ -13,6 +13,7 @@ class RolePermissionSeeder extends Seeder
         $permissions = [
             'statistics',
             'tickets',
+            'wallets',
             'transactions',
             'markets',
             'orders',
