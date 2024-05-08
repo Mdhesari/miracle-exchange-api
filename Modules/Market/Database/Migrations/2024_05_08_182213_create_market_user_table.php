@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('market_user', function (Blueprint $table) {
-            $table->foreignId('market_id');
+            $table->foreignUuid('market_id');
             $table->foreignId('user_id');
 
             $table->primary(['market_id', 'user_id']);
