@@ -11,11 +11,17 @@ class ApplyMarketQueryFilters extends BaseQueryFilters
     {
         parent::__invoke($query, $data);
 
-        if ( ! $this->user() || $this->user()?->cannot('markets') ) {
+        if (! $this->user() || $this->user()?->cannot('markets')) {
             $query->where('status', MarketStatus::Enabled->name);
         } else {
-            if ( isset($data['status']) )
+            if (isset($data['status']))
                 $query->where('status', $data['status']);
+        }
+
+        if ($this->user()) {
+            if (isset($data['bookmarked']) && $data['bookmarked']) {
+                $query->whereHas('bookmarks', fn($query) => $query->whereUserId($this->user()->id));
+            }
         }
 
         return $query;

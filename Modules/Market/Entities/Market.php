@@ -2,6 +2,7 @@
 
 namespace Modules\Market\Entities;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -94,5 +95,10 @@ class Market extends Model implements Expandable, HasFilters
         return $this->update([
             'status' => MarketStatus::Enabled->name,
         ]);
+    }
+
+    public function bookmarks(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(User::class);
     }
 }
