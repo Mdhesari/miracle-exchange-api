@@ -21,6 +21,6 @@ Route::apiResource('markets', MarketController::class);
 
 Route::post('markets/{market}/bookmark', MarketBookmarkController::class);
 
-Route::post('markets/{market}/chart', MarketChartController::class);
+Route::get('markets/{market}/chart', MarketChartController::class);
 
 Route::put('markets/{market}/status-toggle', MarketToggleController::class)->name('markets.status-toggle');
