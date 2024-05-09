@@ -13,7 +13,7 @@ class MarketPrice extends Model
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'price', 'market_id', 'date',
+        'price', 'market_id', 'date', 'name', 'persian_name', 'symbol_char', 'symbol',
     ];
 
     protected $casts = [
