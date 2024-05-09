@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
 use Mdhesari\LaravelQueryFilters\Contracts\Expandable;
 use Mdhesari\LaravelQueryFilters\Contracts\HasFilters;
@@ -53,7 +55,7 @@ class Market extends Model implements Expandable, HasFilters
         return Auth::guest() ? false : $this->users()->whereUserId(Auth::id())->exists();
     }
 
-    public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
     }
@@ -73,7 +75,7 @@ class Market extends Model implements Expandable, HasFilters
         return $this->status === MarketStatus::Disabled->name;
     }
 
-    public function orders(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
     }
@@ -109,8 +111,13 @@ class Market extends Model implements Expandable, HasFilters
         ]);
     }
 
-    public function bookmarks(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function bookmarks(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function prices(): HasMany
+    {
+        return $this->hasMany(MarketPrice::class);
     }
 }

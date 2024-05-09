@@ -3,8 +3,8 @@
 namespace Modules\Market\Console;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Log;
 use Modules\Market\Entities\Market;
+use Modules\Market\Jobs\CreateMarketPriceHistory;
 use Psy\Command\ExitCommand;
 
 class UpdateMarketFromNavasan extends Command
@@ -40,28 +40,31 @@ class UpdateMarketFromNavasan extends Command
         $bar->start();
 
         foreach ($data as $key => $market) {
-            try {
-                $marketName = $marketsName[$key] ?? null;
+            if (! isset($market['value']) || ! $market['value']) {
 
-                $marketModel = Market::firstOrCreate([
-                    'symbol' => $key,
-                ], [
-                    'persian_name'     => is_array($marketName) ? $marketName['title'] : null,
-                    'country_code'     => is_array($marketName) ? $marketName['country_code'] : null,
-                    'symbol_char'      => is_array($marketName) ? $marketName['symbol'] : null,
+                continue;
+            }
+
+            $marketName = $marketsName[$key] ?? null;
+
+            $marketModel = Market::firstOrCreate([
+                'symbol' => $key,
+            ], [
+                'persian_name'     => is_array($marketName) ? $marketName['title'] : null,
+                'country_code'     => is_array($marketName) ? $marketName['country_code'] : null,
+                'symbol_char'      => is_array($marketName) ? $marketName['symbol'] : null,
+                'price'            => $market['value'],
+                'price_updated_at' => verta()->parse($market['date'])->toCarbon(),
+            ]);
+
+            if (! $marketModel->wasRecentlyCreated) {
+                $marketModel->update([
                     'price'            => $market['value'],
                     'price_updated_at' => verta()->parse($market['date'])->toCarbon(),
                 ]);
-
-                if (! $marketModel->wasRecentlyCreated) {
-                    $marketModel->update([
-                        'price'            => $market['value'],
-                        'price_updated_at' => verta()->parse($market['date'])->toCarbon(),
-                    ]);
-                }
-            } catch (\Exception $e) {
-                // report
             }
+
+            dispatch(new CreateMarketPriceHistory($marketModel));
 
             $bar->advance();
         }
