@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Market\Http\Controllers\MarketBookmarkController;
+use Modules\Market\Http\Controllers\MarketChartController;
 use Modules\Market\Http\Controllers\MarketController;
 use Modules\Market\Http\Controllers\MarketToggleController;
 
@@ -19,5 +20,7 @@ use Modules\Market\Http\Controllers\MarketToggleController;
 Route::apiResource('markets', MarketController::class);
 
 Route::post('markets/{market}/bookmark', MarketBookmarkController::class);
+
+Route::post('markets/{market}/chart', MarketChartController::class);
 
 Route::put('markets/{market}/status-toggle', MarketToggleController::class)->name('markets.status-toggle');

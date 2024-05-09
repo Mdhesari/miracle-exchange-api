@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Mdhesari\LaravelQueryFilters\Contracts\Expandable;
 use Mdhesari\LaravelQueryFilters\Contracts\HasFilters;
 use Modules\Market\Database\factories\MarketFactory;
@@ -39,11 +40,22 @@ class Market extends Model implements Expandable, HasFilters
 
     protected $appends = [
         'total_price',
+        'is_bookmarked',
     ];
 
     public function getTotalPriceAttribute()
     {
         return $this->price + ($this->profit_price ?: 0);
+    }
+
+    public function getIsBookmarkedAttribute()
+    {
+        return Auth::guest() ? false : $this->users()->whereUserId(Auth::id())->exists();
+    }
+
+    public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(User::class);
     }
 
     protected static function newFactory()

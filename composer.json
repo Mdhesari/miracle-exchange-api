@@ -11,6 +11,7 @@
         "php": "^8.1",
         "andreaselia/laravel-api-to-postman": "^1.15",
         "beyondcode/laravel-comments": "^1.5",
+        "flowframe/laravel-trend": "^0.2.0",
         "guzzlehttp/guzzle": "^7.2",
         "hekmatinasser/verta": "^8.3",
         "kavenegar/laravel": "^1.3",
