@@ -3,7 +3,6 @@
 namespace Modules\Market\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Flowframe\Trend\Trend;
 use Modules\Market\Entities\Market;
 
 class MarketChartController extends Controller

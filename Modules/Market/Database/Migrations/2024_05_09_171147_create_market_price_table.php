@@ -12,6 +12,12 @@ return new class extends Migration {
     {
         Schema::create('market_prices', function (Blueprint $table) {
             $table->foreignUuid('market_id');
+
+            $table->string('name')->nullable();
+            $table->string('persian_name')->nullable();
+            $table->string('symbol_char', 8)->nullable();
+            $table->string('symbol', 64)->nullable();
+
             $table->float('price', 12, 0);
 
             $table->timestamp('date');

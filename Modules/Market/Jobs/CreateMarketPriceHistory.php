@@ -31,8 +31,12 @@ class CreateMarketPriceHistory implements ShouldQueue
     {
         try {
             $this->market->prices()->create([
-                'price' => $this->market->total_price,
-                'date'  => $this->market->price_updated_at,
+                'name'         => $this->market->name,
+                'persian_name' => $this->market->persian_name,
+                'symbol'       => $this->market->symbol,
+                'symbol_char'  => $this->market->symbol_char,
+                'price'        => $this->market->total_price,
+                'date'         => $this->market->price_updated_at,
             ]);
         } catch (UniqueConstraintViolationException $e) {
             // ignore
