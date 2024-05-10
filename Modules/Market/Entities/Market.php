@@ -37,6 +37,7 @@ class Market extends Model implements Expandable, HasFilters
     ];
 
     protected $casts = [
+        'is_crypto'        => 'boolean',
         'price'            => 'decimal:0',
         'profit_price'     => 'decimal:0',
         'price_updated_at' => 'datetime',
