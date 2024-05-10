@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Validation\ValidationException;
+use Modules\Market\Entities\Market;
 use Modules\Wallet\Actions\ApplyWalletQueryFilters;
 use Modules\Wallet\Actions\CreateDepositTransaction;
 use Modules\Wallet\Actions\CreateWithdrawTransaction;
@@ -84,12 +85,15 @@ class WalletController extends Controller
     {
         $hasPermission = $this->hasPermissionToWallets($request->user());
 
+        $market = Market::find($request->market_id);
         $transaction = $createDepositTransaction([
-            'crypto_network_id'  => $request->crypto_network_id,
-            'currency'           => $request->currency,
-            'user_id'            => $hasPermission ? $request->input('user', $request->user()->id) : $request->user()->id,
-            'quantity'           => $request->quantity,
-            'status'             => $hasPermission ? Transaction::STATUS_VERIFIED : Transaction::STATUS_PENDING,
+            'transactionable_type' => $market::class,
+            'transactionable_id'   => $market->id,
+            'crypto_network_id'    => $request->crypto_network_id,
+            'currency'             => $request->currency,
+            'user_id'              => $hasPermission ? $request->input('user', $request->user()->id) : $request->user()->id,
+            'quantity'             => $request->quantity,
+            'status'               => $hasPermission ? Transaction::STATUS_VERIFIED : Transaction::STATUS_PENDING,
         ]);
 
         return api()->success(__('wallet::transaction.deposit.success', [
@@ -111,13 +115,16 @@ class WalletController extends Controller
     {
         $hasPermission = $this->hasPermissionToWallets($request->user());
 
+        $market = Market::find($request->market_id);
         $transaction = $createWithdrawTransaction([
-            'crypto_network_id'  => $request->crypto_network_id,
-            'crypto_wallet_hash' => $request->crypto_wallet_hash,
-            'currency'           => $request->currency,
-            'user_id'            => $hasPermission ? $request->input('user', $request->user()->id) : $request->user()->id,
-            'quantity'           => $request->quantity,
-            'status'             => $hasPermission ? Transaction::STATUS_VERIFIED : Transaction::STATUS_PENDING,
+            'transactionable_type' => $market::class,
+            'transactionable_id'   => $market->id,
+            'crypto_network_id'    => $request->crypto_network_id,
+            'crypto_wallet_hash'   => $request->crypto_wallet_hash,
+            'currency'             => $request->currency,
+            'user_id'              => $hasPermission ? $request->input('user', $request->user()->id) : $request->user()->id,
+            'quantity'             => $request->quantity,
+            'status'               => $hasPermission ? Transaction::STATUS_VERIFIED : Transaction::STATUS_PENDING,
         ]);
 
         return api()->success(__('wallet::transaction.withdraw.success', [

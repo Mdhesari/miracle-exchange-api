@@ -16,8 +16,8 @@ class DepositRequest extends FormRequest
         return [
             'user'              => 'nullable|exists:users,id',
             'quantity'          => 'required|numeric|gt:0',
-            'market_id'         => 'required|string',
-            'crypto_network_id' => 'required|exists:networks,id',
+            'market_id'         => 'required|exists:markets,id',
+            'crypto_network_id' => 'required|exists:crypto_networks,id',
         ];
     }
 

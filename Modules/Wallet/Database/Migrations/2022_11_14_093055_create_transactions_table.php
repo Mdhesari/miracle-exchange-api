@@ -22,7 +22,6 @@ class CreateTransactionsTable extends Migration
             $table->string('currency')->nullable();
             $table->string('hash')->unique()->nullable();
             $table->string('callback_url')->nullable();
-            $table->string('crypto_wallet_hash')->nullable();
 
             $table->float('quantity', 16, 0);
 
@@ -31,7 +30,6 @@ class CreateTransactionsTable extends Migration
 
             $table->foreignId('user_id')->nullable()->constrained();
             $table->foreignId('admin_id')->nullable()->constrained('users');
-            $table->foreignUuid('crypto_network_id')->nullable();
 
             $table->nullableUuidMorphs('transactionable');
 

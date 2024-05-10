@@ -11,12 +11,10 @@ use Mdhesari\LaravelQueryFilters\Contracts\Expandable;
 use Mdhesari\LaravelQueryFilters\Contracts\HasFilters;
 use Mdhesari\LaravelQueryFilters\Traits\HasExpandScope;
 use Modules\Wallet\Database\Factories\WalletFactory;
-use OwenIt\Auditing\Auditable;
-use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 
-class Wallet extends Model implements HasFilters, Expandable, AuditableContract
+class Wallet extends Model implements HasFilters, Expandable
 {
-    use HasFactory, SoftDeletes, HasExpandScope, Auditable, HasUuids;
+    use HasFactory, SoftDeletes, HasExpandScope, HasUuids;
 
     const STATUS_ACTIVE = 'active';
     const STATUS_INACTIVE = 'inactive';
@@ -76,13 +74,15 @@ class Wallet extends Model implements HasFilters, Expandable, AuditableContract
     public function deposit($data): Model
     {
         return $this->transactions()->create([
-            'type'               => Transaction::TYPE_DEPOSIT,
-            'quantity'           => $data['quantity'],
-            'crypto_network_id'  => $data['crypto_network_id'],
-            'crypto_wallet_hash' => 'TEST_WALLET_HASH_FOR_DEPOSIT',
-            'status'             => $data['status'] ?? Transaction::STATUS_PENDING,
-            'verified_at'        => $data['verified_at'] ?? null,
-            'reference'          => $data['reference'] ?? null,
+            'type'                 => Transaction::TYPE_DEPOSIT,
+            'quantity'             => $data['quantity'],
+            'crypto_network_id'    => $data['crypto_network_id'],
+            'crypto_wallet_hash'   => 'TEST_WALLET_HASH_FOR_DEPOSIT',
+            'status'               => $data['status'] ?? Transaction::STATUS_PENDING,
+            'verified_at'          => $data['verified_at'] ?? null,
+            'reference'            => $data['reference'] ?? null,
+            'transactionable_id'   => $data['transactionable_id'] ?? null,
+            'transactionable_type' => $data['transactionable_type'] ?? null,
         ]);
     }
 

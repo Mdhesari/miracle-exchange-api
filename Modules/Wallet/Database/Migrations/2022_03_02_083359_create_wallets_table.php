@@ -1,6 +1,5 @@
 <?php
 
-use App\Constants\WalletConstant;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,7 +17,6 @@ class CreateWalletsTable extends Migration
         Schema::create('wallets', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
-            $table->string('currency')->default(WalletConstant::DEFAULT_CURRENCY);
             $table->float('quantity', 16, 0);
 
             $table->foreignId('user_id')->constrained();
