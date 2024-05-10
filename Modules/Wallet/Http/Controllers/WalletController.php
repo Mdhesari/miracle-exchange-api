@@ -100,7 +100,7 @@ class WalletController extends Controller
             'quantity'       => $transaction->formatted_qua,
             'total_quantity' => $transaction->wallet->formatted_qua,
         ]), [
-            'item' => $transaction,
+            'item' => $transaction->fresh(),
         ]);
     }
 
@@ -131,7 +131,7 @@ class WalletController extends Controller
             'quantity'       => $transaction->formatted_qua,
             'total_quantity' => $transaction->wallet->formatted_qua,
         ]), [
-            'item' => $transaction,
+            'item' => $transaction->fresh(),
         ]);
     }
 

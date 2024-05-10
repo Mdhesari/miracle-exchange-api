@@ -27,11 +27,11 @@ class TransactionPolicy
 
     public function reject(User $user, Transaction $transaction): bool
     {
-        return $transaction->type === Transaction::TYPE_WITHDRAW && $user->can('transactions') && ! $transaction->isVerified();
+        return $user->can('transactions') && ! $transaction->isVerified();
     }
 
     public function reference(User $user, Transaction $transaction): bool
     {
-        return $transaction->type === Transaction::TYPE_WITHDRAW && $user->isOwner($transaction->user_id) && ! $transaction->isVerified();
+        return $user->isOwner($transaction->user_id) && ! $transaction->isVerified();
     }
 }
