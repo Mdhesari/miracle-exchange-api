@@ -2,6 +2,7 @@
 
 namespace Modules\Wallet\Actions;
 
+use Modules\Wallet\Entities\Wallet;
 use Modules\Wallet\Events\TransactionDepositCreated;
 use Modules\Wallet\Wallet as WalletModule;
 
@@ -11,6 +12,7 @@ class CreateDepositTransaction
     {
         $user = WalletModule::user()->findOrFail($data['user_id']);
 
+        /** @var Wallet $wallet */
         $wallet = $user->wallets()->first();
 
         if (! $wallet) {

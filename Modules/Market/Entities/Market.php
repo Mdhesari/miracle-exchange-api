@@ -133,4 +133,9 @@ class Market extends Model implements Expandable, HasFilters
     {
         return $this->hasMany(MarketPrice::class);
     }
+
+    public function getOwner()
+    {
+        return $this->name;
+    }
 }
