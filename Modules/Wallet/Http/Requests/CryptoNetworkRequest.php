@@ -6,12 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class CryptoNetworkRequest extends FormRequest
 {
-    public string $name;
-
-    public float $fee;
-
-    public bool $isActive;
-
     /**
      * Get the validation rules that apply to the request.
      */
