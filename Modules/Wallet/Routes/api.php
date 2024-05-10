@@ -21,12 +21,12 @@ Route::prefix('wallets')->name('wallets.')->group(function () {
     /**
      * Deposit
      */
-//    Route::post('deposit', [WalletController::class, 'deposit'])->name('deposit');
+    Route::post('deposit', [WalletController::class, 'deposit'])->name('deposit');
 
     /**
      * Withdraw
      */
-//    Route::post('withdraw', [WalletController::class, 'withdraw'])->name('withdraw');
+    Route::post('withdraw', [WalletController::class, 'withdraw'])->name('withdraw');
 
     Route::apiResource(null, WalletController::class)->except(['store', 'update']);
 });

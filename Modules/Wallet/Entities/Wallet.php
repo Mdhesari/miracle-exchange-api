@@ -22,7 +22,7 @@ class Wallet extends Model implements HasFilters, Expandable, AuditableContract
     const STATUS_INACTIVE = 'inactive';
 
     protected $fillable = [
-        'quantity', 'status', 'user_id'
+        'quantity', 'status', 'user_id', 'currency',
     ];
 
     protected $casts = [

@@ -17,6 +17,7 @@ class CreateWalletsTable extends Migration
         Schema::create('wallets', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
+            $table->string('currency')->default('usdt');
             $table->float('quantity', 16, 0);
 
             $table->foreignId('user_id')->constrained();
