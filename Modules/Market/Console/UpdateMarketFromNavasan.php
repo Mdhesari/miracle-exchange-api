@@ -64,7 +64,7 @@ class UpdateMarketFromNavasan extends Command
                 ]);
             }
 
-            dispatch(new CreateMarketPriceHistory($marketModel));
+            dispatch(new CreateMarketPriceHistory($marketModel->fresh()));
 
             $bar->advance();
         }
