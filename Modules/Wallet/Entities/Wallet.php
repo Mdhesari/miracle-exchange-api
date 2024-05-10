@@ -76,7 +76,7 @@ class Wallet extends Model implements HasFilters, Expandable
         return $this->transactions()->create([
             'type'                 => Transaction::TYPE_DEPOSIT,
             'quantity'             => $data['quantity'],
-            'crypto_network_id'    => $data['crypto_network_id'],
+            'crypto_network_id'    => $data['crypto_network_id'] ?? null,
             'crypto_wallet_hash'   => 'TEST_WALLET_HASH_FOR_DEPOSIT',
             'status'               => $data['status'] ?? Transaction::STATUS_PENDING,
             'verified_at'          => $data['verified_at'] ?? null,
