@@ -89,7 +89,6 @@ class WalletController extends Controller
         $transaction = $createDepositTransaction([
             'transactionable_type' => $market::class,
             'transactionable_id'   => $market->id,
-            'crypto_network_id'    => $request->crypto_network_id,
             'currency'             => $market->symbol,
             'user_id'              => $hasPermission ? $request->input('user', $request->user()->id) : $request->user()->id,
             'quantity'             => $request->quantity,
