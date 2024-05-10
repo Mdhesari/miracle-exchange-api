@@ -16,7 +16,8 @@ class Notification extends Model implements HasFilters
 
     protected $fillable = [
         'title',
-        'notifiable',
+        'notifiable_type',
+        'notifiable_id',
         'message',
         'status',
         'read_at',

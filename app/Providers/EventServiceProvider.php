@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Events\User\UserInviterUpdated;
 use App\Listeners\SendUserNotifications;
+use App\Listeners\SendWelcomeNotification;
 use App\Listeners\User\SendInvitationRewardToUser;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -27,6 +28,7 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class                   => [
             SendEmailVerificationNotification::class,
+            SendWelcomeNotification::class,
         ],
         OrderCreated::class                 => [
             SendOrderNotifications::class,
