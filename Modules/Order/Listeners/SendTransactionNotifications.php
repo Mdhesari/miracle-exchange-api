@@ -5,6 +5,7 @@ namespace Modules\Order\Listeners;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Modules\Auth\Jobs\SendSMS;
+use Modules\Order\Entities\Order;
 use Modules\Order\Exceptions\InvalidTransactionException;
 use Modules\Wallet\Events\TransactionReferenceUpdated;
 
@@ -32,8 +33,9 @@ class SendTransactionNotifications
         $transaction = $event->transaction;
         $order = $transaction->transactionable;
 
-        if (is_null($order)) {
-            throw new InvalidTransactionException;
+        if (is_null($order) && ! $order instanceof Order) {
+
+            return;
         }
 
         if ($order->user->mobile) {
