@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 use Modules\Wallet\Entities\Transaction;
 
 class CreateTransactionsTable extends Migration
@@ -19,8 +19,11 @@ class CreateTransactionsTable extends Migration
 
             $table->foreignUuid('gateway_id')->nullable();
             $table->string('reference')->nullable();
+            $table->string('currency')->nullable();
             $table->string('hash')->unique()->nullable();
             $table->string('callback_url')->nullable();
+            $table->string('crypto_wallet_hash')->nullable();
+            $table->foreignId('crypto_network_id')->nullable();
 
             $table->float('quantity', 16, 0);
 

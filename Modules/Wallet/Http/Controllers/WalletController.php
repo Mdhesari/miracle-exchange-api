@@ -85,16 +85,20 @@ class WalletController extends Controller
         $hasPermission = $this->hasPermissionToWallets($request->user());
 
         $transaction = $createDepositTransaction([
-            'user_id'  => $hasPermission ? $request->input('user', $request->user()->id) : $request->user()->id,
-            'quantity' => $request->quantity,
-            'status'   => $hasPermission ? Transaction::STATUS_VERIFIED : Transaction::STATUS_PENDING,
+            'crypto_network_id'  => $request->crypto_network_id,
+            'currency'           => $request->currency,
+            'user_id'            => $hasPermission ? $request->input('user', $request->user()->id) : $request->user()->id,
+            'quantity'           => $request->quantity,
+            'status'             => $hasPermission ? Transaction::STATUS_VERIFIED : Transaction::STATUS_PENDING,
         ]);
 
         return api()->success(__('wallet::transaction.deposit.success', [
             'user'           => $request->user,
             'quantity'       => $transaction->formatted_qua,
             'total_quantity' => $transaction->wallet->formatted_qua,
-        ]));
+        ]), [
+            'item' => $transaction,
+        ]);
     }
 
     /**
@@ -108,9 +112,12 @@ class WalletController extends Controller
         $hasPermission = $this->hasPermissionToWallets($request->user());
 
         $transaction = $createWithdrawTransaction([
-            'user_id'  => $hasPermission ? $request->input('user', $request->user()->id) : $request->user()->id,
-            'quantity' => $request->quantity,
-            'status'   => $hasPermission ? Transaction::STATUS_VERIFIED : Transaction::STATUS_PENDING,
+            'crypto_network_id'  => $request->crypto_network_id,
+            'crypto_wallet_hash' => $request->crypto_wallet_hash,
+            'currency'           => $request->currency,
+            'user_id'            => $hasPermission ? $request->input('user', $request->user()->id) : $request->user()->id,
+            'quantity'           => $request->quantity,
+            'status'             => $hasPermission ? Transaction::STATUS_VERIFIED : Transaction::STATUS_PENDING,
         ]);
 
         return api()->success(__('wallet::transaction.withdraw.success', [

@@ -14,10 +14,10 @@ class DepositRequest extends FormRequest
     public function rules()
     {
         return [
-            'user'           => 'nullable|exists:users,id',
-            'currency'       => 'required|string',
-            'quantity'       => 'required|numeric|gt:0',
-            'wallet_network' => 'required|string',
+            'user'              => 'nullable|exists:users,id',
+            'quantity'          => 'required|numeric|gt:0',
+            'currency'          => 'required|string',
+            'crypto_network_id' => 'required|exists:networks,id',
         ];
     }
 
