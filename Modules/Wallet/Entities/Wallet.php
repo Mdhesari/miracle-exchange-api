@@ -83,6 +83,7 @@ class Wallet extends Model implements HasFilters, Expandable
             'reference'            => $data['reference'] ?? null,
             'transactionable_id'   => $data['transactionable_id'] ?? null,
             'transactionable_type' => $data['transactionable_type'] ?? null,
+            'user_id'              => $data['user_id'] ?? null,
         ]);
     }
 
