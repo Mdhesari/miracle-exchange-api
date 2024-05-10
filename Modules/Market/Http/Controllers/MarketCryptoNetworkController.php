@@ -22,7 +22,9 @@ class MarketCryptoNetworkController extends Controller
      */
     public function __invoke(MarketCryptoNetworkRequest $request, Market $market, AddMarketToCryptoNetwork $addMarketToCryptoNetwork): \Illuminate\Http\JsonResponse
     {
-        $addMarketToCryptoNetwork($market, $request->crypto_network_id);
+        foreach ($request->crypto_network_ids as $id) {
+            $addMarketToCryptoNetwork($market, $id);
+        }
 
         return api()->success();
     }

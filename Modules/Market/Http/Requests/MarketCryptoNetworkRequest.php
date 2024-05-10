@@ -12,7 +12,8 @@ class MarketCryptoNetworkRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'crypto_network_id' => 'required|exists:crypto_networks,id',
+            'crypto_network_ids' => 'required|array',
+            'crypto_network_ids.*' => 'required|exists:crypto_networks,id',
         ];
     }
 
