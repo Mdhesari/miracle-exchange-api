@@ -2,8 +2,9 @@
 
 namespace Modules\Wallet\Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
+use Modules\Wallet\Entities\CryptoNetwork;
 
 class WalletDatabaseSeeder extends Seeder
 {
@@ -16,6 +17,10 @@ class WalletDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
+        CryptoNetwork::create([
+            'name'      => 'trc20',
+            'fee'       => 1,
+            'is_active' => true,
+        ]);
     }
 }
