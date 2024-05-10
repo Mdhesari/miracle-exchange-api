@@ -31,6 +31,7 @@ class Market extends Model implements Expandable, HasFilters
         'profit_price',
         'price',
         'status',
+        'is_crypto',
         'price_updated_at',
         'meta',
     ];
