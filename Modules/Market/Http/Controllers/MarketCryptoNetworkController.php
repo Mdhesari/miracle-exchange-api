@@ -3,6 +3,7 @@
 namespace Modules\Market\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use Modules\Market\Actions\SyncMarketToCryptoNetwork;
 use Modules\Market\Entities\Market;
 use Modules\Market\Http\Requests\MarketCryptoNetworkRequest;
@@ -18,9 +19,9 @@ class MarketCryptoNetworkController extends Controller
      * @param MarketCryptoNetworkRequest $request
      * @param Market $market
      * @param SyncMarketToCryptoNetwork $syncMarketToCryptoNetwork
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function __invoke(MarketCryptoNetworkRequest $request, Market $market, SyncMarketToCryptoNetwork $syncMarketToCryptoNetwork): \Illuminate\Http\JsonResponse
+    public function __invoke(MarketCryptoNetworkRequest $request, Market $market, SyncMarketToCryptoNetwork $syncMarketToCryptoNetwork): JsonResponse
     {
         $syncMarketToCryptoNetwork($market, $request->crypto_network_ids);
 
