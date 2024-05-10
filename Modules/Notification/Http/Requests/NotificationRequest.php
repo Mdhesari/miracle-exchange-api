@@ -4,7 +4,6 @@ namespace Modules\Notification\Http\Requests;
 
 use App\Traits\HasApiRequest;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class NotificationRequest extends FormRequest
 {
@@ -19,10 +18,8 @@ class NotificationRequest extends FormRequest
     {
         return $this->getRules([
             'title'    => 'required|string|max:1000',
-            'role'     => ['nullable', 'bail', 'string', Rule::in(['funder', 'investor'])],
             'message'  => 'nullable|string',
             'sends_at' => 'nullable|numeric',
-            'channel'  => 'nullable|string',
         ]);
     }
 
