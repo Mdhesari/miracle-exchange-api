@@ -10,14 +10,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('crypto_networks', function (Blueprint $table) {
-            $table->uuid('id');
+        Schema::create('crypto_network_market', function (Blueprint $table) {
+            $table->foreignUuid('crypto_network_id');
+            $table->foreignUuid('market_id');
 
-            $table->string('name');
-            $table->boolean('is_active');
-            $table->decimal('fee');
-
-            $table->timestamps();
+            $table->primary(['crypto_network_id', 'market_id']);
         });
     }
 
@@ -26,6 +23,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('crypto_networks');
+        Schema::dropIfExists('crypto_network_market');
     }
 };

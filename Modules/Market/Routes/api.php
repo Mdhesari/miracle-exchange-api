@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\Market\Http\Controllers\MarketBookmarkController;
 use Modules\Market\Http\Controllers\MarketChartController;
 use Modules\Market\Http\Controllers\MarketController;
+use Modules\Market\Http\Controllers\MarketCryptoNetworkController;
 use Modules\Market\Http\Controllers\MarketToggleController;
 
 /*
@@ -24,3 +25,5 @@ Route::post('markets/{market}/bookmark', MarketBookmarkController::class);
 Route::get('markets/{market}/chart', MarketChartController::class);
 
 Route::put('markets/{market}/status-toggle', MarketToggleController::class)->name('markets.status-toggle');
+
+Route::post('markets/{market}/crypto-network', MarketCryptoNetworkController::class);

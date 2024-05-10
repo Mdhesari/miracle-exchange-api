@@ -22,6 +22,7 @@ class MarketRequest extends FormRequest
             'price'        => 'required|numeric',
             'profit_price' => 'nullable|numeric',
             'meta'         => 'nullable|array',
+            'is_crypto'    => 'nullable|boolean',
         ]);
     }
 

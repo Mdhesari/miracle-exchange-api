@@ -11,13 +11,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
 use Mdhesari\LaravelQueryFilters\Contracts\Expandable;
 use Mdhesari\LaravelQueryFilters\Contracts\HasFilters;
+use Mdhesari\LaravelQueryFilters\Traits\HasExpandScope;
 use Modules\Market\Database\factories\MarketFactory;
 use Modules\Market\Enums\MarketStatus;
 use Modules\Order\Entities\Order;
+use Modules\Wallet\Entities\CryptoNetwork;
 
 class Market extends Model implements Expandable, HasFilters
 {
-    use HasFactory, HasUuids;
+    use HasFactory, HasUuids, HasExpandScope;
 
     protected $fillable = [
         'name',
@@ -40,6 +42,10 @@ class Market extends Model implements Expandable, HasFilters
         'meta'             => 'array',
     ];
 
+    protected $with = [
+        'cryptoNetworks',
+    ];
+
     protected $appends = [
         'total_price',
         'is_bookmarked',
@@ -58,6 +64,11 @@ class Market extends Model implements Expandable, HasFilters
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function cryptoNetworks(): BelongsToMany
+    {
+        return $this->belongsToMany(CryptoNetwork::class);
     }
 
     protected static function newFactory()
@@ -82,7 +93,7 @@ class Market extends Model implements Expandable, HasFilters
 
     public function getExpandRelations(): array
     {
-        return ['orders'];
+        return ['orders', 'cryptoNetworks'];
     }
 
     public function getSearchParams(): array
