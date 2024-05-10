@@ -14,8 +14,11 @@ class WithdrawRequest extends FormRequest
     public function rules()
     {
         return [
-            'user'     => 'nullable|exists:users,id',
-            'quantity' => 'required|numeric|gt:0',
+            'user'           => 'nullable|exists:users,id',
+            'quantity'       => 'required|numeric|gt:0',
+            'currency'       => 'required|string',
+            'wallet_hash'    => 'required|string',
+            'wallet_network' => 'required|string',
         ];
     }
 
