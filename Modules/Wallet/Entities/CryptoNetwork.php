@@ -14,7 +14,11 @@ class CryptoNetwork extends Model
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'name', 'is_active',
+        'name', 'is_active', 'fee',
+    ];
+
+    protected $casts = [
+        'fee' => 'decimal:2',
     ];
 
     protected static function newFactory(): CryptoNetworkFactory

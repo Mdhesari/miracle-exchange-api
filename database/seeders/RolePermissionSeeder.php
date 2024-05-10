@@ -25,6 +25,7 @@ class RolePermissionSeeder extends Seeder
             'telegram',
             'telescope',
             'comments',
+            'crypto',
         ];
 
         foreach ($permissions as $name) {

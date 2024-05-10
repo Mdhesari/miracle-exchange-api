@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Wallet\Http\Controllers\CryptoNetworkController;
 use Modules\Wallet\Http\Controllers\TransactionController;
 use Modules\Wallet\Http\Controllers\WalletController;
 
@@ -38,3 +39,5 @@ Route::prefix('transactions')->name('transactions.')->group(function () {
 });
 
 Route::resource('transactions', \Modules\Wallet\Http\Controllers\TransactionController::class)->only(['index', 'show']);
+
+Route::apiResource('crypto-networks', CryptoNetworkController::class);
