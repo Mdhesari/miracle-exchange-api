@@ -16,6 +16,10 @@ class ApplyWalletQueryFilters extends BaseQueryFilters
             $query->inActive();
         }
 
+        if ($this->user()->cannot('wallets')) {
+            $query->where('user_id', $this->user()->id);
+        }
+
         return $query;
     }
 }
