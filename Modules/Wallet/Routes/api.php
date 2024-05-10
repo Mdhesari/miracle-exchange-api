@@ -38,6 +38,6 @@ Route::prefix('transactions')->name('transactions.')->group(function () {
 //    Route::get('export/excel', [TransactionExportController::class, 'exportExcel'])->name('export-excel');
 });
 
-Route::resource('transactions', \Modules\Wallet\Http\Controllers\TransactionController::class)->only(['index', 'show']);
+Route::resource('transactions', TransactionController::class)->only(['index', 'show']);
 
 Route::apiResource('crypto-networks', CryptoNetworkController::class);
