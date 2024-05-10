@@ -24,7 +24,9 @@ class SetupWallet
             $wallet->restore();
         }
 
-        event(new WalletCreated($wallet));
+        if ($wallet->wasRecentlyCreated) {
+            event(new WalletCreated($wallet));
+        }
 
         return $wallet->fresh();
     }

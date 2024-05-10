@@ -14,7 +14,8 @@ class OrderPaymentRequest extends FormRequest
     public function rules()
     {
         return [
-            'gateway_id' => 'required|exists:gateways,id',
+            'gateway_id' => 'nullable|exists:gateways,id',
+            'use_wallet' => 'nullable|boolean|required_if:gateway_id,null',
         ];
     }
 

@@ -69,6 +69,7 @@ class User extends Authenticatable implements JWTSubject, HasFilters, HasMedia, 
 
     protected $appends = [
         'full_name',
+        'wallet_quantity',
         'status_trans',
         'available_status',
         'available_gender',

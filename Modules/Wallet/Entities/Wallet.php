@@ -144,4 +144,9 @@ class Wallet extends Model implements HasFilters, Expandable
             'transactions',
         ];
     }
+
+    public function hasBalance(int $qua)
+    {
+        return $this->quantity >= $qua;
+    }
 }
