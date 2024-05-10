@@ -3,9 +3,8 @@
 namespace Modules\User\Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Seeder;
 
 class UserDatabaseSeeder extends Seeder
 {
@@ -29,14 +28,6 @@ class UserDatabaseSeeder extends Seeder
                 'mobile'   => '9393982868',
                 'password' => 'secret@mahdi',
             ],
-            [
-                'mobile'   => '9126111243',
-                'password' => 'secret@guest',
-            ],
-            [
-                'mobile'   => '9194347696',
-                'password' => 'secret@zahedi',
-            ]
         ];
 
         array_map(fn($admin) => User::firstOrCreate([
