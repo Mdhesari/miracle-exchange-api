@@ -1,9 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Modules\Wallet\Http\Controllers\TransactionController;
-use Modules\Wallet\Http\Controllers\TransactionExportController;
 use Modules\Wallet\Http\Controllers\WalletController;
 
 /*

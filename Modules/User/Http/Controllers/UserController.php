@@ -46,8 +46,6 @@ class UserController extends Controller
      * @LRDparam expand string ['media']
      * @LRDparam national_code string
      * @LRDparam user_id integer
-     * @LRDparam investors boolean
-     * @LRDparam funders boolean
      * @LRDparam admins boolean
      * @LRDparam oldest boolean
      * @LRDparam date_from integer

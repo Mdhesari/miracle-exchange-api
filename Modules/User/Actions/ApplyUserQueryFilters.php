@@ -30,22 +30,6 @@ class ApplyUserQueryFilters extends BaseQueryFilters
             });
         }
 
-        if ( isset($data['investors']) ) {
-            $query->whereHas('roles', function ($query) {
-                $query->whereHas('permissions', function ($query) {
-                    $query->where('name', 'investor');
-                });
-            });
-        }
-
-        if ( isset($data['funders']) ) {
-            $query->whereHas('roles', function ($query) {
-                $query->whereHas('permissions', function ($query) {
-                    $query->where('name', 'funder');
-                });
-            });
-        }
-
         return $query;
     }
 }

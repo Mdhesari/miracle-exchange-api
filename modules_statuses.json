@@ -11,5 +11,6 @@
     "Bank": false,
     "Revenue": true,
     "Landing": true,
-    "Comment": true
+    "Comment": true,
+    "Notification": true
 }
