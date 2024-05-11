@@ -14,7 +14,7 @@ class VerifyTransactionRequest extends FormRequest
     public function rules()
     {
         return [
-            'reference' => 'required|string',
+            'reference' => 'nullable|string',
             'media'     => 'nullable|array',
             'media.*'   => 'nullable|file|mimes:jpeg,png,gif,pdf,doc,docx|max:10000',
         ];
