@@ -2,6 +2,8 @@
 
 namespace Modules\Wallet\Traits;
 
+use Illuminate\Support\Facades\Auth;
+use Modules\Wallet\Actions\SetupWallet;
 use Modules\Wallet\Entities\Wallet;
 
 trait HasWallet
@@ -13,7 +15,14 @@ trait HasWallet
 
     public function wallet()
     {
-        return $this->wallets()->orderBy('quantity', 'desc')->first();
+        $wallet = $this->wallets()->orderBy('quantity', 'desc')->first();
+        if (! $wallet) {
+            $wallet = app(SetupWallet::class)([
+                'user_id' => Auth::id(),
+            ]);
+        }
+
+        return $wallet;
     }
 
     public function getWalletQuantityAttribute()
