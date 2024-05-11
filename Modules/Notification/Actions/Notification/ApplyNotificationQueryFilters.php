@@ -2,6 +2,7 @@
 
 namespace Modules\Notification\Actions\Notification;
 
+use App\Models\User;
 use Mdhesari\LaravelQueryFilters\Abstract\BaseQueryFilters;
 
 class ApplyNotificationQueryFilters extends BaseQueryFilters
@@ -15,7 +16,7 @@ class ApplyNotificationQueryFilters extends BaseQueryFilters
         }
 
         if ($this->user()->cannot('notifications')) {
-            $query->where('role', null)->orWhereIn('role', $this->user()->roles()->pluck('name'));
+            $query->where('notifiable_type', User::class)->where('notifiable_id', $this->user()->id);
         }
 
         return $query;

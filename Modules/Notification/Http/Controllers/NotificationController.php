@@ -26,6 +26,9 @@ class NotificationController extends Controller
      * @param Request $request
      * @param ApplyNotificationQueryFilters $applyQueryFilters
      * @return JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
+     * @throws \WendellAdriel\ValidatedDTO\Exceptions\CastTargetException
+     * @throws \WendellAdriel\ValidatedDTO\Exceptions\MissingCastTypeException
      */
     public function index(Request $request, ApplyNotificationQueryFilters $applyQueryFilters): JsonResponse
     {
