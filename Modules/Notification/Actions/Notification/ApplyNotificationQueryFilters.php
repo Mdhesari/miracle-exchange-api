@@ -15,6 +15,10 @@ class ApplyNotificationQueryFilters extends BaseQueryFilters
             $query->where('status', $data['status']);
         }
 
+        if (isset($data['read'])) {
+            $query = $data['read'] ? $query->whereNotNull('read_at') : $query->whereNull('read_at');
+        }
+
         if ($this->user()->cannot('notifications')) {
             $query->where('notifiable_type', User::class)->where('notifiable_id', $this->user()->id);
         }
