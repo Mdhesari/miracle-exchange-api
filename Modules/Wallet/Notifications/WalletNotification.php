@@ -27,7 +27,7 @@ class WalletNotification extends Notification
      */
     public function via($notifiable): array
     {
-        return [new DatabaseChannel::class];
+        return [DatabaseChannel::class];
     }
 
     /**
