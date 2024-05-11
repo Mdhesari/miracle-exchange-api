@@ -28,7 +28,7 @@ class CreateOrderTransaction
             $wallet = $user->wallet();
             $usdtQua = $order->toUsdt();
             $wallet->hasBalance($usdtQua) ?: throw ValidationException::withMessages([
-                'wallet' => 'wallet::transaction.insufficientBalance',
+                'wallet' => __('wallet::transaction.insufficientBalance'),
             ]);
 
             $wallet->dischargeWallet($usdtQua);

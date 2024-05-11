@@ -7,10 +7,13 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 use Modules\Order\Actions\CreateAdminOrderTransaction;
 use Modules\Wallet\Actions\Transaction\ApplyTransactionQueryFilters;
 use Modules\Wallet\Actions\UpdateReference;
 use Modules\Wallet\Entities\Transaction;
+use Modules\Wallet\Entities\Wallet;
 use Modules\Wallet\Events\Transaction\TransactionVerified;
 use Modules\Wallet\Http\Requests\ReferenceTransactionRequest;
 use Modules\Wallet\Http\Requests\RejectTransactionRequest;
@@ -74,7 +77,28 @@ class TransactionController extends Controller
     {
         $this->authorize('verify', $transaction);
 
-        $transaction->verify();
+        try {
+            DB::beginTransaction();
+
+            $transaction->verify();
+
+            /** @var Wallet $wallet */
+            $wallet = $transaction->user->wallet();
+            if ($transaction->isDeposit()) {
+                $wallet->chargeWallet($transaction->quantity);
+            } else {
+                $wallet->hasBalance($transaction->quantity) ?: throw ValidationException::withMessages([
+                    'wallet' => __('wallet::transaction.insufficientBalance'),
+                ]);
+                $wallet->dischargeWallet($transaction->quantity);
+            }
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            throw $e;
+        }
 
         event(new TransactionVerified($transaction));
 
