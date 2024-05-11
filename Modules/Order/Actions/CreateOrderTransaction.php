@@ -9,6 +9,7 @@ use Modules\Order\Entities\Order;
 use Modules\Order\Events\OrderTransactionCreated;
 use Modules\Wallet\Entities\Transaction;
 use Modules\Wallet\Entities\Wallet;
+use Modules\Wallet\Events\WalletWithdraw;
 
 class CreateOrderTransaction
 {
@@ -31,6 +32,8 @@ class CreateOrderTransaction
             ]);
 
             $wallet->dischargeWallet($usdtQua);
+
+            event(new WalletWithdraw($wallet));
 
             $data['status'] = Transaction::STATUS_ADMIN_PENDING;
             $data['wallet_id'] = $wallet->id;

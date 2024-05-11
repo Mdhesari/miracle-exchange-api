@@ -17,6 +17,8 @@ use Modules\Revenue\Listeners\CreateRevenueForInviter;
 use Modules\User\Events\UserAuthorized;
 use Modules\Wallet\Events\Transaction\TransactionVerified;
 use Modules\Wallet\Events\TransactionReferenceUpdated;
+use Modules\Wallet\Events\WalletWithdraw;
+use Modules\Wallet\Listeners\SendWalletNotification;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -47,6 +49,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         UserAuthorized::class               => [
             SendUserNotifications::class,
+        ],
+        WalletWithdraw::class               => [
+            SendWalletNotification::class,
         ],
     ];
 
