@@ -140,4 +140,13 @@ class CommentController extends Controller
             'item' => $comment,
         ]);
     }
+
+    public function approveToggle(Comment $comment)
+    {
+        $comment->update([
+            'is_approved' => ! $comment->is_approved,
+        ]);
+
+        return api()->success();
+    }
 }

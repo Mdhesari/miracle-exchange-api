@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Modules\Comment\Http\Controllers\CommentController;
 
@@ -17,4 +16,5 @@ use Modules\Comment\Http\Controllers\CommentController;
 
 Route::prefix('comment-types/{type}')->group(function () {
     Route::apiResource('comments', CommentController::class);
+    Route::put('comments/{comment}/approval-toggle', [CommentController::class, 'approveToggle']);
 });
