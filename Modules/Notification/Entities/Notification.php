@@ -58,4 +58,11 @@ class Notification extends Model implements HasFilters
     {
         return $this->status === NotificationStatus::Scheduled->name;
     }
+
+    public function read()
+    {
+        return $this->forceFill([
+            'read_at' => now(),
+        ])->save();
+    }
 }

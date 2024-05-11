@@ -10,6 +10,7 @@ use Modules\Notification\Actions\Notification\ApplyNotificationQueryFilters;
 use Modules\Notification\Actions\UpdateNotification;
 use Modules\Notification\Entities\Notification;
 use Modules\Notification\Http\Requests\NotificationRequest;
+use Modules\Notification\Jobs\ReadNotification;
 
 class NotificationController extends Controller
 {
@@ -78,6 +79,8 @@ class NotificationController extends Controller
      */
     public function show(Notification $notification): JsonResponse
     {
+        dispatch(new ReadNotification($notification));
+
         return api()->success(null, [
             'item' => Notification::find($notification->id),
         ]);
