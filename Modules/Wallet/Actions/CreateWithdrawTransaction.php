@@ -30,7 +30,7 @@ class CreateWithdrawTransaction
 
         if ($data['quantity'] > $wallet->quantity) {
             throw ValidationException::withMessages([
-                'quantity' => __('responses.insufficientBalance'),
+                'quantity' => __('wallet::transaction.insufficientBalance'),
             ]);
         }
 
