@@ -90,7 +90,7 @@ class WalletController extends Controller
             'transactionable_type' => $market::class,
             'transactionable_id'   => $market->id,
             'currency'             => $market->symbol,
-            'user_id'              => $hasPermission ? ($request->user ?: $request->user->id) : $request->user()->id,
+            'user_id'              => $hasPermission ? ($request->user ?: $request->user()->id) : $request->user()->id,
             'quantity'             => $request->quantity,
             'status'               => $hasPermission ? Transaction::STATUS_VERIFIED : Transaction::STATUS_PENDING,
         ]);
@@ -121,7 +121,7 @@ class WalletController extends Controller
             'crypto_network_id'    => $request->crypto_network_id,
             'crypto_wallet_hash'   => $request->crypto_wallet_hash,
             'currency'             => $market->symbol,
-            'user_id'              => $hasPermission ? ($request->user ?: $request->user->id) : $request->user()->id,
+            'user_id'              => $hasPermission ? ($request->user ?: $request->user()->id) : $request->user()->id,
             'quantity'             => $request->quantity,
             'status'               => $hasPermission ? Transaction::STATUS_VERIFIED : Transaction::STATUS_PENDING,
         ]);
