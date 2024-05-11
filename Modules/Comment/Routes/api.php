@@ -16,5 +16,5 @@ use Modules\Comment\Http\Controllers\CommentController;
 
 Route::prefix('comment-types/{type}')->group(function () {
     Route::apiResource('comments', CommentController::class);
-    Route::put('comments/{comment}/approval-toggle', [CommentController::class, 'approveToggle']);
+    Route::put('comments/{comment}/approve-toggle', [CommentController::class, 'approveToggle']);
 });
