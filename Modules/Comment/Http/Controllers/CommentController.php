@@ -141,7 +141,7 @@ class CommentController extends Controller
         ]);
     }
 
-    public function approveToggle(Comment $comment)
+    public function approveToggle(Comment $comment): JsonResponse
     {
         $comment->update([
             'is_approved' => ! $comment->is_approved,
