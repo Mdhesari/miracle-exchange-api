@@ -17,8 +17,8 @@ class WithdrawRequest extends FormRequest
             'user'               => 'nullable|exists:users,id',
             'quantity'           => 'required|numeric|gt:0',
             'market_id'          => 'required|exists:markets,id',
-            'crypto_wallet_hash' => 'required|string',
-            'crypto_network_id'  => 'required|exists:crypto_networks,id',
+            'crypto_wallet_hash' => 'nullable|required_if:user,null|string',
+            'crypto_network_id'  => 'nullable|required_if:user,null|exists:crypto_networks,id',
         ];
     }
 
