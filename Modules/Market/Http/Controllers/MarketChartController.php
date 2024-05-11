@@ -3,6 +3,8 @@
 namespace Modules\Market\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Modules\Market\Entities\Market;
 
@@ -13,9 +15,20 @@ class MarketChartController extends Controller
         //
     }
 
-    public function __invoke(Market $market)
+    /**
+     * @LRDparam timeframe string [monthly, daily, hourly]
+     * @param Request $request
+     * @param Market $market
+     * @return JsonResponse
+     */
+    public function __invoke(Request $request, Market $market): JsonResponse
     {
-        $dateFormat = "%Y-%m-%d %H:00:00";
+        $dateFormat = match ($request->query('timeframe')) {
+            'monthly' => '%Y-%m-00 00:00:00',
+            'daily' => '%Y-%m-%d 00:00:00',
+            default => '%Y-%m-%d %H:00:00',
+        };
+
         $results = DB::table(DB::raw('(SELECT DATE_FORMAT(date, "'.$dateFormat.'") AS datetime, price FROM market_prices WHERE market_id = "'.$market->id.'") AS subquery'))
             ->select([
                 DB::raw('datetime'),
