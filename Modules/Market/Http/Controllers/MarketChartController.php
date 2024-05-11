@@ -16,7 +16,7 @@ class MarketChartController extends Controller
     }
 
     /**
-     * @LRDparam timeframe string [monthly, daily, hourly]
+     * @LRDparam timeframe string [yearly, monthly, daily, hourly]
      * @param Request $request
      * @param Market $market
      * @return JsonResponse
@@ -24,6 +24,7 @@ class MarketChartController extends Controller
     public function __invoke(Request $request, Market $market): JsonResponse
     {
         $dateFormat = match ($request->query('timeframe')) {
+            'yearly' => '%Y-00-00 00:00:00',
             'monthly' => '%Y-%m-00 00:00:00',
             'daily' => '%Y-%m-%d 00:00:00',
             default => '%Y-%m-%d %H:00:00',
