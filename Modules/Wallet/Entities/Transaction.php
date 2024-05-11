@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Lang;
 use Mdhesari\LaravelQueryFilters\Contracts\Expandable;
 use Mdhesari\LaravelQueryFilters\Contracts\HasFilters;
 use Mdhesari\LaravelQueryFilters\Traits\HasExpandScope;
+use Modules\Account\Entities\Account;
 use Modules\Revenue\Traits\Revenuable;
 use Modules\Wallet\Database\Factories\TransactionFactory;
 use Modules\Wallet\Services\Audit\Traits\UuidAudit;
@@ -48,7 +49,7 @@ class Transaction extends Model implements HasFilters, Expandable, AuditableCont
     const MEDIA_REFERENCE = 'reference';
 
     protected $fillable = [
-        'transactionable_id', 'currency', 'wallet_id', 'crypto_wallet_hash', 'crypto_network_id', 'transactionable_type', 'gateway_id', 'quantity', 'status', 'type', 'user_id', 'admin_id', 'meta', 'reference', 'gateway', 'callback_url',
+        'transactionable_id', 'account_id', 'currency', 'wallet_id', 'crypto_wallet_hash', 'crypto_network_id', 'transactionable_type', 'gateway_id', 'quantity', 'status', 'type', 'user_id', 'admin_id', 'meta', 'reference', 'gateway', 'callback_url',
     ];
 
     protected $casts = [
@@ -134,6 +135,11 @@ class Transaction extends Model implements HasFilters, Expandable, AuditableCont
         return $this->belongsTo(Wallet::class);
     }
 
+    public function account(): BelongsTo
+    {
+        return $this->belongsTo(Account::class);
+    }
+
     public function scopeVerified($query)
     {
         return $query->whereNotNull('verified_at');
@@ -194,7 +200,7 @@ class Transaction extends Model implements HasFilters, Expandable, AuditableCont
     public function getExpandRelations(): array
     {
         return [
-            'transactionable', 'user', 'media',
+            'transactionable', 'user', 'media', 'account',
         ];
     }
 

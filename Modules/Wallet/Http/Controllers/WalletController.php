@@ -116,6 +116,7 @@ class WalletController extends Controller
 
         $market = Market::find($request->market_id);
         $transaction = $createWithdrawTransaction([
+            'account_id'           => $request->account_id,
             'transactionable_type' => $market::class,
             'transactionable_id'   => $market->id,
             'crypto_network_id'    => $request->crypto_network_id,
