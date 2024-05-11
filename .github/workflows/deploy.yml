@@ -21,4 +21,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
-          script: "cd /var/www/simple-exchange-api && bash ./.scripts/deploy.sh"
+          script: "cd /srv/miracle-exchange-api && bash ./.scripts/deploy.sh"
