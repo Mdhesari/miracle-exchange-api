@@ -3,8 +3,10 @@
 namespace Modules\Wallet\Actions;
 
 use Illuminate\Validation\ValidationException;
-use Modules\Wallet\Wallet as WalletModule;
+use Modules\Wallet\Entities\Transaction;
+use Modules\Wallet\Entities\Wallet;
 use Modules\Wallet\Events\TransactionWithdrawCreated;
+use Modules\Wallet\Wallet as WalletModule;
 
 class CreateWithdrawTransaction
 {
@@ -15,9 +17,10 @@ class CreateWithdrawTransaction
     {
         $user = WalletModule::user()->findOrFail($data['user_id']);
 
+        /** @var Wallet $wallet */
         $wallet = $user->wallets()->first();
 
-        if ( ! $wallet ) {
+        if (! $wallet) {
             $wallet = app(SetupWallet::class)([
                 'user_id' => $user->id,
             ]);
@@ -25,13 +28,17 @@ class CreateWithdrawTransaction
 
         $wallet->refresh();
 
-        if ( $data['quantity'] > $wallet->quantity ) {
+        if ($data['quantity'] > $wallet->quantity) {
             throw ValidationException::withMessages([
                 'quantity' => __('responses.insufficientBalance'),
             ]);
         }
 
+        /** @var Transaction $transaction */
         $transaction = $wallet->withdraw($data);
+        if ($transaction->isVerified()) {
+            $wallet->dischargeWallet($transaction->quantity);
+        }
 
         event(new TransactionWithdrawCreated($transaction));
 
