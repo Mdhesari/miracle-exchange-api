@@ -28,15 +28,14 @@ class CreateWithdrawTransaction
 
         $wallet->refresh();
 
-        if ($data['quantity'] > $wallet->quantity) {
-            throw ValidationException::withMessages([
-                'quantity' => __('wallet::transaction.insufficientBalance'),
-            ]);
-        }
-
         /** @var Transaction $transaction */
         $transaction = $wallet->withdraw($data);
         if ($transaction->isVerified()) {
+            if ($data['quantity'] > $wallet->quantity) {
+                throw ValidationException::withMessages([
+                    'quantity' => __('wallet::transaction.insufficientBalance'),
+                ]);
+            }
             $wallet->dischargeWallet($transaction->quantity);
         }
 
