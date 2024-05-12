@@ -17,7 +17,7 @@ class TransactionObserver
     public function updating(Transaction $transaction)
     {
         if ($transaction->isDirty('status') && $transaction->status === Transaction::STATUS_VERIFIED) {
-            $transaction->paid
+            $transaction->paid_at = now();
         }
     }
 }
