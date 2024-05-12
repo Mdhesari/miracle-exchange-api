@@ -73,18 +73,12 @@ class Wallet extends Model implements HasFilters, Expandable
 
     public function deposit($data): Model
     {
-        return $this->transactions()->create([
-            'type'                 => Transaction::TYPE_DEPOSIT,
-            'quantity'             => $data['quantity'],
-            'crypto_network_id'    => $data['crypto_network_id'] ?? null,
-            'crypto_wallet_hash'   => 'TEST_WALLET_HASH_FOR_DEPOSIT',
-            'status'               => $data['status'] ?? Transaction::STATUS_PENDING,
-            'verified_at'          => $data['verified_at'] ?? null,
-            'reference'            => $data['reference'] ?? null,
-            'transactionable_id'   => $data['transactionable_id'] ?? null,
-            'transactionable_type' => $data['transactionable_type'] ?? null,
-            'user_id'              => $data['user_id'] ?? null,
-        ]);
+        return $this->transactions()->create(array_replace($data, [
+            'type'               => Transaction::TYPE_DEPOSIT,
+            //TODO - Crypto wallet hash
+            'crypto_wallet_hash' => 'TEST_WALLET_HASH_FOR_DEPOSIT',
+            'status'             => $data['status'] ?? Transaction::STATUS_PENDING,
+        ]));
     }
 
     public function getFormattedQuaAttribute()
