@@ -141,8 +141,23 @@ class CommentController extends Controller
         ]);
     }
 
-    public function approveToggle(Comment $comment): JsonResponse
+    /**
+     * @param Request $request
+     * @param string $type
+     * @param $comment
+     * @param GetCommentableType $getCommentableType
+     * @return JsonResponse
+     * @throws AuthorizationException
+     * @throws \Exception
+     */
+    public function approveToggle(Request $request, string $type, $comment, GetCommentableType $getCommentableType): JsonResponse
     {
+        $commentable_type = $getCommentableType($type);
+
+        $comment = Comment::where('commentable_type', $commentable_type)->where('id', $comment)->firstOrFail();
+
+        $this->authorize('approve', $comment);
+
         $comment->update([
             'is_approved' => ! $comment->is_approved,
         ]);

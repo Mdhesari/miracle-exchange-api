@@ -21,4 +21,9 @@ class CommentPolicy
     {
         return $comment->is_approved || intval($comment->user_id) === intval($user->id) || $user->can('comments');
     }
+
+    public function approve(User $user, Comment $comment): bool
+    {
+        return $user->can('comments');
+    }
 }
