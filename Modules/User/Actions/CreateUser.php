@@ -4,7 +4,7 @@ namespace Modules\User\Actions;
 
 use App\Events\User\UserInviterUpdated;
 use App\Models\User;
-use Modules\User\Events\UserCreated;
+use Illuminate\Auth\Events\Registered;
 use Modules\User\Events\UserRestored;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
@@ -28,7 +28,7 @@ class CreateUser
             $user->restore();
             event(new UserRestored($user));
         } else {
-            event(new UserCreated($user));
+            event(new Registered($user));
         }
 
         if (isset($data['inviter_code']) && is_null($user->inviter_id)) {
