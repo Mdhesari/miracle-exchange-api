@@ -2,7 +2,7 @@
 
 namespace Modules\Wallet\Listeners;
 
-use Modules\Wallet\Events\WalletWithdraw;
+use Modules\Wallet\Events\WalletTransaction;
 use Modules\Wallet\Notifications\WalletNotification;
 
 class SendWalletNotification
@@ -18,7 +18,7 @@ class SendWalletNotification
     /**
      * Handle the event.
      */
-    public function handle(WalletWithdraw $event): void
+    public function handle(WalletTransaction $event): void
     {
         $tx = $event->transaction;
         $tx->user->notify(new WalletNotification($tx));

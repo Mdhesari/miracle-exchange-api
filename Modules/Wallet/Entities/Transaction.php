@@ -305,4 +305,9 @@ class Transaction extends Model implements HasFilters, Expandable, AuditableCont
     {
         return $this->admin_id ? ($this->admin?->getSubject() ?: ' admin ') : ($this->transactionable?->getOwner() ?: $this->admin?->getSubject()) ?? ' admin ';
     }
+
+    public function isAllPending(): bool
+    {
+        return $this->isPending() || $this->isAdminPending() || $this->isGatewayPending();
+    }
 }

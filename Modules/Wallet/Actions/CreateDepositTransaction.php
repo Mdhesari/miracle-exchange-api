@@ -4,6 +4,7 @@ namespace Modules\Wallet\Actions;
 
 use Modules\Wallet\Entities\Wallet;
 use Modules\Wallet\Events\TransactionDepositCreated;
+use Modules\Wallet\Events\WalletTransaction;
 use Modules\Wallet\Wallet as WalletModule;
 
 class CreateDepositTransaction
@@ -27,6 +28,8 @@ class CreateDepositTransaction
 
         if ($transaction->isVerified()) {
             $wallet->chargeWallet($transaction->quantity);
+
+            event(new WalletTransaction($transaction));
         }
 
         event(new TransactionDepositCreated($transaction));

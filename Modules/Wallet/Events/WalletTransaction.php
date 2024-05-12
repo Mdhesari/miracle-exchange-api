@@ -5,7 +5,7 @@ namespace Modules\Wallet\Events;
 use Illuminate\Queue\SerializesModels;
 use Modules\Wallet\Entities\Transaction;
 
-class WalletWithdraw
+class WalletTransaction
 {
     use SerializesModels;
 

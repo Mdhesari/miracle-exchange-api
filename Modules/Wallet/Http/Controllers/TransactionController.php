@@ -17,6 +17,7 @@ use Modules\Wallet\Actions\UpdateReference;
 use Modules\Wallet\Entities\Transaction;
 use Modules\Wallet\Entities\Wallet;
 use Modules\Wallet\Events\Transaction\TransactionVerified;
+use Modules\Wallet\Events\WalletTransaction;
 use Modules\Wallet\Http\Requests\ReferenceTransactionRequest;
 use Modules\Wallet\Http\Requests\RejectTransactionRequest;
 use Modules\Wallet\Http\Requests\VerifyTransactionRequest;
@@ -79,6 +80,7 @@ class TransactionController extends Controller
      * @param CreateAdminOrderTransaction $createAdminOrderTransaction
      * @return JsonResponse
      * @throws AuthorizationException
+     * @throws ValidationException
      */
     public function verify(VerifyTransactionRequest $request, Transaction $transaction, CreateAdminOrderTransaction $createAdminOrderTransaction): JsonResponse
     {
@@ -99,6 +101,8 @@ class TransactionController extends Controller
                 ]);
                 $wallet->dischargeWallet($transaction->quantity);
             }
+
+            event(new WalletTransaction($transaction));
 
             DB::commit();
         } catch (Exception $e) {

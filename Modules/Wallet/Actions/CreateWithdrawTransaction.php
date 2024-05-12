@@ -6,6 +6,7 @@ use Illuminate\Validation\ValidationException;
 use Modules\Wallet\Entities\Transaction;
 use Modules\Wallet\Entities\Wallet;
 use Modules\Wallet\Events\TransactionWithdrawCreated;
+use Modules\Wallet\Events\WalletTransaction;
 use Modules\Wallet\Wallet as WalletModule;
 
 class CreateWithdrawTransaction
@@ -37,6 +38,8 @@ class CreateWithdrawTransaction
                 ]);
             }
             $wallet->dischargeWallet($transaction->quantity);
+
+            event(new WalletTransaction($transaction));
         }
 
         event(new TransactionWithdrawCreated($transaction));

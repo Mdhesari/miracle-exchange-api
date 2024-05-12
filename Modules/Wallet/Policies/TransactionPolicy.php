@@ -22,7 +22,7 @@ class TransactionPolicy
 
     public function verify(User $user, Transaction $transaction): bool
     {
-        return $user->can('transactions') && ! $transaction->isRejected();
+        return $user->can('transactions') && $transaction->isAllPending();
     }
 
     public function reject(User $user, Transaction $transaction): bool
