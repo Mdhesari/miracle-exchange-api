@@ -46,7 +46,7 @@ class WalletNotification extends Notification
     {
         return [
             'title' => __('notification.'.$this->transaction->type, [
-                'symbol' => $this->transaction->currency,
+                'symbol' => $this->transaction->wallet->currency,
                 'qua'    => $this->transaction->quantity
             ]),
         ];
