@@ -58,6 +58,7 @@ class Transaction extends Model implements HasFilters, Expandable, AuditableCont
         'transactionable_type',
         'gateway_id',
         'quantity',
+        'executed_usdt_price',
         'status',
         'type',
         'user_id',
@@ -70,8 +71,9 @@ class Transaction extends Model implements HasFilters, Expandable, AuditableCont
     ];
 
     protected $casts = [
-        'quantity' => 'decimal:0',
-        'meta'     => 'array',
+        'quantity'            => 'decimal:0',
+        'executed_usdt_price' => 'decimal:0',
+        'meta'                => 'array',
     ];
 
     protected $appends = [
