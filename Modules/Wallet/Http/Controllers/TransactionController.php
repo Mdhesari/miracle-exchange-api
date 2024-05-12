@@ -10,6 +10,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use Modules\Order\Actions\CreateAdminOrderTransaction;
+use Modules\Order\Entities\Order;
 use Modules\Wallet\Actions\Transaction\ApplyTransactionQueryFilters;
 use Modules\Wallet\Actions\UpdateReference;
 use Modules\Wallet\Entities\Transaction;
@@ -102,9 +103,12 @@ class TransactionController extends Controller
 
         event(new TransactionVerified($transaction));
 
-        $transaction = $createAdminOrderTransaction($transaction->transactionable, array_merge($request->validated(), [
-            'admin_id' => $request->user()->id,
-        ]));
+        // TODO - Why do we need this order transaction for? (just forgot :))
+        if ($transaction->transactionable instanceof Order) {
+            $transaction = $createAdminOrderTransaction($transaction->transactionable, array_merge($request->validated(), [
+                'admin_id' => $request->user()->id,
+            ]));
+        }
 
         return api()->success(null, [
             'item' => Transaction::find($transaction->id),
