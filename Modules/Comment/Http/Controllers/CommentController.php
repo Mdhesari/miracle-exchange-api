@@ -118,13 +118,13 @@ class CommentController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param CommentRequest $request
      * @param string $type
      * @param $comment
      * @param GetCommentableType $getCommentableType
      * @param UpdateComment $updateComment
      * @return JsonResponse
-     * @throws \Exception
+     * @throws AuthorizationException
      */
     public function update(CommentRequest $request, string $type, $comment, GetCommentableType $getCommentableType, UpdateComment $updateComment): JsonResponse
     {
