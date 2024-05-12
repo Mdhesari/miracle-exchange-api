@@ -27,6 +27,7 @@ class MarketChartController extends Controller
             'yearly' => '%Y-00-00 00:00:00',
             'monthly' => '%Y-%m-00 00:00:00',
             'daily' => '%Y-%m-%d 00:00:00',
+            'minutely' => '%Y-%m-%d 00:%i:00',
             default => '%Y-%m-%d %H:00:00',
         };
 
