@@ -130,6 +130,11 @@ class Transaction extends Model implements HasFilters, Expandable, AuditableCont
         ];
     }
 
+    public function cryptoNetwork(): BelongsTo
+    {
+        return $this->belongsTo(CryptoNetwork::class);
+    }
+
     public function wallet(): BelongsTo
     {
         return $this->belongsTo(Wallet::class);
@@ -200,7 +205,7 @@ class Transaction extends Model implements HasFilters, Expandable, AuditableCont
     public function getExpandRelations(): array
     {
         return [
-            'transactionable', 'user', 'media', 'account',
+            'transactionable', 'user', 'media', 'account', 'cryptoNetwork',
         ];
     }
 
