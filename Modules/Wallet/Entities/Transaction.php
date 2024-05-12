@@ -49,7 +49,24 @@ class Transaction extends Model implements HasFilters, Expandable, AuditableCont
     const MEDIA_REFERENCE = 'reference';
 
     protected $fillable = [
-        'transactionable_id', 'account_id', 'currency', 'wallet_id', 'crypto_wallet_hash', 'crypto_network_id', 'transactionable_type', 'gateway_id', 'quantity', 'status', 'type', 'user_id', 'admin_id', 'meta', 'reference', 'gateway', 'callback_url',
+        'transactionable_id',
+        'account_id',
+        'currency',
+        'wallet_id',
+        'crypto_wallet_hash',
+        'crypto_network_id',
+        'transactionable_type',
+        'gateway_id',
+        'quantity',
+        'status',
+        'type',
+        'user_id',
+        'admin_id',
+        'meta',
+        'reference',
+        'gateway',
+        'callback_url',
+        'paid_at',
     ];
 
     protected $casts = [
