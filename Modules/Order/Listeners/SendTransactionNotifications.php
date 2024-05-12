@@ -38,7 +38,7 @@ class SendTransactionNotifications
             return;
         }
 
-        $order->user->notify(new OrderNotification());
+        $order->user->notify(new OrderNotification($order));
 
         if ($order->user?->mobile) {
             SendSMS::dispatch($order->user->mobile, $event instanceof TransactionReferenceUpdated ? 'submitUserReceipt' : 'submitAdminReceipt', [
