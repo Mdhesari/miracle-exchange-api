@@ -3,6 +3,7 @@
 namespace Modules\Order\Listeners;
 
 use App\Models\User;
+use App\Notifications\OrderNotification;
 use Illuminate\Support\Str;
 use Modules\Auth\Jobs\SendSMS;
 use Modules\Order\Entities\Order;
@@ -32,11 +33,12 @@ class SendTransactionNotifications
     {
         $transaction = $event->transaction;
         $order = $transaction->transactionable;
-
         if (is_null($order) && ! $order instanceof Order) {
 
             return;
         }
+
+        $order->user->notify(new OrderNotification());
 
         if ($order->user?->mobile) {
             SendSMS::dispatch($order->user->mobile, $event instanceof TransactionReferenceUpdated ? 'submitUserReceipt' : 'submitAdminReceipt', [

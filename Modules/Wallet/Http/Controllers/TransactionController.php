@@ -117,6 +117,7 @@ class TransactionController extends Controller
         if ($transaction->transactionable instanceof Order) {
             $transaction = $createAdminOrderTransaction($transaction->transactionable, array_merge($request->validated(), [
                 'admin_id' => $request->user()->id,
+                'status'   => Transaction::STATUS_VERIFIED,
             ]));
         }
 
