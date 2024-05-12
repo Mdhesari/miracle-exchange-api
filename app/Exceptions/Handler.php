@@ -10,7 +10,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Modules\Auth\Exceptions\OTPRateLimitException;
-use Shetabit\Multipay\Exceptions\PurchaseFailedException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
@@ -70,7 +69,7 @@ class Handler extends ExceptionHandler
         }
 
         if ($e instanceof NotFoundHttpException) {
-            return api()->notFound();
+            return api()->notFound($e->getMessage());
         }
 
         if ($e instanceof TokenExpiredException) {
