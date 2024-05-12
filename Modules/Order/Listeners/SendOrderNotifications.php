@@ -30,7 +30,7 @@ class SendOrderNotifications
         $order = $event->order;
 
         if ($order->user->mobile) {
-            SendSMS::dispatch($order->user->mobile, 'submitOrder', [
+            SendSMS::dispatch($order->user->mobile, 'submitOrderM', [
                 // price
                 $order->fromatted_cumulative_quote_quantity.'_تومان',
                 // currency
@@ -41,7 +41,7 @@ class SendOrderNotifications
         }
 
         foreach (User::permission('orders')->whereNotNull('mobile')->cursor() as $user) {
-            SendSMS::dispatch($user->mobile, 'adminSubmitOrder', [
+            SendSMS::dispatch($user->mobile, 'adminSubmitOrderM', [
                 // currency
                 Str::replace(' ', '_', $order->market->persian_name ?: $order->market->symbol),
                 // quantity

@@ -46,7 +46,7 @@ class SendTransactionNotifications
         }
 
         foreach (User::permission('orders')->whereNotNull('mobile')->cursor() as $user) {
-            SendSMS::dispatch($user->mobile, 'submitUserReceiptAdminNotify', [
+            SendSMS::dispatch($user->mobile, 'submitUserReceiptAdminNotifyM', [
                 // number
                 $order->id,
             ]);

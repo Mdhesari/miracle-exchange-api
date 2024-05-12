@@ -133,7 +133,7 @@ class OTPController extends Controller
          * Dispatch send sms job.
          */
 
-        SendSMS::dispatch($mobile, "loginOtp", $data);
+        SendSMS::dispatch($mobile, "loginOtpM", $data);
     }
 
     /**
