@@ -113,6 +113,9 @@ class TicketController extends Controller
      * @param Request $request
      * @param ApplyQueryFilters $applyQueryFilters
      * @return JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
+     * @throws \WendellAdriel\ValidatedDTO\Exceptions\CastTargetException
+     * @throws \WendellAdriel\ValidatedDTO\Exceptions\MissingCastTypeException
      */
     public function getMyTickets(Request $request, ApplyQueryFilters $applyQueryFilters): JsonResponse
     {

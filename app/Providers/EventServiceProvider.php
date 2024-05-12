@@ -3,12 +3,15 @@
 namespace App\Providers;
 
 use App\Events\User\UserInviterUpdated;
+use App\Listeners\SendTicketMessageNotification;
+use App\Listeners\SendTicketNotification;
 use App\Listeners\SendUserNotifications;
 use App\Listeners\SendWelcomeNotification;
 use App\Listeners\User\SendInvitationRewardToUser;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Modules\Helpdesk\Events\TicketMessageCreated;
 use Modules\Order\Events\AdminOrderTransactionCreated;
 use Modules\Order\Events\OrderCreated;
 use Modules\Order\Listeners\SendOrderNotifications;
@@ -50,8 +53,11 @@ class EventServiceProvider extends ServiceProvider
         UserAuthorized::class               => [
             SendUserNotifications::class,
         ],
-        WalletTransaction::class               => [
+        WalletTransaction::class            => [
             SendWalletNotification::class,
+        ],
+        TicketMessageCreated::class         => [
+            SendTicketMessageNotification::class,
         ],
     ];
 
