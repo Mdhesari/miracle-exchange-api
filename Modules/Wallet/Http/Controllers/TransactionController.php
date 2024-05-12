@@ -2,6 +2,7 @@
 
 namespace Modules\Wallet\Http\Controllers;
 
+use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
@@ -19,6 +20,8 @@ use Modules\Wallet\Events\Transaction\TransactionVerified;
 use Modules\Wallet\Http\Requests\ReferenceTransactionRequest;
 use Modules\Wallet\Http\Requests\RejectTransactionRequest;
 use Modules\Wallet\Http\Requests\VerifyTransactionRequest;
+use WendellAdriel\ValidatedDTO\Exceptions\CastTargetException;
+use WendellAdriel\ValidatedDTO\Exceptions\MissingCastTypeException;
 
 class TransactionController extends Controller
 {
@@ -34,6 +37,10 @@ class TransactionController extends Controller
     /**
      * @param Request $request
      * @param ApplyTransactionQueryFilters $applyTransactionQueryFilters
+     * @return JsonResponse
+     * @throws ValidationException
+     * @throws CastTargetException
+     * @throws MissingCastTypeException
      * @LRDparam s string
      * @LRDparam type string
      * @LRDparam user_id integer
@@ -44,7 +51,6 @@ class TransactionController extends Controller
      * @LRDparam oldest boolean
      * @LRDparam date_from integer
      * @LRDparam date_to integer
-     * @return JsonResponse
      */
     public function index(Request $request, ApplyTransactionQueryFilters $applyTransactionQueryFilters): JsonResponse
     {
@@ -95,7 +101,7 @@ class TransactionController extends Controller
             }
 
             DB::commit();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
 
             throw $e;
