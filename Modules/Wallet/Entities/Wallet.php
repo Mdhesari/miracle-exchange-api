@@ -92,7 +92,7 @@ class Wallet extends Model implements HasFilters, Expandable
         return \Modules\Wallet\Wallet::formatMoney($this->quantity);
     }
 
-    public function withdraw(array $data): Model
+    public function withdraw(array $data): Transaction
     {
         $data = array_replace($data, [
             'type'        => Transaction::TYPE_WITHDRAW,

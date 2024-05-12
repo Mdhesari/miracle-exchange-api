@@ -20,6 +20,7 @@ class SendWalletNotification
      */
     public function handle(WalletWithdraw $event): void
     {
-        $event->wallet->user->notify(new WalletNotification($event->wallet));
+        $tx = $event->transaction;
+        $tx->user->notify(new WalletNotification($tx));
     }
 }

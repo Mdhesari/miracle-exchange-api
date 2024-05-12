@@ -5,6 +5,7 @@ namespace Modules\Order\Actions;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Modules\Market\Entities\Market;
 use Modules\Order\Entities\Order;
 use Modules\Order\Events\OrderTransactionCreated;
 use Modules\Wallet\Entities\Transaction;
@@ -26,14 +27,22 @@ class CreateOrderTransaction
             $user = Auth::user();
             /** @var Wallet $wallet */
             $wallet = $user->wallet();
-            $usdtQua = $order->toUsdt();
+
+            $usdtIrtPrice = Market::select('price')->whereSymbol('usdt')->first()->price;
+            $usdtQua = $order->toUsdt($usdtIrtPrice);
             $wallet->hasBalance($usdtQua) ?: throw ValidationException::withMessages([
                 'wallet' => __('wallet::transaction.insufficientBalance'),
             ]);
 
+            $transaction = $wallet->withdraw([
+                'quantity'            => $usdtQua,
+                'executed_usdt_price' => $usdtIrtPrice,
+                'status'              => Transaction::STATUS_VERIFIED,
+                'verified_at'         => now(),
+            ]);
             $wallet->dischargeWallet($usdtQua);
 
-            event(new WalletWithdraw($wallet));
+            event(new WalletWithdraw($transaction));
 
             $data['status'] = Transaction::STATUS_ADMIN_PENDING;
             $data['wallet_id'] = $wallet->id;

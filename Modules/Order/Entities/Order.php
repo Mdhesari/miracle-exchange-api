@@ -106,10 +106,8 @@ class Order extends Model implements Expandable
         return $this->user->full_name;
     }
 
-    public function toUsdt(): int
+    public function toUsdt($usdtIrtPrice): int
     {
-        $usdtMarket = Market::select('price')->whereSymbol('usdt')->first();
-
-        return round($this->cumulative_quote_quantity / $usdtMarket->price);
+        return round($this->cumulative_quote_quantity / $usdtIrtPrice);
     }
 }

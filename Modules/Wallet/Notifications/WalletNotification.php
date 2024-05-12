@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Modules\Notification\Channels\DatabaseChannel;
-use Modules\Wallet\Entities\Wallet;
+use Modules\Wallet\Entities\Transaction;
 
 class WalletNotification extends Notification
 {
@@ -16,7 +16,7 @@ class WalletNotification extends Notification
      * Create a new notification instance.
      */
     public function __construct(
-        private Wallet $wallet
+        private Transaction $transaction
     )
     {
         //
@@ -36,9 +36,7 @@ class WalletNotification extends Notification
     public function toMail($notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line('The introduction to the notification.')
-            ->action('Notification Action', 'https://laravel.com')
-            ->line('Thank you for using our application!');
+            ->line($this->toArray($notifiable)['title']);
     }
 
     /**
@@ -47,8 +45,8 @@ class WalletNotification extends Notification
     public function toArray($notifiable): array
     {
         return [
-            'title' => __('notification.withdraw', [
-                'symbol' => $this->wallet->currency,
+            'title' => __('notification.'.$this->transaction->type, [
+                'symbol' => $this->transaction->currency,
                 'qua'    => $this->wallet->quantity
             ]),
         ];

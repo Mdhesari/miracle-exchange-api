@@ -3,7 +3,7 @@
 namespace Modules\Wallet\Events;
 
 use Illuminate\Queue\SerializesModels;
-use Modules\Wallet\Entities\Wallet;
+use Modules\Wallet\Entities\Transaction;
 
 class WalletWithdraw
 {
@@ -13,7 +13,7 @@ class WalletWithdraw
      * Create a new event instance.
      */
     public function __construct(
-        public Wallet $wallet
+        public Transaction $transaction
     )
     {
         //
