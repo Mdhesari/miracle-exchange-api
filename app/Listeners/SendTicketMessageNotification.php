@@ -21,7 +21,9 @@ class SendTicketMessageNotification
     public function handle(TicketMessageCreated $event): void
     {
         $tm = $event->ticketMessage;
-        $tm->ticket->user->notify(new TicketMessageNotification($tm));
+        if ($tm->user->can('tickets')) {
+            $tm->ticket->user->notify(new TicketMessageNotification($tm));
+        }
 
     }
 }
