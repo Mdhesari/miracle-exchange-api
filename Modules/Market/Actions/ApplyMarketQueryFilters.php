@@ -24,6 +24,10 @@ class ApplyMarketQueryFilters extends BaseQueryFilters
             }
         }
 
+        if (isset($data['is_crypto'])) {
+            $query->whereIsCrypto(boolval($data['is_crypto']));
+        }
+
         return $query;
     }
 }

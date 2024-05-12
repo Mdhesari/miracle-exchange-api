@@ -26,6 +26,7 @@ class MarketController extends Controller
      * @LRDparam per_page string
      * @LRDparam expand string [orders]
      * @LRDparam status Enum [Enabled, Disabled]
+     * @LRDparam is_crypto boolean
      */
     public function index(Request $request, ApplyMarketQueryFilters $applyMarketQueryFilters): JsonResponse
     {
