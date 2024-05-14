@@ -35,6 +35,7 @@ class CreateOrderTransaction
             ]);
 
             $transaction = $wallet->withdraw([
+                'user_id'             => $user->id,
                 'quantity'            => $usdtQua,
                 'executed_usdt_price' => $usdtIrtPrice,
                 'status'              => Transaction::STATUS_VERIFIED,
