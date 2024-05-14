@@ -33,7 +33,7 @@ class SendTransactionNotifications
     {
         $transaction = $event->transaction;
         $order = $transaction->transactionable;
-        if (is_null($order) && ! $order instanceof Order) {
+        if (! $order instanceof Order) {
 
             return;
         }
