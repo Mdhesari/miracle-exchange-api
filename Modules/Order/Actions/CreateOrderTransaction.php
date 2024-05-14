@@ -28,7 +28,7 @@ class CreateOrderTransaction
             /** @var Wallet $wallet */
             $wallet = $user->wallet();
 
-            $usdtIrtPrice = Market::select('price')->whereSymbol('usdt')->first()->price;
+            $usdtIrtPrice = Market::getUsdtIrtLatestPrice();
             $usdtQua = $order->toUsdt($usdtIrtPrice);
             $wallet->hasBalance($usdtQua) ?: throw ValidationException::withMessages([
                 'wallet' => __('wallet::transaction.insufficientBalance'),

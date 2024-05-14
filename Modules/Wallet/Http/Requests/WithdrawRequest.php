@@ -14,12 +14,13 @@ class WithdrawRequest extends FormRequest
     public function rules()
     {
         return [
-            'user'               => 'nullable|exists:users,id',
-            'quantity'           => 'required|numeric|gt:0',
-            'market_id'          => 'required|exists:markets,id',
-            'crypto_wallet_hash' => 'nullable|required_if:user,null|string',
-            'crypto_network_id'  => 'nullable|required_if:user,null|exists:crypto_networks,id',
-            'account_id'         => 'nullable|exists:accounts,id',
+            'user'                => 'nullable|exists:users,id',
+            'quantity'            => 'required|numeric|gt:0',
+            'executed_usdt_price' => 'nullable|numeric:gt:0',
+            'market_id'           => 'required|exists:markets,id',
+            'crypto_wallet_hash'  => 'nullable|required_if:user,null|string',
+            'crypto_network_id'   => 'nullable|required_if:user,null|exists:crypto_networks,id',
+            'account_id'          => 'nullable|exists:accounts,id',
         ];
     }
 

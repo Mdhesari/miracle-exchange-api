@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Mdhesari\LaravelQueryFilters\Contracts\Expandable;
 use Mdhesari\LaravelQueryFilters\Contracts\HasFilters;
 use Mdhesari\LaravelQueryFilters\Traits\HasExpandScope;
@@ -52,6 +53,11 @@ class Market extends Model implements Expandable, HasFilters
         'total_price',
         'is_bookmarked',
     ];
+
+    public static function getUsdtIrtLatestPrice()
+    {
+        return Cache::remember('usdt_irt_latest_price', now()->addHours(4), fn() => static::select('price')->whereSymbol('usdt')->first()->price);
+    }
 
     public function getTotalPriceAttribute()
     {
