@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Modules\Notification\Channels\DatabaseChannel;
+use Modules\Order\Entities\Order;
 use Modules\Wallet\Entities\Transaction;
 
 class WalletNotification extends Notification
@@ -46,9 +47,26 @@ class WalletNotification extends Notification
     {
         return [
             'title' => __('notification.'.$this->transaction->type, [
-                'symbol' => $this->transaction->wallet->currency,
+                'symbol' => $this->getTransactionCurrency($this->transaction),
                 'qua'    => $this->transaction->quantity
             ]),
         ];
+    }
+
+    private function getTransactionCurrency(Transaction $transaction)
+    {
+        $curr = '';
+
+        if ($transaction->wallet) {
+
+            $curr = $transaction->wallet->currency;
+        }
+
+        if ($transaction->transactionable instanceof Order) {
+
+            $curr = $transaction->transactionable->market->symbol;
+        }
+
+        return $curr;
     }
 }
