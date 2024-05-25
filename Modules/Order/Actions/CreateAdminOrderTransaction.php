@@ -26,7 +26,7 @@ class CreateAdminOrderTransaction
         }
 
         $transaction = $order->transactions()->create([
-            'reference' => $data['reference'],
+            'reference' => $data['reference'] ?? null,
             'quantity'  => $order->cumulative_quote_quantity,
             'user_id'   => $order->user_id,
             'type'      => $data['type'],
