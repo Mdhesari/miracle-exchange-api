@@ -21,7 +21,7 @@ class CreateMarketPriceHistory implements ShouldQueue
         private Market $market
     )
     {
-        //
+        $this->onQueue('low');
     }
 
     /**
