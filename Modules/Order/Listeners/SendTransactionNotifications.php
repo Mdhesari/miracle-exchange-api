@@ -41,7 +41,7 @@ class SendTransactionNotifications
         $order->user->notify(new OrderNotification($order));
 
         if ($order->user?->mobile) {
-            SendSMS::dispatch($order->user->mobile, $event instanceof TransactionReferenceUpdated ? 'submitUserReceipt' : 'submitAdminReceipt', [
+            SendSMS::dispatch($order->user->mobile, $event instanceof TransactionReferenceUpdated ? 'submitUserReceiptM' : 'submitAdminReceiptM', [
                 // currency
                 Str::replace(' ', '_', $order->market->persian_name),
             ]);
