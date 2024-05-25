@@ -33,7 +33,7 @@ class SendSMS implements ShouldQueue
 
         $this->parameters = $parameters;
 
-        $this->onQueue('send-sms-queue');
+        $this->onQueue('high');
     }
 
     public function handle()
