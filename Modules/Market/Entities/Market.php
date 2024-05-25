@@ -59,6 +59,11 @@ class Market extends Model implements Expandable, HasFilters
         return Cache::remember('usdt_irt_latest_price', now()->addHours(4), fn() => static::select('price')->whereSymbol('usdt')->first()->price);
     }
 
+    public function getPersianNameAttribute($value)
+    {
+        return empty($value) ? $this->name : $value;
+    }
+
     public function getTotalPriceAttribute()
     {
         return $this->price + ($this->profit_price ?: 0);
