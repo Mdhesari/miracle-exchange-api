@@ -36,10 +36,10 @@ class MarketChartController extends Controller
                 DB::raw('datetime'),
                 DB::raw('MAX(price) AS high_price'),
                 DB::raw('MIN(price) AS low_price'),
-                DB::raw('(SELECT price FROM market_prices WHERE market_id = "'.$market->id.'" AND DATE_FORMAT(date, "'.$dateFormat.'") = datetime ORDER BY date ASC LIMIT 1) AS open_price'),
-                DB::raw('(SELECT price FROM market_prices WHERE market_id = "'.$market->id.'" AND DATE_FORMAT(date, "'.$dateFormat.'") = datetime ORDER BY date DESC LIMIT 1) AS close_price'),
+                DB::raw('(SELECT mp.price FROM market_prices mp WHERE mp.market_id = "'.$market->id.'" AND DATE_FORMAT(mp.date, "'.$dateFormat.'") = subquery.datetime ORDER BY mp.date ASC LIMIT 1) AS open_price'),
+                DB::raw('(SELECT mp.price FROM market_prices mp WHERE mp.market_id = "'.$market->id.'" AND DATE_FORMAT(mp.date, "'.$dateFormat.'") = subquery.datetime ORDER BY mp.date DESC LIMIT 1) AS close_price'),
             ])
-            ->groupBy('datetime')
+            ->groupByRaw('datetime')
             ->orderBy('datetime')->get();
 
         return api()->success(null, [
