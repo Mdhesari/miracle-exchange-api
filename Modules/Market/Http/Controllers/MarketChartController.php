@@ -31,16 +31,32 @@ class MarketChartController extends Controller
             default => '%Y-%m-%d %H:00:00',
         };
 
-        $results = DB::table(DB::raw('(SELECT DATE_FORMAT(date, "'.$dateFormat.'") AS datetime, price FROM market_prices WHERE market_id = "'.$market->id.'") AS subquery'))
-            ->select([
-                DB::raw('datetime'),
-                DB::raw('MAX(price) AS high_price'),
-                DB::raw('MIN(price) AS low_price'),
-                DB::raw('(SELECT mp.price FROM market_prices mp WHERE mp.market_id = "'.$market->id.'" AND DATE_FORMAT(mp.date, "'.$dateFormat.'") = subquery.datetime ORDER BY mp.date ASC LIMIT 1) AS open_price'),
-                DB::raw('(SELECT mp.price FROM market_prices mp WHERE mp.market_id = "'.$market->id.'" AND DATE_FORMAT(mp.date, "'.$dateFormat.'") = subquery.datetime ORDER BY mp.date DESC LIMIT 1) AS close_price'),
-            ])
-            ->groupByRaw('datetime')
-            ->orderBy('datetime')->get();
+        $marketId = $market->id;
+
+        $results = DB::select("
+            SELECT
+                datetime,
+                high_price,
+                low_price,
+                (SELECT mp1.price FROM market_prices mp1
+                 WHERE mp1.market_id = ?
+                 AND DATE_FORMAT(mp1.date, ?) = agg.datetime
+                 ORDER BY mp1.date ASC LIMIT 1) AS open_price,
+                (SELECT mp2.price FROM market_prices mp2
+                 WHERE mp2.market_id = ?
+                 AND DATE_FORMAT(mp2.date, ?) = agg.datetime
+                 ORDER BY mp2.date DESC LIMIT 1) AS close_price
+            FROM (
+                SELECT
+                    DATE_FORMAT(date, ?) AS datetime,
+                    MAX(price) AS high_price,
+                    MIN(price) AS low_price
+                FROM market_prices
+                WHERE market_id = ?
+                GROUP BY DATE_FORMAT(date, ?)
+            ) AS agg
+            ORDER BY datetime ASC
+        ", [$marketId, $dateFormat, $marketId, $dateFormat, $dateFormat, $marketId, $dateFormat]);
 
         return api()->success(null, [
             'items' => $results,
